@@ -262,8 +262,28 @@ long double calc_benchmark_f14(long double *x)
     return res;
 }
 
-/* Placeholder implementations for functions 15-25 */
-long double calc_benchmark_f15(long double *x) {
+void calc_benchmark_norm_f15(void)
+{
+    int i;
+    transform_norm (0);    norm_f[0] = calc_rastrigin(trans_x);
+    transform_norm (1);    norm_f[1] = calc_rastrigin(trans_x);
+    for (i=0; i<nreal; i++)
+    {
+        norm_x[i] = 0.0;
+    }
+    transform_norm (2);    norm_f[2] = calc_weierstrass(trans_x) - calc_weierstrass(norm_x);
+    transform_norm (3);    norm_f[3] = calc_weierstrass(trans_x) - calc_weierstrass(norm_x);
+    transform_norm (4);    norm_f[4] = calc_griewank(trans_x);
+    transform_norm (5);    norm_f[5] = calc_griewank(trans_x);
+    transform_norm (6);    norm_f[6] = calc_ackley(trans_x);
+    transform_norm (7);    norm_f[7] = calc_ackley(trans_x);
+    transform_norm (8);    norm_f[8] = calc_sphere(trans_x);
+    transform_norm (9);    norm_f[9] = calc_sphere(trans_x);
+    return;
+}
+
+long double calc_benchmark_f15(long double *x) 
+{
     int i;
     long double res;
     transform (x, 0);    basic_f[0] = calc_rastrigin(trans_x);
@@ -291,25 +311,6 @@ long double calc_benchmark_f15(long double *x) {
         res += weight[i]*(basic_f[i]+bias[i]);
     }
     return (res);
-}
-void calc_benchmark_norm_f15(void)
-{
-    int i;
-    transform_norm (0);    norm_f[0] = calc_rastrigin(trans_x);
-    transform_norm (1);    norm_f[1] = calc_rastrigin(trans_x);
-    for (i=0; i<nreal; i++)
-    {
-        norm_x[i] = 0.0;
-    }
-    transform_norm (2);    norm_f[2] = calc_weierstrass(trans_x) - calc_weierstrass(norm_x);
-    transform_norm (3);    norm_f[3] = calc_weierstrass(trans_x) - calc_weierstrass(norm_x);
-    transform_norm (4);    norm_f[4] = calc_griewank(trans_x);
-    transform_norm (5);    norm_f[5] = calc_griewank(trans_x);
-    transform_norm (6);    norm_f[6] = calc_ackley(trans_x);
-    transform_norm (7);    norm_f[7] = calc_ackley(trans_x);
-    transform_norm (8);    norm_f[8] = calc_sphere(trans_x);
-    transform_norm (9);    norm_f[9] = calc_sphere(trans_x);
-    return;
 }
 
 void calc_benchmark_norm_f16(void)
