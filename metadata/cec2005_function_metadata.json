@@ -1,0 +1,566 @@
+{
+  "functions": [
+    {
+      "id": 1,
+      "name": "Shifted Sphere Function",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -450,
+        "search_range": [-100, 100]
+      },
+      "characteristics": [
+        "Unimodal",
+        "Separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Shifted Schwefel's Problem 1.2",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -450,
+        "search_range": [-100, 100]
+      },
+      "characteristics": [
+        "Unimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Shifted Rotated High Conditioned Elliptic Function",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": -450,
+        "search_range": [-100, 100]
+      },
+      "characteristics": [
+        "Unimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Shifted Schwefel's Problem 1.2 with Noise in Fitness",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -450,
+        "search_range": [-100, 100],
+        "noisy": true
+      },
+      "characteristics": [
+        "Unimodal",
+        "Non-separable",
+        "Noisy"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Schwefel's Problem 2.6 with Global Optimum on Bounds",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -310,
+        "search_range": [-100, 100],
+        "optimum_on_bounds": true
+      },
+      "characteristics": [
+        "Unimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Shifted Rosenbrock's Function",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": 390,
+        "search_range": [-100, 100]
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Shifted Rotated Griewank's Function",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": -180,
+        "search_range": [0, 600],
+        "no_bounds": true
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Shifted Rotated Ackley's Function with Global Optimum on Bounds",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": -140,
+        "search_range": [-32, 32],
+        "optimum_on_bounds": true
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Shifted Rastrigin's Function",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -330,
+        "search_range": [-5, 5]
+      },
+      "characteristics": [
+        "Multimodal",
+        "Separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Shifted Rotated Rastrigin's Function",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": -330,
+        "search_range": [-5, 5]
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Shifted Rotated Weierstrass Function",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": 90,
+        "search_range": [-0.5, 0.5]
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Schwefel's Problem 2.13",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -460,
+        "search_range": [-3.14159, 3.14159]
+      },
+      "characteristics": [
+        "Multimodal",
+        "Non-separable"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "bias_D50.txt"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Shifted Expanded Griewank's plus Rosenbrock's Function (F8F2)",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": false,
+        "global_optimum": -130,
+        "search_range": [-3, 1]
+      },
+      "characteristics": [
+        "Expanded",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Shifted Rotated Expanded Schaffer's F6 Function",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": false,
+        "global_optimum": -300,
+        "search_range": [-100, 100]
+      },
+      "characteristics": [
+        "Expanded",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Hybrid Composition Function 1",
+      "properties": {
+        "shifted": true,
+        "rotated": false,
+        "biased": true,
+        "global_optimum": 120,
+        "search_range": [-5, 5],
+        "is_hybrid": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Rotated Hybrid Composition Function 1",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 120,
+        "search_range": [-5, 5],
+        "is_hybrid": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Rotated Hybrid Composition Function 1 with Noise in Fitness",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 120,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "noisy": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal",
+        "Noisy"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Rotated Hybrid Composition Function 2",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 10,
+        "search_range": [-5, 5],
+        "is_hybrid": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Rotated Hybrid Composition Function 2 with a Narrow Basin for the Global Optimum",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 10,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "narrow_basin": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Rotated Hybrid Composition Function 2 with the Global Optimum on the Bounds",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 10,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "optimum_on_bounds": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Rotated Hybrid Composition Function 3",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 360,
+        "search_range": [-5, 5],
+        "is_hybrid": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Rotated Hybrid Composition Function 3 with High Condition Number Matrix",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 360,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "high_condition": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_sub_D2.txt",
+        "rot_sub_D10.txt",
+        "rot_sub_D30.txt",
+        "rot_sub_D50.txt"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Non-Continuous Rotated Hybrid Composition Function 3",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 360,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "non_continuous": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Rotated Hybrid Composition Function 4",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 260,
+        "search_range": [-5, 5],
+        "is_hybrid": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Rotated Hybrid Composition Function 4 without Bounds",
+      "properties": {
+        "shifted": true,
+        "rotated": true,
+        "biased": true,
+        "global_optimum": 260,
+        "search_range": [-5, 5],
+        "is_hybrid": true,
+        "no_bounds": true
+      },
+      "characteristics": [
+        "Hybrid",
+        "Multimodal"
+      ],
+      "dimensions": [2, 10, 30, 50],
+      "required_files": [
+        "shift_D50.txt",
+        "rot_D2.txt",
+        "rot_D10.txt",
+        "rot_D30.txt",
+        "rot_D50.txt"
+      ]
+    }
+  ]
+} 
