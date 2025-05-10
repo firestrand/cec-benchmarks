@@ -99,10 +99,8 @@ $F_1(x^*) = f_{\text{bias}_1} = -450$. [cite: 19]
 
 | File Name              | Variable     | Description                                                                 | Notes for Usage              |
 |------------------------|--------------|-----------------------------------------------------------------------------|------------------------------|
-| `sphere_func_data.mat` | `o`          | $1 \times 100$ vector, the shifted global optimum                             | When using, cut $o = o(1:D)$ |
-| `sphere_func_data.txt` | `o`          | $1 \times 100$ vector, the shifted global optimum                             | When using, cut $o = o(1:D)$ |
-| `fbias_data.mat`       | `f_bias`     | $1 \times 25$ vector, records all the 25 function's $f_{\text{bias}_i}$ values |                              |
-| `fbias_data.txt`       | `f_bias`     | $1 \times 25$ vector, records all the 25 function's $f_{\text{bias}_i}$ values |                              |
+| `f01/shift_D50.txt`    | `o`          | $1 \times 50$ vector, the shifted global optimum                            | When using, cut $o = o(1:D)$ |
+| `fbias_data.mat`       | `f_bias`     | $1 \times 25$ vector, records all the 25 function's $f_{\text{bias}_i}$ values | Function biases handled in code |
 
 #### 2.1.2. $F_2$: Shifted Schwefel's Problem 1.2 [cite: 22]
 
@@ -128,8 +126,7 @@ $F_2(x^*) = f_{\text{bias}_2} = -450$. [cite: 22]
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `schwefel_102_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `schwefel_102_data.txt`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f02/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
 #### 2.1.3. $F_3$: Shifted Rotated High Conditioned Elliptic Function [cite: 23]
 
@@ -155,16 +152,13 @@ $F_3(x^*) = f_{\text{bias}_3} = -450$. [cite: 23]
 
 **Associated Data files:** [cite: 24]
 
-| File Name                             | Variable | Description                               | Notes for Usage              |
-|---------------------------------------|----------|-------------------------------------------|------------------------------|
-| `high_cond_elliptic_rot_data.mat`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `high_cond_elliptic_rot_data.txt`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `elliptic_M_D10.mat`                  | `M`      | $10 \times 10$ matrix                     |                              |
-| `elliptic_M_D10.txt`                  | `M`      | $10 \times 10$ matrix                     |                              |
-| `elliptic_M_D30.mat`                  | `M`      | $30 \times 30$ matrix                     |                              |
-| `elliptic_M_D30.txt`                  | `M`      | $30 \times 30$ matrix                     |                              |
-| `elliptic_M_D50.mat`                  | `M`      | $50 \times 50$ matrix                     |                              |
-| `elliptic_M_D50.txt`                  | `M`      | $50 \times 50$ matrix                     |                              |
+| File Name                      | Variable | Description                               | Notes for Usage              |
+|--------------------------------|----------|-------------------------------------------|------------------------------|
+| `f03/shift_D50.txt`            | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f03/rot_D2.txt`               | `M`      | $2 \times 2$ matrix                        |                              |
+| `f03/rot_D10.txt`              | `M`      | $10 \times 10$ matrix                      |                              |
+| `f03/rot_D30.txt`              | `M`      | $30 \times 30$ matrix                      |                              |
+| `f03/rot_D50.txt`              | `M`      | $50 \times 50$ matrix                      |                              |
 
 #### 2.1.4. $F_4$: Shifted Schwefel's Problem 1.2 with Noise in Fitness
 
@@ -192,8 +186,7 @@ $F_4(x^*) = f_{\text{bias}_4} = -450$.
 
 | File Name               | Variable | Description                               | Notes for Usage              |
 |-------------------------|----------|-------------------------------------------|------------------------------|
-| `schwefel_102_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `schwefel_102_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f04/shift_D50.txt`     | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
 #### 2.1.5. $F_5$: Schwefel's Problem 2.6 with Global Optimum on Bounds
 
@@ -225,9 +218,7 @@ $F_5(x^*) = f_{\text{bias}_5} = -310$.
 
 | File Name                 | Variable | Description                                                                                                | Notes for Usage                     |
 |---------------------------|----------|------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `schwefel_206_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum                                                            | When using, cut $o = o(1:D)$        |
-|                           | `A`      | $100 \times 100$ matrix                                                                                      | When using, cut $A = A(1:D, 1:D)$   |
-| `schwefel_206_data.txt`   | `o`, `A` | First line is `o` ($1 \times 100$ vector), lines 2-101 are `A` ($100 \times 100$ matrix)                      | As above                            |
+| `f05/shift_D50.txt`       | `o, A`   | File containing the shifted global optimum and linear transformation matrix                                | When using, cut $o = o(1:D)$, $A = A(1:D, 1:D)$ |
 
 ### 2.2 Basic Multimodal Functions
 
@@ -256,8 +247,7 @@ $F_6(x^*) = f_{\text{bias}_6} = 390$.
 
 | File Name                   | Variable | Description                               | Notes for Usage              |
 |-----------------------------|----------|-------------------------------------------|------------------------------|
-| `rosenbrock_func_data.mat`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `rosenbrock_func_data.txt`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f06/shift_D50.txt`         | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
 #### 2.2.2. $F_7$: Shifted Rotated Griewank's Function without Bounds
 
@@ -285,14 +275,11 @@ $M = M' \cdot (1 + 0.3 \cdot |N(0,1)|)$.
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `griewank_func_data.mat`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `griewank_func_data.txt`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `griewank_M_D10.mat`      | `M`      | $10 \times 10$ matrix                     |                              |
-| `griewank_M_D10.txt`      | `M`      | $10 \times 10$ matrix                     |                              |
-| `griewank_M_D30.mat`      | `M`      | $30 \times 30$ matrix                     |                              |
-| `griewank_M_D30.txt`      | `M`      | $30 \times 30$ matrix                     |                              |
-| `griewank_M_D50.mat`      | `M`      | $50 \times 50$ matrix                     |                              |
-| `griewank_M_D50.txt`      | `M`      | $50 \times 50$ matrix                     |                              |
+| `f07/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f07/rot_D2.txt`          | `M`      | $2 \times 2$ matrix                        |                              |
+| `f07/rot_D10.txt`         | `M`      | $10 \times 10$ matrix                      |                              |
+| `f07/rot_D30.txt`         | `M`      | $30 \times 30$ matrix                      |                              |
+| `f07/rot_D50.txt`         | `M`      | $50 \times 50$ matrix                      |                              |
 
 #### 2.2.3. $F_8$: Shifted Rotated Ackley's Function with Global Optimum on Bounds
 
@@ -323,14 +310,11 @@ $F_8(x^*) = f_{\text{bias}_8} = -140$.
 
 | File Name             | Variable | Description                               | Notes for Usage              |
 |-----------------------|----------|-------------------------------------------|------------------------------|
-| `ackley_func_data.mat`| `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `ackley_func_data.txt`| `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `ackley_M_D10.mat`    | `M`      | $10 \times 10$ matrix                     |                              |
-| `ackley_M_D10.txt`    | `M`      | $10 \times 10$ matrix                     |                              |
-| `ackley_M_D30.mat`    | `M`      | $30 \times 30$ matrix                     |                              |
-| `ackley_M_D30.txt`    | `M`      | $30 \times 30$ matrix                     |                              |
-| `ackley_M_D50.mat`    | `M`      | $50 \times 50$ matrix                     |                              |
-| `ackley_M_D50.txt`    | `M`      | $50 \times 50$ matrix                     |                              |
+| `f08/shift_D50.txt`   | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f08/rot_D2.txt`      | `M`      | $2 \times 2$ matrix                        |                              |
+| `f08/rot_D10.txt`     | `M`      | $10 \times 10$ matrix                      |                              |
+| `f08/rot_D30.txt`     | `M`      | $30 \times 30$ matrix                      |                              |
+| `f08/rot_D50.txt`     | `M`      | $50 \times 50$ matrix                      |                              |
 
 #### 2.2.4. $F_9$: Shifted Rastrigin's Function
 
@@ -357,8 +341,7 @@ $F_9(x^*) = f_{\text{bias}_9} = -330$.
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `rastrigin_func_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `rastrigin_func_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f09/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
 #### 2.2.5. $F_{10}$: Shifted Rotated Rastrigin's Function
 
@@ -387,14 +370,11 @@ $F_{10}(x^*) = f_{\text{bias}_{10}} = -330$.
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `rastrigin_func_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `rastrigin_func_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `rastrigin_M_D10.mat`     | `M`      | $10 \times 10$ matrix                     |                              |
-| `rastrigin_M_D10.txt`     | `M`      | $10 \times 10$ matrix                     |                              |
-| `rastrigin_M_D30.mat`     | `M`      | $30 \times 30$ matrix                     |                              |
-| `rastrigin_M_D30.txt`     | `M`      | $30 \times 30$ matrix                     |                              |
-| `rastrigin_M_D50.mat`     | `M`      | $50 \times 50$ matrix                     |                              |
-| `rastrigin_M_D50.txt`     | `M`      | $50 \times 50$ matrix                     |                              |
+| `f10/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f10/rot_D2.txt`          | `M`      | $2 \times 2$ matrix                        |                              |
+| `f10/rot_D10.txt`         | `M`      | $10 \times 10$ matrix                      |                              |
+| `f10/rot_D30.txt`         | `M`      | $30 \times 30$ matrix                      |                              |
+| `f10/rot_D50.txt`         | `M`      | $50 \times 50$ matrix                      |                              |
 
 #### 2.2.6. $F_{11}$: Shifted Rotated Weierstrass Function
 
@@ -424,14 +404,11 @@ $F_{11}(x^*) = f_{\text{bias}_{11}} = 90$.
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `weierstrass_data.mat`    | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `weierstrass_data.txt`    | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `weierstrass_M_D10.mat`   | `M`      | $10 \times 10$ matrix                     |                              |
-| `weierstrass_M_D10.txt`   | `M`      | $10 \times 10$ matrix                     |                              |
-| `weierstrass_M_D30.mat`   | `M`      | $30 \times 30$ matrix                     |                              |
-| `weierstrass_M_D30.txt`   | `M`      | $30 \times 30$ matrix                     |                              |
-| `weierstrass_M_D50.mat`   | `M`      | $50 \times 50$ matrix                     |                              |
-| `weierstrass_M_D50.txt`   | `M`      | $50 \times 50$ matrix                     |                              |
+| `f11/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f11/rot_D2.txt`          | `M`      | $2 \times 2$ matrix                        |                              |
+| `f11/rot_D10.txt`         | `M`      | $10 \times 10$ matrix                      |                              |
+| `f11/rot_D30.txt`         | `M`      | $30 \times 30$ matrix                      |                              |
+| `f11/rot_D50.txt`         | `M`      | $50 \times 50$ matrix                      |                              |
 
 #### 2.2.7. $F_{12}$: Schwefel's Problem 2.13
 
@@ -461,10 +438,7 @@ $F_{12}(x^*) = f_{\text{bias}_{12}} = -460$.
 
 | File Name                 | Variable | Description                                                                                                                               | Notes for Usage                                                                |
 |---------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `schwefel_213_data.mat`   | `alpha`  | $1 \times 100$ vector, the shifted global optimum                                                                                           | When using, cut `alpha` = `alpha`(1:D)                                           |
-|                           | `a`      | $100 \times 100$ matrix                                                                                                                     | When using, cut `a` = `a`(1:D, 1:D)                                              |
-|                           | `b`      | $100 \times 100$ matrix                                                                                                                     | When using, cut `b` = `b`(1:D, 1:D)                                              |
-| `schwefel_213_data.txt`   | `a`, `b`, `alpha` | Lines 1-100 are `a` ($100 \times 100$ matrix), lines 101-200 are `b` ($100 \times 100$ matrix), the last line is `alpha` ($1 \times 100$ vector). | As above                                                                       |
+| `f12/bias_D50.txt`        | `alpha, a, b` | File containing alpha, a and b matrices                                                                                                    | When using, cut to appropriate dimensions                                       |
 
 ### 2.3 Expanded Functions
 
@@ -501,8 +475,7 @@ $F_{13}(x^*) = f_{\text{bias}_{13}} = -130$. (Note: PDF says $f_{\text{bias}_{13
 
 | File Name                 | Variable | Description                               | Notes for Usage              |
 |---------------------------|----------|-------------------------------------------|------------------------------|
-| `EF8F2_func_data.mat`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `EF8F2_func_data.txt`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f13/shift_D50.txt`       | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
 #### 2.3.2. $F_{14}$: Shifted Rotated Expanded Scaffer's F6 Function
 
@@ -532,14 +505,11 @@ $F_{14}(x^*) = f_{\text{bias}_{14}} = -300$. (Note: PDF says $f_{\text{bias}_{14
 
 | File Name                     | Variable | Description                               | Notes for Usage              |
 |-------------------------------|----------|-------------------------------------------|------------------------------|
-| `E_ScafferF6_func_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `E_ScafferF6_func_data.txt`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
-| `E_ScafferF6_M_D10.mat`       | `M`      | $10 \times 10$ matrix                     |                              |
-| `E_ScafferF6_M_D10.txt`       | `M`      | $10 \times 10$ matrix                     |                              |
-| `E_ScafferF6_M_D30.mat`       | `M`      | $30 \times 30$ matrix                     |                              |
-| `E_ScafferF6_M_D30.txt`       | `M`      | $30 \times 30$ matrix                     |                              |
-| `E_ScafferF6_M_D50.mat`       | `M`      | $50 \times 50$ matrix                     |                              |
-| `E_ScafferF6_M_D50.txt`       | `M`      | $50 \times 50$ matrix                     |                              |
+| `f14/shift_D50.txt`           | `o`      | $1 \times 50$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `f14/rot_D2.txt`              | `M`      | $2 \times 2$ matrix                        |                              |
+| `f14/rot_D10.txt`             | `M`      | $10 \times 10$ matrix                      |                              |
+| `f14/rot_D30.txt`             | `M`      | $30 \times 30$ matrix                      |                              |
+| `f14/rot_D50.txt`             | `M`      | $50 \times 50$ matrix                      |                              |
 
 ### 2.4 Composition Functions
 
@@ -728,8 +698,7 @@ $F_{15}(x^*) = f_{\text{bias}_{15}} = 120$. [cite: 1]
 
 | File Name                 | Variable | Description                                            | Notes for Usage                                     |
 |---------------------------|----------|--------------------------------------------------------|-----------------------------------------------------|
-| `hybrid_func1_data.mat`   | `o`      | $10 \times 100$ matrix (optima $o_i$ for 10 functions) | Use $o_i = o(i, 1:D)$ for the $i$-th function. [cite: 1] |
-| `hybrid_func1_data.txt`   | `o`      | $10 \times 100$ matrix (optima $o_i$ for 10 functions) | Use $o_i$ similarly. [cite: 1]                 |
+| `f15/shift_D50.txt`       | `o`      | $10 \times 50$ matrix (optima $o_i$ for 10 functions) | Use $o_i = o(i, 1:D)$ for the $i$-th function. [cite: 1] |
 
 *(For $F_{15}$, $M_i$ are identity matrices, so specific $M$ files are not strictly needed for its calculation beyond knowing they are identity.)*
 
@@ -753,17 +722,15 @@ $F_{16}(x^*) = f_{\text{bias}_{16}} = 120$. [cite: 1]
 *Figure 2-16 3-D map for 2-D function* [cite: 1]
 
 **Associated Data file for $F_{16}$:**
-Uses `hybrid_func1_data.mat/.txt` for optima $o_i$.
+Uses `f16/shift_D50.txt` for optima $o_i$.
 Rotation matrices $M_i$ are provided in separate files:
 
 | File Name                   | Variable      | Description                                                                                                                               |
 |-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `hybrid_func1_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, `M.M2`, ..., `M.M10` (ten $10 \times 10$ matrices). [cite: 1]                                                              |
-| `hybrid_func1_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially (e.g., lines 1-10 for M1, 11-20 for M2, ..., 91-100 for M10). [cite: 1]                             |
-| `hybrid_func1_M_D30.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $30 \times 30$ matrices). [cite: 1]                                                                     |
-| `hybrid_func1_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially. [cite: 1]                                                                                       |
-| `hybrid_func1_M_D50.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $50 \times 50$ matrices). [cite: 1]                                                                     |
-| `hybrid_func1_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially. [cite: 1]                                                                                       |
+| `f16/rot_D2.txt`            | `M1`...`M10`  | Ten $2 \times 2$ matrices sequentially                                                                                                    |
+| `f16/rot_D10.txt`           | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially                                                                                                  |
+| `f16/rot_D30.txt`           | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially                                                                                                  |
+| `f16/rot_D50.txt`           | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially                                                                                                  |
 
 *(When using, cut $o = o(:, 1:D)$ for the optima. The matrices $M_i$ are used in $z_i = ((x-o_i)/\lambda_i) \cdot M_i$.)*
 
@@ -793,7 +760,7 @@ $F_{17}(x^*) = f_{\text{bias}_{17}} = 120$.
 *Figure 2-17 3-D map for 2-D function*
 
 **Associated Data file for $F_{17}$:**
-Same as $F_{16}$ (uses `hybrid_func1_data.mat/.txt` for optima $o_i$ and `hybrid_func1_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
+Same as $F_{16}$ (uses `f17/shift_D50.txt` for optima $o_i$ and `f17/rot_D<dims>.txt` for rotation matrices $M_i$).
 
 #### 2.4.4. $F_{18}$: Rotated Hybrid Composition Function
 
@@ -835,19 +802,15 @@ $F_{18}(x^*) = f_{\text{bias}_{18}} = 10$.
 *Figure 2-18 3-D map for 2-D function*
 
 **Associated Data file for $F_{18}$:**
-Uses `hybrid_func2_data.mat/.txt` for optima $o_i$.
-Rotation matrices $M_i$ are provided in files like `hybrid_func2_M_D<dims>.mat/.txt`.
+Uses `f18/shift_D50.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files:
 
 | File Name                   | Variable      | Description                                                                                                                               |
 |-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `hybrid_func2_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$). Note: $o_{10}$ is fixed at origin.                                                                     |
-| `hybrid_func2_data.txt`     | `o`           | As above.                                                                                                                                 |
-| `hybrid_func2_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ matrices).                                                              |
-| `hybrid_func2_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
-| `hybrid_func2_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
-| `hybrid_func2_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
-| `hybrid_func2_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
-| `hybrid_func2_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
+| `f18/rot_D2.txt`            | `M1`...`M10`  | Ten $2 \times 2$ matrices sequentially                                                                                                    |
+| `f18/rot_D10.txt`           | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially                                                                                                  |
+| `f18/rot_D30.txt`           | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially                                                                                                  |
+| `f18/rot_D50.txt`           | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially                                                                                                  |
 
 #### 2.4.5. $F_{19}$: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum
 
@@ -874,12 +837,12 @@ $F_{19}(x^*) = f_{\text{bias}_{19}} = 10$. (PDF says $f_{\text{bias}_{19}}(19)$,
 *Figure 2-19 3-D map for 2-D function*
 
 **Associated Data file for $F_{19}$:**
-Same as $F_{18}$ (uses `hybrid_func2_data.mat/.txt` for optima $o_i$ and `hybrid_func2_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
+Same as $F_{18}$ (uses `f19/shift_D50.txt` for optima $o_i$ and `f19/rot_D<dims>.txt` for rotation matrices $M_i$).
 
 #### 2.4.6. $F_{20}$: Rotated Hybrid Composition Function with the Global Optimum on the Bounds
 
 All settings are the same as $F_{18}$ **except** the location of the global optimum $o_1$ is modified.
-After loading the data file for $o_i$ (from `hybrid_func2_data.mat/.txt`), the coordinates of $o_1$ (the optimum for the first basic function) are adjusted:
+After loading the data file for $o_i$ (from `f20/shift_D50.txt`), the coordinates of $o_1$ (the optimum for the first basic function) are adjusted:
 Set $o_{1,j} = 5$ for $j = 1, 2, ..., \lfloor D/2 \rfloor$. (The PDF states "$o_{1(2,j)}=5$", which could be a typo. Interpreted as setting the first $\lfloor D/2 \rfloor$ components of $o_1$ to the upper bound, 5). This forces the global optimum onto the boundary of the search space.
 
 - All other parameters (basic functions, $\sigma_i$, $\lambda_i$, $M_i$, their condition numbers, other $o_i$ (for $i=2..10$), $\text{bias_coefficients}$, $f_{\text{global_bias}} = f_{\text{bias}_{20}} = 10$) remain the same as for $F_{18}$.
@@ -903,7 +866,7 @@ $F_{20}(x^*) = f_{\text{bias}_{20}} = 10$.
 *Figure 2-20 3-D map for 2-D function*
 
 **Associated Data file for $F_{20}$:**
-Same as $F_{18}$ (uses `hybrid_func2_data.mat/.txt` for base optima $o_i$ and `hybrid_func2_M_D<dims>.mat/.txt` for rotation matrices $M_i$), with the specific modification to $o_1$ applied after loading.
+Same as $F_{18}$ (uses `f20/shift_D50.txt` for base optima $o_i$ and `f20/rot_D<dims>.txt` for rotation matrices $M_i$), with the specific modification to $o_1$ applied after loading.
 
 #### 2.4.7. $F_{21}$: Rotated Hybrid Composition Function
 
@@ -946,19 +909,15 @@ $F_{21}(x^*) = f_{\text{bias}_{21}} = 360$.
 *Figure 2-21 3-D map for 2-D function*
 
 **Associated Data file for $F_{21}$:**
-Uses `hybrid_func3_data.mat/.txt` for optima $o_i$.
-Rotation matrices $M_i$ are provided in files like `hybrid_func3_M_D<dims>.mat/.txt`.
+Uses `f21/shift_D50.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files:
 
 | File Name                   | Variable      | Description                                                                                                                               |
 |-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `hybrid_func3_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$).                                                                                                    |
-| `hybrid_func3_data.txt`     | `o`           | As above.                                                                                                                                 |
-| `hybrid_func3_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ orthogonal matrices).                                                              |
-| `hybrid_func3_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
-| `hybrid_func3_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
-| `hybrid_func3_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
-| `hybrid_func3_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
-| `hybrid_func3_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
+| `f21/rot_D2.txt`            | `M1`...`M10`  | Ten $2 \times 2$ orthogonal matrices sequentially                                                                                         |
+| `f21/rot_D10.txt`           | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially                                                                                                  |
+| `f21/rot_D30.txt`           | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially                                                                                                  |
+| `f21/rot_D50.txt`           | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially                                                                                                  |
 
 #### 2.4.8. $F_{22}$: Rotated Hybrid Composition Function with High Condition Number Matrix
 
@@ -982,17 +941,15 @@ $F_{22}(x^*) = f_{\text{bias}_{22}} = 360$.
 *Figure 2-22 3-D map for 2-D function*
 
 **Associated Data file for $F_{22}$:**
-Uses `hybrid_func3_data.mat/.txt` for optima $o_i$ (same as $F_{21}$).
-Rotation matrices $M_i$ with high condition numbers are provided in files like `hybrid_func3_HM_D<dims>.mat/.txt` (HM for High Condition Matrix).
+Uses `f22/shift_D50.txt` for optima $o_i$ (same as $F_{21}$).
+Rotation matrices $M_i$ with high condition numbers are provided in files:
 
 | File Name                    | Variable      | Description                                                                                                                               |
 |------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `hybrid_func3_HM_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ high condition matrices).                                                         |
-| `hybrid_func3_HM_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
-| `hybrid_func3_HM_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices. (PDF also lists `hybrid_func3_MH_D30.txt`, likely a typo and should be `_HM_`).                   |
-| `hybrid_func3_MH_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially. (Filename from PDF)                                                                  |
-| `hybrid_func3_MH_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices. (PDF also lists `hybrid_func3_HM_D50.txt`, likely `_HM_`).                                      |
-| `hybrid_func3_HM_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially. (Filename from PDF)                                                                  |
+| `f22/rot_sub_D2.txt`         | `M1`...`M10`  | Ten $2 \times 2$ high condition matrices sequentially                                                                                     |
+| `f22/rot_sub_D10.txt`        | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially                                                                                                  |
+| `f22/rot_sub_D30.txt`        | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially                                                                                                  |
+| `f22/rot_sub_D50.txt`        | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially                                                                                                  |
 
 #### 2.4.9. $F_{23}$: Non-Continuous Rotated Hybrid Composition Function
 
@@ -1027,7 +984,7 @@ $F_{23}(x^*) \approx f_{\text{bias}_{23}} = 360$.
 *Figure 2-23 3-D map for 2-D function*
 
 **Associated Data file for $F_{23}$:**
-Same as $F_{21}$ (uses `hybrid_func3_data.mat/.txt` for optima $o_i$ and `hybrid_func3_M_D<dims>.mat/.txt` for rotation matrices $M_i$). The non-continuous transformation is an additional processing step.
+Same as $F_{21}$ (uses `f23/shift_D50.txt` for optima $o_i$ and `f23/rot_D<dims>.txt` for rotation matrices $M_i$). The non-continuous transformation is an additional processing step.
 
 #### 2.4.10. $F_{24}$: Rotated Hybrid Composition Function
 
@@ -1072,19 +1029,15 @@ $F_{24}(x^*) = f_{\text{bias}_{24}} = 260$.
 *Figure 2-24 3-D map for 2-D function*
 
 **Associated Data file for $F_{24}$:**
-Uses `hybrid_func4_data.mat/.txt` for optima $o_i$.
-Rotation matrices $M_i$ are provided in files like `hybrid_func4_M_D<dims>.mat/.txt`.
+Uses `f24/shift_D50.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files:
 
 | File Name                   | Variable      | Description                                                                                                                               |
 |-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `hybrid_func4_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$).                                                                                                    |
-| `hybrid_func4_data.txt`     | `o`           | As above.                                                                                                                                 |
-| `hybrid_func4_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ matrices).                                                              |
-| `hybrid_func4_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
-| `hybrid_func4_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
-| `hybrid_func4_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
-| `hybrid_func4_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
-| `hybrid_func4_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
+| `f24/rot_D2.txt`            | `M1`...`M10`  | Ten $2 \times 2$ matrices sequentially                                                                                                    |
+| `f24/rot_D10.txt`           | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially                                                                                                  |
+| `f24/rot_D30.txt`           | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially                                                                                                  |
+| `f24/rot_D50.txt`           | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially                                                                                                  |
 
 #### 2.4.11. $F_{25}$: Rotated Hybrid Composition Function without bounds
 
@@ -1100,12 +1053,12 @@ All settings are the same as $F_{24}$ (basic functions, $\sigma_i$, $\lambda_i$,
 - Unimodal functions give flat areas for the function.
 - The PDF states "Global optimum is on the bound". This seems to conflict with "No bounds". The key is that the *initialization range is different from where the global optimum $o_1$ is located*.
 - **No bounds** (for search, though an initialization range is given).
-- Initialize population in $[2, 5]^D$. The global optimum $x^* \approx o_1$ (which is loaded from `hybrid_func4_data.mat` and is likely centered around 0 before transformation by $M_1$) is outside of this initialization range.
+- Initialize population in $[2, 5]^D$. The global optimum $x^* \approx o_1$ (which is loaded from `f25/shift_D50.txt` and is likely centered around 0 before transformation by $M_1$) is outside of this initialization range.
 
 $F_{25}(x^*) = f_{\text{bias}_{25}} = 260$.
 
 **Associated Data file for $F_{25}$:**
-Same as $F_{24}$ (uses `hybrid_func4_data.mat/.txt` for optima $o_i$ and `hybrid_func4_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
+Same as $F_{24}$ (uses `f25/shift_D50.txt` for optima $o_i$ and `f25/rot_D<dims>.txt` for rotation matrices $M_i$).
 
 ---
 ### 2.5 Comparisons Pairs
