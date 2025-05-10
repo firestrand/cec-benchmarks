@@ -1,1734 +1,1382 @@
-# Problem Definitions and Evaluation Criteria for the CEC 2005
+# Problem Definitions and Evaluation Criteria for the CEC 2005 Special Session on Real-Parameter Optimization
 
-# Special Session on Real-Parameter Optimization
+P. N. Suganthan<sup>1</sup>, N. Hansen<sup>2</sup>, J. J. Liang<sup>1</sup>, K. Deb<sup>3</sup>, Y.-P. Chen<sup>4</sup>, A. Auger<sup>2</sup>, S. Tiwari<sup>3</sup>
 
-P. N. Suganthan¹, N. Hansen², J. J. Liang¹, K. Deb³, Y. -P. Chen⁴, A. Auger², S. Tiwari³
+<sup>1</sup>School of EEE, Nanyang Technological University, Singapore, 639798 [cite: 1]
+<sup>2</sup>ETH Zurich, Switzerland [cite: 1]
+<sup>3</sup>Kanpur Genetic Algorithms Laboratory (KanGAL), Indian Institute of Technology, Kanpur, PIN 208 016, India [cite: 1]
+<sup>4</sup>Natural Computing Laboratory, Department of Computer Science, National Chiao Tung University, Taiwan [cite: 1]
 
-¹School of EEE, Nanyang Technological University, Singapore, 639798
+*Emails:* epnsugan@ntu.edu.sg, Nikolaus.Hansen@inf.ethz.ch, liangjing@pmail.ntu.edu.sg, deb@iitk.ac.in, ypchen@csie.nctu.edu.tw, Anne.Auger@inf.ethz.ch, tiwaris@iitk.ac.in [cite: 1]
 
-²(ETH) Zürich, Switzerland
+**Technical Report, Nanyang Technological University, Singapore**
+**And**
+**KanGAL Report Number 2005005 (Kanpur Genetic Algorithms Laboratory, IIT Kanpur)** [cite: 1]
 
-³Kanpur Genetic Algorithms Laboratory (KanGAL), Indian Institute of Technology, Kanpur, PIN 208 016, India
+**May 2005** [cite: 1]
 
-⁴Natural Computing Laboratory, Department of Computer Science, National Chiao Tung University, Taiwan
+## Acknowledgement
 
-epnsugan@ntu.edu.sg, Nikolaus.Hansen@inf.ethz.ch, liangjing@pmail.ntu.edu.sg, deb@iitk.ac.in, ypchen@csie.nctu.edu.tw, Anne.Auger@inf.ethz.ch, tiwaris@iitk.ac.in
-
-Technical Report, Nanyang Technological University, Singapore
-
-And
-
-KanGAL Report Number 2005005 (Kanpur Genetic Algorithms Laboratory, IIT Kanpur)
-
-May 2005
-
-# Acknowledgement
-
-We also acknowledge the contributions by Drs / Professors Maurice Clerc (Maurice.Clerc@WriteMe.com), Bogdan Filipic (bogdan.filipic@ijs.si), William Hart (wehart@sandia.gov), Marc Schoenauer (Marc.Schoenauer@lri.fr), Hans‑Paul Schwefel (hans‑paul.schwefel@cs.uni‑dortmund.de), Aristin Pedro Ballester (p.ballester@imperial.ac.uk) and Darrell Whitley (whitley@CS.ColoState.EDU).
----
-# Problem Definitions and Evaluation Criteria for the CEC 2005
-
-# Special Session on Real-Parameter Optimization
-
-In the past two decades, different kinds of optimization algorithms have been designed and applied to solve real‑parameter function optimization problems. Some of the popular approaches are real‑parameter EAs, evolution strategies (ES), differential evolution (DE), particle swarm optimization (PSO), evolutionary programming (EP), classical methods such as quasi‑Newton method (QN), hybrid evolutionary‑classical methods, other non‑evolutionary methods such as simulated annealing (SA), tabu search (TS) and others. Under each category, there exist many different methods varying in their operators and working principles, such as correlated ES and CMA‑ES. In most such studies, a subset of the standard test problems (Sphere, Schwefel's, Rosenbrock's, Rastrigin's, etc.) is considered. Although some comparisons are made in some research studies, often they are confusing and limited to the test problems used in the study. In some occasions, the test problem and chosen algorithm are complementary to each other and the same algorithm may not work in other problems that well. There is definitely a need of evaluating these methods in a more systematic manner by specifying a common termination criterion, size of problems, initialization scheme, linkages/rotation, etc. There is also a need to perform a scalability study demonstrating how the running time/evaluations increase with an increase in the problem size. We would also like to include some real world problems in our standard test suite with codes/executables.
-
-In this report, 25 benchmark functions are given and experiments are conducted on some real‑parameter optimization algorithms. The codes in Matlab, C and Java for them could be found at http://www.ntu.edu.sg/home/EPNSugan/. The mathematical formulas and properties of these functions are described in Section 2. In Section 3, the evaluation criteria are given. Some notes are given in Section 4.
-
-# 1. Summary of the 25 CEC’05 Test Functions
-
-# Unimodal Functions (5):
-
-- F₁: Shifted Sphere Function
-- F₂: Shifted Schwefel’s Problem 1.2
-- F₃: Shifted Rotated High Conditioned Elliptic Function
-- F₄: Shifted Schwefel’s Problem 1.2 with Noise in Fitness
-- F₅: Schwefel’s Problem 2.6 with Global Optimum on Bounds
-
-# Multimodal Functions (20):
-
-# Basic Functions (7):
-
-- F₆: Shifted Rosenbrock’s Function
-- F₇: Shifted Rotated Griewank’s Function without Bounds
-- F₈: Shifted Rotated Ackley’s Function with Global Optimum on Bounds
-- F₉: Shifted Rastrigin’s Function
-- F₁₀: Shifted Rotated Rastrigin’s Function
-- F₁₁: Shifted Rotated Weierstrass Function
-- F₁₂: Schwefel’s Problem 2.13
-
-# Expanded Functions (2):
----
-# Hybrid Composition Functions (11):
-
-- F₁₅: Hybrid Composition Function
-- F₁₆: Rotated Hybrid Composition Function
-- F₁₇: Rotated Hybrid Composition Function with Noise in Fitness
-- F₁₈: Rotated Hybrid Composition Function
-- F₁₉: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum
-- F₂₀: Rotated Hybrid Composition Function with the Global Optimum on the Bounds
-- F₂₁: Rotated Hybrid Composition Function
-- F₂₂: Rotated Hybrid Composition Function with High Condition Number Matrix
-- F₂₃: Non‑Continuous Rotated Hybrid Composition Function
-- F₂₄: Rotated Hybrid Composition Function
-- F₂₅: Rotated Hybrid Composition Function without Bounds
-
-# Pseudo-Real Problems:
-
-Available from http://www.cs.colostate.edu/~genitor/functions.html. If you have any queries on these problems, please contact Professor Darrell Whitley. Email: whitley@CS.ColoState.EDU
----
-# 2. Definitions of the 25 CEC’05 Test Functions
-
-# 2.1 Unimodal Functions:
-
-# 2.1.1. F1: Shifted Sphere Function
-
-F1(x) = &sum;i=1D zi2 + fbias₁, z = x - o, x = [x1, x2,..., xD]
-
-D: dimensions. o = [o1, o2,..., oD] : the shifted global optimum.
-
-# Properties:
-
-- Unimodal
-- Shifted
-- Separable
-- Scalable
-
-x ∈ [100, 100], Global optimum: x* = o1, F(x*) = fbias₁ = -450
-
-# Associated Data files:
-
-|Name:|sphere_func_data.mat|
-|---|---|
-| |sphere_func_data.txt|
-|Variable:|o|
-| |1*100 vector - the shifted global optimum|
-|When cut using:|o = o(1:D)|
-|Name:|fbias_data.mat|
-| |fbias_data.txt|
-|Variable:|f_bias|
-| |1*25 vector, record all the 25 function’s fbiasi|
+We also acknowledge the contributions by Drs / Professors Maurice Clerc (Maurice.Clerc@WriteMe.com), Bogdan Filipic (bogdan.filipic@ijs.si), William Hart (wehart@sandia.gov), Marc Schoenauer (Marc.Schoenauer@lri.fr), Hans-Paul Schwefel (hans-paul.schwefel@cs.uni-dortmund.de), Aristin Pedro Ballester (p.ballester@imperial.ac.uk) and Darrell Whitley (whitley@CS.ColoState.EDU). [cite: 1]
 
 ---
-# 2.1.2. F2: Shifted Schwefel’s Problem 1.2
 
-F(x) = ∑i=1D ∑j=1D (zj)² + fbias
+## Problem Definitions and Evaluation Criteria for the CEC 2005 Special Session on Real-Parameter Optimization
 
-z = x - o
+In the past two decades, different kinds of optimization algorithms have been designed and applied to solve real-parameter function optimization problems. [cite: 4, 5] Some of the popular approaches are real-parameter EAs, evolution strategies (ES), differential evolution (DE), particle swarm optimization (PSO), evolutionary programming (EP), classical methods such as quasi-Newton method (QN), hybrid evolutionary-classical methods, other non-evolutionary methods such as simulated annealing (SA), tabu search (TS) and others. [cite: 5] Under each category, there exist many different methods varying in their operators and working principles, such as correlated ES and CMA-ES. [cite: 6] In most such studies, a subset of the standard test problems (Sphere, Schwefel's, Rosenbrock's, Rastrigin's, etc.) is considered. [cite: 7] Although some comparisons are made in some research studies, often they are confusing and limited to the test problems used in the study. [cite: 8] In some occasions, the test problem and chosen algorithm are complementary to each other and the same algorithm may not work in other problems that well. [cite: 9] There is definitely a need of evaluating these methods in a more systematic manner by specifying a common termination criterion, size of problems, initialization scheme, linkages/rotation, etc. [cite: 10] There is also a need to perform a scalability study demonstrating how the running time/evaluations increase with an increase in the problem size. [cite: 10] We would also like to include some real world problems in our standard test suite with codes/executables. [cite: 11]
 
-x = [x1, x2,..., xD]
+In this report, 25 benchmark functions are given and experiments are conducted on some real-parameter optimization algorithms. [cite: 12] The codes in Matlab, C and Java for them could be found at [http://www.ntu.edu.sg/home/EPNSugan/](http://www.ntu.edu.sg/home/EPNSugan/). [cite: 13] The mathematical formulas and properties of these functions are described in Section 2. [cite: 14] In Section 3, the evaluation criteria are given. [cite: 14] Some notes are given in Section 4. [cite: 15]
 
-D: dimensions
+## 1. Summary of the 25 CEC'05 Test Functions
 
-o = [o1, o2,...,oD] : the shifted global optimum
+### Unimodal Functions (5):
 
-Properties:
+- $F_1$: Shifted Sphere Function [cite: 15]
+- $F_2$: Shifted Schwefel's Problem 1.2 [cite: 15]
+- $F_3$: Shifted Rotated High Conditioned Elliptic Function [cite: 15]
+- $F_4$: Shifted Schwefel's Problem 1.2 with Noise in Fitness [cite: 15]
+- $F_5$: Schwefel's Problem 2.6 with Global Optimum on Bounds [cite: 15]
 
-- Unimodal
-- Shifted
-- Non-separable
-- Scalable
+### Multimodal Functions (20):
 
-x ∈ [100,100], Global optimum x = o, F(x) = fbias = -450
+#### Basic Functions (7):
 
-# Associated Data files:
+- $F_6$: Shifted Rosenbrock's Function [cite: 15]
+- $F_7$: Shifted Rotated Griewank's Function without Bounds [cite: 15]
+- $F_8$: Shifted Rotated Ackley's Function with Global Optimum on Bounds [cite: 15]
+- $F_9$: Shifted Rastrigin's Function [cite: 15]
+- $F_{10}$: Shifted Rotated Rastrigin's Function [cite: 15]
+- $F_{11}$: Shifted Rotated Weierstrass Function [cite: 15]
+- $F_{12}$: Schwefel's Problem 2.13 [cite: 15]
 
-|Name:|schwefel_102_data.mat|
-|---|---|
-| |schwefel_102_data.txt|
-|Variable:|o 1*100 vector the shifted global optimum|
+#### Expanded Functions (2):
+- $F_{13}$: Expanded Extended Griewank's plus Rosenbrock's Function (F8F2) [cite: 16]
+- $F_{14}$: Shifted Rotated Expanded Scaffer's F6 [cite: 16]
 
-When cut using, o = o(1:D)
+#### Hybrid Composition Functions (11):
+- $F_{15}$: Hybrid Composition Function [cite: 16]
+- $F_{16}$: Rotated Hybrid Composition Function [cite: 16]
+- $F_{17}$: Rotated Hybrid Composition Function with Noise in Fitness [cite: 16]
+- $F_{18}$: Rotated Hybrid Composition Function [cite: 16]
+- $F_{19}$: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum [cite: 16]
+- $F_{20}$: Rotated Hybrid Composition Function with the Global Optimum on the Bounds [cite: 16]
+- $F_{21}$: Rotated Hybrid Composition Function [cite: 16]
+- $F_{22}$: Rotated Hybrid Composition Function with High Condition Number Matrix [cite: 16]
+- $F_{23}$: Non-Continuous Rotated Hybrid Composition Function [cite: 16]
+- $F_{24}$: Rotated Hybrid Composition Function [cite: 16]
+- $F_{25}$: Rotated Hybrid Composition Function without Bounds [cite: 16]
+
+#### Pseudo-Real Problems:
+Available from [http://www.cs.colostate.edu/~genitor/functions.html](http://www.cs.colostate.edu/~genitor/functions.html). [cite: 16] If you have any queries on these problems, please contact Professor Darrell Whitley. Email: whitley@CS.ColoState.EDU [cite: 17]
+
 ---
-2.1.3. F₃: Shifted Rotated High Conditioned Elliptic Function
-        D       i−1
-F ( )   ∑(10 )     z    f _ bias ,  z = (x − o)*M , x = [x , x ,..., x  ]
-  3 x =       6 D−1  2 +
-                     i         3                       1  2     D
-       i=1
-D: dimensions
-       o =[o₁, o₂,...,oD ]  : the shifted global optimum
-M: orthogonal matrix
-                                                                      100
-                              Figure 2-3    100 100
-                                         3‑D map for 2‑D function
-Properties:
-    ¾  Unimodal
-    ¾  Shifted
-    ¾  Rotated
-    ¾  Non‑separable
-    ¾  Scalable
-        x ∈ −                             x  = o  F (x ) = f_bias =‑ 450
-    ¾      [ 100,100]ᴰ , Global optimum     *    , 3  *          3
-Associated Data files:
-Name:          high_cond_elliptic_rot_data.mat
-               high_cond_elliptic_rot_data.txt
-Variable:      o      1*100 vector           the shifted global optimum
-  When
- cut
- using,                         o=o(1:D)
-Name:         elliptic_M_D10 .mat            elliptic_M_D10 .txt
-Variable:      M 10*10
-                     matrix
-Name:         elliptic_M_D30 .mat            elliptic_M_D30 .txt
-Variable:      M 30*30
-                     matrix
-Name:         elliptic_M_D50 .mat            elliptic_M_D50 .txt
-Variable:      M 50*50
-                     matrix
 
-                                                6
----
-# 2.1.4. F₄: Shifted Schwefel’s Problem 1.2 with Noise in Fitness
+## 2. Definitions of the 25 CEC'05 Test Functions [cite: 18]
 
-F (x) = (∑ ∑ (z) ) * (1 + 0.4 N(0,1)) + f_bias
+### 2.1 Unimodal Functions:
 
-z = x - o
+#### 2.1.1. $F_1$: Shifted Sphere Function [cite: 18]
 
-D: dimensions
+$F_1(x) = \sum_{i=1}^{D} z_i^2 + f_{\text{bias}_1}$. [cite: 18]
 
-o = [o₁, o₂,...,oD]: the shifted global optimum
+$z = x - o$, where $x = [x_1, x_2, ..., x_D]$. [cite: 18]
+D: dimensions. [cite: 18]
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum. [cite: 19]
 
-# Properties:
+**Properties:** [cite: 19]
+- Unimodal [cite: 19]
+- Shifted [cite: 19]
+- Separable [cite: 19]
+- Scalable [cite: 19]
 
+Search range: $x \in [-100, 100]^D$. [cite: 19]
+Global optimum: $x^* = o$. [cite: 19]
+$F_1(x^*) = f_{\text{bias}_1} = -450$. [cite: 19]
+
+*Figure 2-1 3-D map for 2-D function* [cite: 19]
+
+**Associated Data files:** [cite: 20]
+
+| File Name              | Variable     | Description                                                                 | Notes for Usage              |
+|------------------------|--------------|-----------------------------------------------------------------------------|------------------------------|
+| `sphere_func_data.mat` | `o`          | $1 \times 100$ vector, the shifted global optimum                             | When using, cut $o = o(1:D)$ |
+| `sphere_func_data.txt` | `o`          | $1 \times 100$ vector, the shifted global optimum                             | When using, cut $o = o(1:D)$ |
+| `fbias_data.mat`       | `f_bias`     | $1 \times 25$ vector, records all the 25 function's $f_{\text{bias}_i}$ values |                              |
+| `fbias_data.txt`       | `f_bias`     | $1 \times 25$ vector, records all the 25 function's $f_{\text{bias}_i}$ values |                              |
+
+#### 2.1.2. $F_2$: Shifted Schwefel's Problem 1.2 [cite: 22]
+
+$F_2(x) = \sum_{i=1}^{D} \left( \sum_{j=1}^{i} z_j \right)^2 + f_{\text{bias}_2}$. [cite: 22]
+
+D: dimensions. [cite: 22]
+$z = x - o$, where $x = [x_1, x_2, ..., x_D]$. [cite: 22]
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum. [cite: 22]
+
+**Properties:** [cite: 22]
+- Unimodal [cite: 22]
+- Shifted [cite: 22]
+- Non-separable [cite: 22]
+- Scalable [cite: 22]
+
+Search range: $x \in [-100, 100]^D$. [cite: 22]
+Global optimum $x^* = o$. [cite: 22]
+$F_2(x^*) = f_{\text{bias}_2} = -450$. [cite: 22]
+
+*Figure 2-2 3-D map for 2-D function* [cite: 22]
+
+**Associated Data files:** [cite: 22]
+
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `schwefel_102_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `schwefel_102_data.txt`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+
+#### 2.1.3. $F_3$: Shifted Rotated High Conditioned Elliptic Function [cite: 23]
+
+$F_3(x) = \sum_{i=1}^{D} (10^6)^{\frac{i-1}{D-1}} z_i^2 + f_{\text{bias}_3}$. [cite: 23]
+
+D: dimensions. [cite: 23]
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$. [cite: 23]
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum. [cite: 23]
+M: orthogonal matrix. [cite: 23]
+
+**Properties:** [cite: 23]
+- Unimodal [cite: 23]
+- Shifted [cite: 23]
+- Rotated [cite: 23]
+- Non-separable [cite: 23]
+- Scalable [cite: 23]
+
+Search range: $x \in [-100, 100]^D$. [cite: 23]
+Global optimum $x^* = o$. [cite: 23]
+$F_3(x^*) = f_{\text{bias}_3} = -450$. [cite: 23]
+
+*Figure 2-3 3-D map for 2-D function* [cite: 23]
+
+**Associated Data files:** [cite: 24]
+
+| File Name                             | Variable | Description                               | Notes for Usage              |
+|---------------------------------------|----------|-------------------------------------------|------------------------------|
+| `high_cond_elliptic_rot_data.mat`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `high_cond_elliptic_rot_data.txt`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `elliptic_M_D10.mat`                  | `M`      | $10 \times 10$ matrix                     |                              |
+| `elliptic_M_D10.txt`                  | `M`      | $10 \times 10$ matrix                     |                              |
+| `elliptic_M_D30.mat`                  | `M`      | $30 \times 30$ matrix                     |                              |
+| `elliptic_M_D30.txt`                  | `M`      | $30 \times 30$ matrix                     |                              |
+| `elliptic_M_D50.mat`                  | `M`      | $50 \times 50$ matrix                     |                              |
+| `elliptic_M_D50.txt`                  | `M`      | $50 \times 50$ matrix                     |                              |
+
+#### 2.1.4. $F_4$: Shifted Schwefel's Problem 1.2 with Noise in Fitness
+
+$F_4(x) = \left( \sum_{i=1}^{D} \left( \sum_{j=1}^{i} z_j \right)^2 \right) \cdot (1 + 0.4 \cdot |N(0,1)|) + f_{\text{bias}_4}$.
+
+$z = x - o$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+$N(0,1)$ is a normally distributed random number with mean 0 and standard deviation 1.
+
+**Properties:**
 - Unimodal
 - Shifted
 - Non-separable
 - Scalable
 - Noise in fitness
 
-x ∈ [-100, 100]ᴰ, Global optimum F₄(x*) = f_bias₄ = -450
+Search range: $x \in [-100, 100]^D$.
+Global optimum $x^* = o$.
+$F_4(x^*) = f_{\text{bias}_4} = -450$.
 
-# Associated Data file:
+*Figure 2-4 3-D map for 2-D function*
 
-|Name:|schwefel_102_data.mat|
-|---|---|
-| |schwefel_102_data.txt|
-|Variable:|o 1*100 vector the shifted global optimum|
-| |When using, cut o = o(1:D)|
+**Associated Data file:**
 
----
-# 2.1.5. F₅: Schwefel’s Problem 2.6 with Global Optimum on Bounds
+| File Name               | Variable | Description                               | Notes for Usage              |
+|-------------------------|----------|-------------------------------------------|------------------------------|
+| `schwefel_102_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `schwefel_102_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
-f ( ) , x = [1,3], f (x ) = 0
+#### 2.1.5. $F_5$: Schwefel's Problem 2.6 with Global Optimum on Bounds
 
-x = max{ x₁ + 2x₂ −7 , 2x₁ + x₂ −5}, i = 1,...,n
+For 2-D, the original function is: $f(x_1, x_2) = \max\{|x_1 + 2x_2 - 7|, |2x_1 + x_2 - 5|\}$. For $x^* = [1,3]$, $f(x^*) = 0$.
 
-Extend to D dimensions:
+Extended to D dimensions:
+$F_5(x) = \max_{i=1,...,D} \{|A_i x - B_i|\} + f_{\text{bias}_5}$.
 
-F ( ) , x = [x₁, x₂,..., xₖ]
+Where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+A is a $D \times D$ matrix, where $a_{ij}$ are integer random numbers in the range [-500, 500], and $\det(A) \neq 0$. $A_i$ is the $i^{th}$ row of A.
+$B_i = A_i \cdot o$.
+$o = [o_1, o_2, ..., o_D]^T$ is a $D \times 1$ vector, where $o_i$ are random numbers in the range [-100, 100].
+After loading the data file, set $o_i = -100$ for $i=1, 2, ..., \lceil D/4 \rceil$, and $o_i = 100$ for $i=\lfloor 3D/4 \rfloor, ..., D$.
 
-x₅ = max{ A x − B } + f_bias, i = 1,..., D
+**Properties:**
+- Unimodal
+- Non-separable
+- Scalable
+- If the initialization procedure initializes the population at the bounds, this problem will be solved easily.
 
-D: dimensions
+Search range: $x \in [-100, 100]^D$.
+Global optimum $x^* = o$.
+$F_5(x^*) = f_{\text{bias}_5} = -310$.
 
-A is a D*D matrix, aij are integer random numbers in the range [‑500, 500], det(A) ≠ 0, Ai is the iᵗʰ row of A.
+*Figure 2-5 3-D map for 2-D function*
 
-Bi = Ai * o, o is a D*1 vector, oi are random numbers in the range [‑100,100]
+**Associated Data file:**
 
-After load the data file, set o = −100, for i = 1, 2,..., D / 4, o = 100, for i = ⎢3D / 4 ,..., D
+| File Name                 | Variable | Description                                                                                                | Notes for Usage                     |
+|---------------------------|----------|------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `schwefel_206_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum                                                            | When using, cut $o = o(1:D)$        |
+|                           | `A`      | $100 \times 100$ matrix                                                                                      | When using, cut $A = A(1:D, 1:D)$   |
+| `schwefel_206_data.txt`   | `o`, `A` | First line is `o` ($1 \times 100$ vector), lines 2-101 are `A` ($100 \times 100$ matrix)                      | As above                            |
 
-i ⎢ 100 ⎥ i ⎦
+### 2.2 Basic Multimodal Functions
 
-⎣ 200
+#### 2.2.1. $F_6$: Shifted Rosenbrock's Function
 
-100
+$F_6(x) = \sum_{i=1}^{D-1} \left( 100(z_i^2 - z_{i+1})^2 + (z_i - 1)^2 \right) + f_{\text{bias}_6}$.
 
-100 200 200 100
+$z = x - o + 1$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
 
-# Figure 2-5 3‑D map for 2‑D function
-
-# Properties:
-
-- ¾ Unimodal
-- ¾ Non‑separable
-- ¾ Scalable
-- ¾ If the initialization procedure initializes the population at the bounds, this problem will be solved easily.
-- x ∈ [−100,100]ᴰ, Global optimum x* = o, F₅ (x*) = f_bias₅ = ‑310
-
-# Associated Data file:
-
-|Name:|schwefel_206_data.mat|
-|---|---|
-| |schwefel_206_data.txt|
-|Variable:|o 1*100 vector the shifted global optimum|
-| |A 100*100 matrix|
-
-When cut using, o = o(1:D) A = A(1:D,1:D)
-
-In schwefel_206_data.txt, the first line is o (1*100 vector), and line 2‑line 101 is A (100*100 matrix)
----
-# 2.2 Basic Multimodal Functions
-
-# 2.2.1. F₆: Shifted Rosenbrock’s Function
-
-Fx(x) = &sum;i=1D-1 (100(z2 - zi2)2 + (zi - 1)2) + fbias, z = x - o + 1, x = [x1, x2, ..., xD]
-
-D: dimensions
-
-o = [o1, o2, ..., oD]: the shifted global optimum
-
-Properties:
-
+**Properties:**
 - Multi-modal
 - Shifted
 - Non-separable
 - Scalable
 - Having a very narrow valley from local optimum to global optimum
 
-x ∈ [-100, 100]D
+Search range: $x \in [-100, 100]^D$.
+Global optimum $x^* = o$.
+$F_6(x^*) = f_{\text{bias}_6} = 390$.
 
-Global optimum, F6(x*) = fbias₆ = 390
+*Figure 2-6 3-D map for 2-D function*
 
-# Associated Data file:
+**Associated Data file:**
 
-|Name:|rosenbrock_func_data.mat|
-|---|---|
-| |rosenbrock_func_data.txt|
-|Variable:|o 1*100 vector the shifted global optimum|
+| File Name                   | Variable | Description                               | Notes for Usage              |
+|-----------------------------|----------|-------------------------------------------|------------------------------|
+| `rosenbrock_func_data.mat`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `rosenbrock_func_data.txt`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
-When cut using, o = o(1:D)
----
-# 2.2.2. F₇: Shifted Rotated Griewank’s Function without Bounds
+#### 2.2.2. $F_7$: Shifted Rotated Griewank's Function without Bounds
 
-F₇(x) = ∑i=1D ∏i=14000 (zi - oi) - cos(zi) + 1 + fbias₇, z = (x - o) * M, x = [x1, x2,..., xD]
+$F_7(x) = \sum_{i=1}^{D} \frac{z_i^2}{4000} - \prod_{i=1}^{D} \cos\left(\frac{z_i}{\sqrt{i}}\right) + 1 + f_{\text{bias}_7}$.
 
-D: dimensions
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+$M'$: linear transformation matrix, condition number = 3.
+$M = M' \cdot (1 + 0.3 \cdot |N(0,1)|)$.
 
-o = [o1, o2,...,oD] : the shifted global optimum
-
-M’ : linear transformation matrix, condition number = 3
-
-M = M’(1 + 0.3|N(0,1)|)
-
-# Properties:
-
+**Properties:**
 - Multi-modal
 - Rotated
 - Shifted
 - Non-separable
 - Scalable
-- No bounds for variables x
-- Initialize population in [0, 600] D, Global optimum x* = o is outside of the initialization range, F₇(x*) = fbias₇ = -180
+- No bounds for variables $x$.
+- Initialize population in $[0, 600]^D$. Global optimum $x^* = o$ is outside of the initialization range.
+  $F_7(x^*) = f_{\text{bias}_7} = -180$.
 
-# Associated Data file:
+*Figure 2-7 3-D map for 2-D function*
 
-|Name:|griewank_func_data.mat|griewank_func_data.txt|
-|---|---|---|
-|Variable:|o|1*100 vector|
-|When cut using:|o = o(1:D)| |
-|Name:|griewank_M_D10.mat|griewank_M_D10.txt|
-|Variable:|M|10*10 matrix|
-|Name:|griewank_M_D30.mat|griewank_M_D30.txt|
-|Variable:|M|30*30 matrix|
-|Name:|griewank_M_D50.mat|griewank_M_D50.txt|
-|Variable:|M|50*50 matrix|
+**Associated Data file:**
 
----
-# 2.2.3. F₈: Shifted Rotated Ackley’s Function with Global Optimum on Bounds
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `griewank_func_data.mat`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `griewank_func_data.txt`  | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `griewank_M_D10.mat`      | `M`      | $10 \times 10$ matrix                     |                              |
+| `griewank_M_D10.txt`      | `M`      | $10 \times 10$ matrix                     |                              |
+| `griewank_M_D30.mat`      | `M`      | $30 \times 30$ matrix                     |                              |
+| `griewank_M_D30.txt`      | `M`      | $30 \times 30$ matrix                     |                              |
+| `griewank_M_D50.mat`      | `M`      | $50 \times 50$ matrix                     |                              |
+| `griewank_M_D50.txt`      | `M`      | $50 \times 50$ matrix                     |                              |
 
-F(x) = -20 exp(-0.2 * sqrt(1/D * ∑i=1D zi2)) - exp(1/D * ∑i=1D cos(2 * zi)) + 20 + e + fbias₈
+#### 2.2.3. $F_8$: Shifted Rotated Ackley's Function with Global Optimum on Bounds
 
-z = (x - o) * M, x = [x1, x2,..., xD], D: dimensions
+$F_8(x) = -20 \exp\left(-0.2 \sqrt{\frac{1}{D}\sum_{i=1}^{D} z_i^2}\right) - \exp\left(\frac{1}{D}\sum_{i=1}^{D} \cos(2\pi z_i)\right) + 20 + e + f_{\text{bias}_8}$.
 
-o = [o1, o2,..., oD]: the shifted global optimum; After loading the data file, set o2j−1 = -32 o2j are randomly distributed in the search range, for j = 1, 2,..., ⌊D/2⌋
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+After loading the data file, set $o_{2j-1} = -32$ (the PDF states "$o_{2j-1}=-32o_{2j}$ are randomly distributed", which is ambiguous. Assuming it means some coordinates of $o$ are set to the bound or near it. The text "$o_{2j}$ are randomly distributed in the search range, for $j=1,2,...,\lfloor D/2\rfloor$" also appears in the PDF. For clarity and to reflect the "Global Optimum on Bounds" property, typically some components of $o$ are set to the boundary values, -32 or +32. The exact procedure for setting $o$ would depend on the specific data file implementation details. The file `ackley_func_data.mat` or `.txt` contains the actual $o$ values.)
+M: linear transformation matrix, condition number = 100.
 
-M: linear transformation matrix, condition number = 100
-
-# Figure 2-8 3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
+**Properties:**
+- Multi-modal
 - Rotated
 - Shifted
-- Non‑separable
+- Non-separable
 - Scalable
-- A’s condition number Cond(A) increases with the number of variables as O(D²)
-- Global optimum on the bound
+- Global optimum on the bound.
 - If the initialization procedure initializes the population at the bounds, this problem will be solved easily.
 
-x ∈ [-32, 32]D, Global optimum F(x) = fbias₈ = -140
+Search range: $x \in [-32, 32]^D$.
+Global optimum $x^* = o$.
+$F_8(x^*) = f_{\text{bias}_8} = -140$.
 
-# Associated Data file:
+*Figure 2-8 3-D map for 2-D function*
 
-|Name:|ackley_func_data.mat|ackley_func_data.txt|
-|---|---|---|
-|Variable:|o|1*100 vector|
-|When using,|oo = (1:D)| |
-|Name:|ackley_M_D10.mat|ackley_M_D10.txt|
-|Variable:|M|10*10 matrix|
-|Name:|ackley_M_D30.mat|ackley_M_D30.txt|
-|Variable:|M|30*30 matrix|
-|Name:|ackley_M_D50.mat|ackley_M_D50.txt|
-|Variable:|M|50*50 matrix|
+**Associated Data file:**
 
----
-# 2.2.4. F₉: Shifted Rastrigin’s Function
+| File Name             | Variable | Description                               | Notes for Usage              |
+|-----------------------|----------|-------------------------------------------|------------------------------|
+| `ackley_func_data.mat`| `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `ackley_func_data.txt`| `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `ackley_M_D10.mat`    | `M`      | $10 \times 10$ matrix                     |                              |
+| `ackley_M_D10.txt`    | `M`      | $10 \times 10$ matrix                     |                              |
+| `ackley_M_D30.mat`    | `M`      | $30 \times 30$ matrix                     |                              |
+| `ackley_M_D30.txt`    | `M`      | $30 \times 30$ matrix                     |                              |
+| `ackley_M_D50.mat`    | `M`      | $50 \times 50$ matrix                     |                              |
+| `ackley_M_D50.txt`    | `M`      | $50 \times 50$ matrix                     |                              |
 
-F9(x) = ∑i=1D zi2 - 10πzi + fbias
+#### 2.2.4. $F_9$: Shifted Rastrigin's Function
 
-x = x1, x2, ..., xD, z = x - o, [1, 2, ..., D]
+$F_9(x) = \sum_{i=1}^{D} (z_i^2 - 10 \cos(2\pi z_i) + 10) + f_{\text{bias}_9}$.
 
-D: dimensions
+$z = x - o$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
 
-o = [o1, o2, ..., oD]: the shifted global optimum
-
-# Properties:
-
-- Multi‑modal
+**Properties:**
+- Multi-modal
 - Shifted
 - Separable
 - Scalable
-- Local optima’s number is huge
+- Local optima's number is huge.
 
-x ∈ [-5, 5]D <br />
-x* = o <br />
-F9(x*) = fbias <br />
-Global optimum, F9(x) = -330
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* = o$.
+$F_9(x^*) = f_{\text{bias}_9} = -330$.
 
-# Associated Data file:
+*Figure 2-9 3-D map for 2-D function*
 
-|Name:|rastrigin_func_data.mat|
-|---|---|
-| |rastrigin_func_data.txt|
-|Variable:|o 1*100 vector|
-| |the shifted global optimum|
-|When cut using,|o = (1: D)|
-| |12|
+**Associated Data file:**
 
----
-# 2.2.5. F₁₀: Shifted Rotated Rastrigin’s Function
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `rastrigin_func_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `rastrigin_func_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
-F10(x) = &sum;i=1D zi - πzi + fbias
-z = x - o
-M
-x = x x x
+#### 2.2.5. $F_{10}$: Shifted Rotated Rastrigin's Function
 
-D: dimensions
+$F_{10}(x) = \sum_{i=1}^{D} (z_i^2 - 10 \cos(2\pi z_i) + 10) + f_{\text{bias}_{10}}$.
 
-o = [o1, o2,...,oD] : the shifted global optimum
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+M: linear transformation matrix, condition number = 2.
 
-M: linear transformation matrix, condition number = 2
-
-|Figure 2-10 3‑D map for 2‑D function|Figure 2-10 3‑D map for 2‑D function|Figure 2-10 3‑D map for 2‑D function|Figure 2-10 3‑D map for 2‑D function|
-|---|---|---|---|
-|100|200|300|400|
-
-# Properties:
-
-- Multi‑modal
-- Shifted
-- Rotated
-- Non‑separable
-- Scalable
-- Local optima’s number is huge
-
-x ∈ [-D, D]
-
-x* = o
-
-F(x*) = fbias
-
-Global optimum = -330
-
-# Associated Data file:
-
-|Name:|rastrigin_func_data.mat|
-|---|---|
-| |rastrigin_func_data.txt|
-|Variable:|o 1*100 vector the shifted global optimum|
-|When cut using,|o = (1: D)|
-|Name:|rastrigin_M_D10.mat|
-| |rastrigin_M_D10.txt|
-|Variable:|M 10*10 matrix|
-|Name:|rastrigin_M_D30.mat|
-| |rastrigin_M_D30.txt|
-|Variable:|M 30*30 matrix|
-|Name:|rastrigin_M_D50.mat|
-| |rastrigin_M_D50.txt|
-|Variable:|M 50*50 matrix|
-
----
-# 2.2.6. F₁₁: Shifted Rotated Weierstrass Function
-
-F11(x) = &sum;i=1&sum;k=0 ak πb z + &minus; D &sum;k=0 ak πb &sdot; + fbias
-
-a = 0.5, b = 3, kmax = 20, z = x &minus; oM x = x x x
-
-D: dimensions
-
-o = [o1, o2, ..., oD]: the shifted global optimum
-
-M: linear transformation matrix, condition number = 5
-
-# Properties:
-
+**Properties:**
 - Multi-modal
 - Shifted
 - Rotated
 - Non-separable
 - Scalable
-- Continuous but differentiable only on a set of points
+- Local optima's number is huge.
 
-x &in; [0.5, 0.5], Global optimum x* = o, F11(x*) = fbias = 90
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* = o$.
+$F_{10}(x^*) = f_{\text{bias}_{10}} = -330$.
 
-# Associated Data file:
+*Figure 2-10 3-D map for 2-D function*
 
-|Name:|weierstrass_data.mat|weierstrass_data.txt|
-|---|---|---|
-|Variable:|o|1*100 vector|
-|When cut using,|oD = (1: )| |
-|Name:|weierstrass_M_D10.mat|weierstrass_M_D10.txt|
-|Variable:|M|10*10 matrix|
-|Name:|weierstrass_M_D30.mat|weierstrass_M_D30.txt|
-|Variable:|M|30*30 matrix|
-|Name:|weierstrass_M_D50.mat|weierstrass_M_D50.txt|
-|Variable:|M|50*50 matrix|
+**Associated Data file:**
 
----
-# 2.2.7. F₁₂: Schwefel’s Problem 2.13
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `rastrigin_func_data.mat` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `rastrigin_func_data.txt` | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `rastrigin_M_D10.mat`     | `M`      | $10 \times 10$ matrix                     |                              |
+| `rastrigin_M_D10.txt`     | `M`      | $10 \times 10$ matrix                     |                              |
+| `rastrigin_M_D30.mat`     | `M`      | $30 \times 30$ matrix                     |                              |
+| `rastrigin_M_D30.txt`     | `M`      | $30 \times 30$ matrix                     |                              |
+| `rastrigin_M_D50.mat`     | `M`      | $50 \times 50$ matrix                     |                              |
+| `rastrigin_M_D50.txt`     | `M`      | $50 \times 50$ matrix                     |                              |
 
-F12(x) = ∑i=1D A - B + fbias(x) = x12(x)i
+#### 2.2.6. $F_{11}$: Shifted Rotated Weierstrass Function
 
-A = ∑i=1D(aij sin αj + bij cos αj),
-B = ∑i=1D xi = (aij sin xj + bij cos xj)
+$F_{11}(x) = \sum_{i=1}^{D} \left( \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k (z_i + 0.5))] \right) - D \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k \cdot 0.5)] + f_{\text{bias}_{11}}$.
 
-D: dimensions
+$a = 0.5$, $b = 3$, $k_{\text{max}} = 20$.
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+M: linear transformation matrix, condition number = 5.
 
-A, B are two D*D matrices, aij, bij are integer random numbers in the range [-100,100],
-α = [α1, α2, ..., αD], αj are random numbers in the range [-π,π].
-
-# Figure 2-12
-
-3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
+**Properties:**
+- Multi-modal
 - Shifted
-- Non‑separable
+- Rotated
+- Non-separable
 - Scalable
+- Continuous but differentiable only on a set of points.
 
-x ∈ [-π, π]D, Global optimum * F12(*) = -460
+Search range: $x \in [-0.5, 0.5]^D$.
+Global optimum $x^* = o$.
+$F_{11}(x^*) = f_{\text{bias}_{11}} = 90$.
 
-# Associated Data file:
+*Figure 2-11 3-D map for 2-D function*
 
-Name: schwefel_213_data.mat
+**Associated Data file:**
 
-schwefel_213_data.txt
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `weierstrass_data.mat`    | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `weierstrass_data.txt`    | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `weierstrass_M_D10.mat`   | `M`      | $10 \times 10$ matrix                     |                              |
+| `weierstrass_M_D10.txt`   | `M`      | $10 \times 10$ matrix                     |                              |
+| `weierstrass_M_D30.mat`   | `M`      | $30 \times 30$ matrix                     |                              |
+| `weierstrass_M_D30.txt`   | `M`      | $30 \times 30$ matrix                     |                              |
+| `weierstrass_M_D50.mat`   | `M`      | $50 \times 50$ matrix                     |                              |
+| `weierstrass_M_D50.txt`   | `M`      | $50 \times 50$ matrix                     |                              |
 
-Variable:
+#### 2.2.7. $F_{12}$: Schwefel's Problem 2.13
 
-alpha: 1*100 vector the shifted global optimum
+$F_{12}(x) = \sum_{i=1}^{D} (A_i - B_i(x))^2 + f_{\text{bias}_{12}}$.
 
-a: 100*100 matrix
+Where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$A_i = \sum_{j=1}^{D} (a_{ij} \sin(\alpha_j) + b_{ij} \cos(\alpha_j))$.
+$B_i(x) = \sum_{j=1}^{D} (a_{ij} \sin(x_j) + b_{ij} \cos(x_j))$, for $i=1,...,D$.
 
-b: 100*100 matrix
+A, B are two $D \times D$ matrices; $a_{ij}, b_{ij}$ are integer random numbers in the range [-100, 100].
+$\alpha = [\alpha_1, \alpha_2, ..., \alpha_D]$; $\alpha_j$ are random numbers in the range $[-\pi, \pi]$.
 
-When using, alphai = (1: D), ai = (1: D, 1: D), bi = (1: D, 1: D)
-
-In schwefel_213_data.txt, line 1-line 100 is a (100*100 matrix), and line 101-line 200 is b (100*100 matrix),
-the last line is alpha (1*100 vector).
----
-# 2.3 Expanded Functions
-
-Using a 2‑D function Fx y(, ) as a starting function, corresponding expanded function is:
-
-EFx = F1(x) + F2(x) + ... + FD(x)
-
-F1(x) F2(x) ... FD-1(x) FD(x1, x2, ..., xD)
-
-# 2.3.1 F13: Shifted Expanded Griewank’s plus Rosenbrock’s Function (F8F2)
-
-F8: Griewank’s Function: F8(x) = ∑i=14000 (xi - ∏i=1D-1 cos( xi)) + 1
-
-F2: Rosenbrock’s Function: F2(x) = ∑i=1D-1 (100(xi2 - xi+12)2 + (xi - 1)2)
-
-F8F2(x1, x2, ..., xD) = F8(F2(x1, x2)) + F8(F2(x2, x3)) + ... + F8(F2(xD-1, xD)) + F8(F2(xD, x1))
-
-Shift to
-
-F13(x) = F8(F2(z1, z2)) + F8(F2(z2, z3)) + ... + F8(F2(zD-1, zD)) + F8(F2(zD, z1)) + fbias13
-
-z = x - o + 1, x = [x1, x2, ..., xD]
-
-D: dimensions o = [o1, o2, ..., oD]: the shifted global optimum
-
-| |100|110|120|130| |
-|---|---|---|---|---|---|
-| |1.5|-1.8|1.6|-1.4|11.2|
-
-# Properties:
-
-- Multi‑modal
+**Properties:**
+- Multi-modal
 - Shifted
-- Non‑separable
+- Non-separable
 - Scalable
 
-x ∈ [-5, 5], Global optimum x* = o, F13(x*) = fbias13 = -130
+Search range: $x \in [-\pi, \pi]^D$.
+Global optimum $x^* = \alpha$.
+$F_{12}(x^*) = f_{\text{bias}_{12}} = -460$.
 
-# Associated Data file:
+*Figure 2-12 3-D map for 2-D function*
 
-Name: EF8F2_func_data.mat
+**Associated Data file:**
 
-Name: EF8F2_func_data.txt
+| File Name                 | Variable | Description                                                                                                                               | Notes for Usage                                                                |
+|---------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `schwefel_213_data.mat`   | `alpha`  | $1 \times 100$ vector, the shifted global optimum                                                                                           | When using, cut `alpha` = `alpha`(1:D)                                           |
+|                           | `a`      | $100 \times 100$ matrix                                                                                                                     | When using, cut `a` = `a`(1:D, 1:D)                                              |
+|                           | `b`      | $100 \times 100$ matrix                                                                                                                     | When using, cut `b` = `b`(1:D, 1:D)                                              |
+| `schwefel_213_data.txt`   | `a`, `b`, `alpha` | Lines 1-100 are `a` ($100 \times 100$ matrix), lines 101-200 are `b` ($100 \times 100$ matrix), the last line is `alpha` ($1 \times 100$ vector). | As above                                                                       |
 
-Variable: o 1*100 vector the shifted global optimum
+### 2.3 Expanded Functions
 
-When cut using, o = (1:D)
+Using a 2-D function $F(x,y)$ as a starting function, the corresponding expanded function is:
+$EF(x_1, x_2, ..., x_D) = F(x_1, x_2) + F(x_2, x_3) + ... + F(x_{D-1}, x_D) + F(x_D, x_1)$.
 
-16
----
-# 2.3.2. F₁₄: Shifted Rotated Expanded Scaffer’s F6 Function
+#### 2.3.1. $F_{13}$: Shifted Expanded Griewank's plus Rosenbrock's Function (F8F2)
 
-F(x, y) = 0.5 + (1 + 0.001(x² + y²))²
+F8: Griewank's Function: $F_8(x) = \sum_{i=1}^{D} \frac{x_i^2}{4000} - \prod_{i=1}^{D} \cos\left(\frac{x_i}{\sqrt{i}}\right) + 1$.
+F2: Rosenbrock's Function: $F_2(x) = \sum_{i=1}^{D-1} (100(x_i^2 - x_{i+1})^2 + (x_i - 1)^2)$.
 
-Expanded to
+$F8F2(x_1, x_2, ..., x_D) = F8(F2(x_1, x_2)) + F8(F2(x_2, x_3)) + ... + F8(F2(x_{D-1}, x_D)) + F8(F2(x_D, x_1))$.
 
-F(x) = EF(z) + F(z₁) + F(z₂) + ... + F(zD)
+Shifted to:
+$F_{13}(x) = F8(F2(z_1, z_2)) + F8(F2(z_2, z_3)) + ... + F8(F2(z_{D-1}, z_D)) + F8(F2(z_D, z_1)) + f_{\text{bias}_{13}}$.
 
-z = (x − o) * M, x = [x₁, x₂, ..., xD]
+$z = x - o + 1$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
 
-D: dimensions
-
-o = [o₁, o₂, ..., oD]: the shifted global optimum
-
-M: linear transformation matrix, condition number = 3
-
-# Figure 2-14 3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
+**Properties:**
+- Multi-modal
 - Shifted
-- Non‑separable
+- Non-separable
 - Scalable
 
-x ∈ [−100, 100]ᴰ, Global optimum x = o, F(*) f_bias(14) = -300
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* = o$.
+$F_{13}(x^*) = f_{\text{bias}_{13}} = -130$. (Note: PDF says $f_{\text{bias}_{13}}(13)$, this is likely a typo and should be $f_{\text{bias}_{13}}$ or referencing the value for function 13).
 
-# Associated Data file:
+*Figure 2-13 3-D map for 2-D function*
 
-|Name:|E_ScafferF6_func_data.mat|E_ScafferF6_func_data.txt|
-|---|---|---|
-|Variable:|o|1*100 vector|
-|When cut using,|o = (1:D)| |
-|Name:|E_ScafferF6_M_D10.mat|E_ScafferF6_M_D10.txt|
-|Variable:|M|10*10 matrix|
-|Name:|E_ScafferF6_M_D30.mat|E_ScafferF6_M_D30.txt|
-|Variable:|M|30*30 matrix|
-|Name:|E_ScafferF6_M_D50.mat|E_ScafferF6_M_D50.txt|
-|Variable:|M|50*50 matrix|
+**Associated Data file:**
 
----
- 2.4   Composition functions
-  F( ) : new composition function
-     x
-  f  x   th
-  i ( ) : i  basic function used to construct the composition function
- n : number of basic functions
-  D: dimensions
- Mi : linear transformation matrix for each   fi( x)
- oi : new shifted optimum position for each   fi (x)
-                               n
-                       F( ) ∑                       λ
-                         x  =    {wi *[ fi '((x −oi ) / i * Mi ) +biasi ]}+ f _ bias
-                               i=1
- w : weight value for each   f x
-   i                          i ( ), calculated as below:
-                                          D
-                                         ∑(ˣₖ − oik )²
-                             wi = exp(−  k=1 2Dσi2    ) ，
-                             w    ⎧          wi           wi == max(wi)
-                               i = ⎨w *(1‑max(w ).^10)     w ≠ max(w )
-                                  ⎩  i           i           i         i
-                                                                   n
-                              then normalize the weight  wi = wi  / ∑ wi
-                                                                  i=1
- σ : used to control each  f  x                             σ                                        x
-   i                        i ( )’s coverage range, a small       i  give a narrow range for that fi ( )
- λi  : used to stretch compress the function, λi >1 means stretch, λi <1 means compress
- oi  define the global and local optima’s position,  biasi  define which optimum is global optimum.
-Using  oi ,  biasi , a global optimum can be placed anywhere.
- If ( )x
-    fi    are different functions, differe nt functions have different pr operties and height, in order
- to get a better mixture, esti  mate a biggest function value     f                          x
-                                                                      for 10 functions    ( )
-                                                                  maxi                    fi   , then
- normalize each basic functions to similar heights as below:
-  f  x          x         , C is a predefined constant.
-  i '( ) = C * fi ( ) / fₘₐₓi
- fₘₐₓi  is estimated using  fₘₐₓi = fi((x'/ λi )*Mi ), x'=[5,5…,5].
- In the following composition functions,
- Number of basic functions n=10.
- D: dimensions
- o: n*D matrix, defines  f  x
-                          i ( ) ’s global optimal positions
-      =[0, 100, 200, 300, 400, 500, 600, 700, 800, 900]. Hence, the first function   f x
- bias                                                                                 1( ) always the
- function with the global optimum.
- C=2000
-                                                  18
----
-# Pseudo Code:
+| File Name                 | Variable | Description                               | Notes for Usage              |
+|---------------------------|----------|-------------------------------------------|------------------------------|
+| `EF8F2_func_data.mat`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `EF8F2_func_data.txt`     | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
 
-Define f1‑f10, σ, λ, bias, C, load data file o and rotated linear transformation matrix M1‑M10
+#### 2.3.2. $F_{14}$: Shifted Rotated Expanded Scaffer's F6 Function
 
-y =[5,5…,5].
+Original 2-D Scaffer's F6 function: $F(x,y) = 0.5 + \frac{\sin^2(\sqrt{x^2+y^2}) - 0.5}{(1 + 0.001(x^2+y^2))^2}$.
 
-For i=1:10
+Expanded to:
+$F_{14}(x) = EF(z_1, z_2, ..., z_D) = F(z_1, z_2) + F(z_2, z_3) + ... + F(z_{D-1}, z_D) + F(z_D, z_1) + f_{\text{bias}_{14}}$.
 
-D
+$z = (x - o) \cdot M$, where $x = [x_1, x_2, ..., x_D]$.
+D: dimensions.
+$o = [o_1, o_2, ..., o_D]$: the shifted global optimum.
+M: linear transformation matrix, condition number = 3.
 
-w = exp(− ∑(xᵏ − oⁱᵏ )² ) ，
-
-k=1
-
-i
-
-2Dσi²
-
-fiti = fi (((x −oi ) / λi )*Mi)
-
-f maxi = fi((y / λi ) *Mi) ,
-
-fiti = C * fiti / f maxi
-
-EndFor
-
-n
-
-SW = ∑ wi
-
-i=1
-
-MaxW = max(wi)
-
-For i=1:10
-
-w ⎧         wi           if                  wi == MaxW
-
-= ⎨w *(1‑MaxW .^10)  if             w ≠ MaxW
-
-⎩    i                        i
-
-wi = wi  / SW
-
-EndFor
-
-n
-
-F x     ∑
-
-( ) =   {wi *[ fiti + biasi ]}
-
-i=1
-
-F x =       +
-
-( )    F (x) f _ bias
-
-19
----
-# 2.4.1. F₁₅: Hybrid Composition Function
-
-f1(x) : Rastrigin’s Function
-
-f1(x) = &sum;i=1D (xi2 - 10 cos(2 xi) + 10)
-
-f3−4(x) : Weierstrass Function
-
-fi(x) = &sum;i=1D &sum;k=0kmax (ak cos(2bk(xi + 0.5))) - D &sum;k=0kmax (ak cos(2bk ⋅ 0.5))
-
-a = 0.5, b = 3, kmax = 20
-
-f5−6(x) : Griewank’s Function
-
-fi(x) = &sum;i=1D (xi2 / 4000 - &prod;i=1D cos(xi / &sqrt;i) + 1)
-
-f7−8(x) : Ackley’s Function
-
-fi(x) = -20 exp(-0.2 &sum;i=1D xi2) - exp(&sum;i=1D cos(2 xi)) + 20 + e
-
-f9−10(x) : Sphere Function
-
-fi(x) = &sum;i=1D xi2
-
-σi = 1 for i = 1, 2,..., D
-
-λ = [1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100]
-
-Mi are all identity matrices
-
-Please notice that these formulas are just for the basic functions, no shift or rotation is included in these expressions. x here is just a variable in a function.
-
-Take f1 as an example, when we calculate λ1 f1(((x - o1) / 1) * M1), we need to calculate:
-
-f1(z) = &sum;i=1D (zi2 - 10 cos(2 zi) + 10), z = ((x - o1) / 1) * M1.
----
-# Figure 2-15 3‑D map for 2‑D function
-
-3000250020005000o0500
-# Properties:
-
-- Multi‑modal
-- Separable near the global optimum (Rastrigin)
+**Properties:**
+- Multi-modal
+- Shifted
+- Non-separable
 - Scalable
-- A huge number of local optima
-- Different function’s properties are mixed together
-- Sphere Functions give two flat areas for the function x ∈ −[5,5]ᴰ, Global optimum x* = o₁, F (x*) = f_bias = 120
 
-# Associated Data file:
+Search range: $x \in [-100, 100]^D$.
+Global optimum $x^* = o$.
+$F_{14}(x^*) = f_{\text{bias}_{14}} = -300$. (Note: PDF says $f_{\text{bias}_{14}}(14)$, typo, should be $f_{\text{bias}_{14}}$).
 
-|Name:|hybrid_func1_data.mat|
-|---|---|
-| |hybrid_func1_data.txt|
-|Variable:|o 10*100 vector the shifted optimum for 10 functions|
-|When cut using,|o=o(:,1:D)|
+*Figure 2-14 3-D map for 2-D function*
+
+**Associated Data file:**
+
+| File Name                     | Variable | Description                               | Notes for Usage              |
+|-------------------------------|----------|-------------------------------------------|------------------------------|
+| `E_ScafferF6_func_data.mat`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `E_ScafferF6_func_data.txt`   | `o`      | $1 \times 100$ vector, the shifted global optimum | When using, cut $o = o(1:D)$ |
+| `E_ScafferF6_M_D10.mat`       | `M`      | $10 \times 10$ matrix                     |                              |
+| `E_ScafferF6_M_D10.txt`       | `M`      | $10 \times 10$ matrix                     |                              |
+| `E_ScafferF6_M_D30.mat`       | `M`      | $30 \times 30$ matrix                     |                              |
+| `E_ScafferF6_M_D30.txt`       | `M`      | $30 \times 30$ matrix                     |                              |
+| `E_ScafferF6_M_D50.mat`       | `M`      | $50 \times 50$ matrix                     |                              |
+| `E_ScafferF6_M_D50.txt`       | `M`      | $50 \times 50$ matrix                     |                              |
+
+### 2.4 Composition Functions
+
+Let $F(x)$ be the new composition function.
+$f_i(x)$: $i^{th}$ basic function used to construct the composition function.
+n: number of basic functions.
+D: dimensions.
+$M_i$: linear transformation matrix for each $f_i(x)$.
+$o_i$: new shifted optimum position for each $f_i(x)$.
+
+The general form of a composition function is:
+$F(x) = \sum_{i=1}^{n} \{w_i \cdot [f'_i(((x-o_i)/\lambda_i) \cdot M_i) + \text{bias}_i]\} + f_{\text{g_bias}}$
+(Note: The PDF uses $f_{\text{_bias}}$ at the end, I'm using $f_{\text{g_bias}}$ for global bias to distinguish from $\text{bias}_i$).
+
+$w_i$: weight value for each $f_i(x)$, calculated as below:
+$w_i = \exp\left(-\frac{\sum_{k=1}^{D}(x_k - o_{ik})^2}{2D\sigma_i^2}\right)$.
+(The PDF has $o_{ik}$ as $\sigma_{ik}$ in the formula, but based on context and typical usage, $o_{ik}$ as the k-th component of the $i$-th optimum $o_i$ makes more sense for calculating distance to the center of the function's influence).
+
+The weights $w_i$ are then adjusted:
+If $w_j = \max(w_1, ..., w_n)$, then $w_j = w_j$.
+Otherwise, $w_j = w_j \cdot (1 - (\max(w_1, ..., w_n))^{10})$.
+(The PDF notation is $w_i = \begin{cases} w_i & w_i = \max(w_i) \\ w_i \cdot (1-\max(w_i).\textasciicircum10) & w_i \neq \max(w_i) \end{cases}$. The condition $w_i=\max(w_i)$ should refer to $w_i$ being the maximum *among all* weights for that $x$).
+
+Then, normalize the weights: $w_i = \frac{w_i}{\sum_{j=1}^{n} w_j}$.
+
+$\sigma_i$: used to control each $f_i(x)$'s coverage range; a small $\sigma_i$ gives a narrow range for that $f_i(x)$.
+$\lambda_i$: used to stretch or compress the function; $\lambda_i > 1$ means stretch, $\lambda_i < 1$ means compress.
+$o_i$: define the global and local optima's position.
+$\text{bias}_i$: define which optimum is global optimum. Using $o_i$ and $\text{bias}_i$, a global optimum can be placed anywhere.
+
+If $f_i(x)$ are different functions, they have different properties and heights. To get a better mixture, estimate the maximum function value $f_{\text{max}_i}$ for each basic function $f_i(x)$. Then, normalize each basic function to similar heights:
+$f'_i(x) = C \cdot \frac{f_i(x)}{|f_{\text{max}_i}|}$, where C is a predefined constant.
+$|f_{\text{max}_i}|$ is estimated using $f_{\text{max}_i} = f_i((x'/\lambda_i) \cdot M_i)$, where $x' = [5,5,...,5]$.
+
+In the following composition functions:
+- Number of basic functions $n=10$.
+- D: dimensions.
+- $o$: $n \times D$ matrix, defines $f_i(x)$'s global optimal positions (This is $o_i$ for each function).
+- $\text{bias} = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]$. Hence, the first function $f_1(x)$ always has $\text{bias}_1 = 0$, making its associated optimum (after considering $f'_i$) the target global optimum of the composition function before adding $f_{\text{g_bias}}$.
+- $C=2000$.
 
 ---
-# 2.4.2. F₁₆: Rotated Version of Hybrid Composition Function F₁₅
+**Pseudo Code:**
 
-Except Mi are different linear transformation matrixes with condition number of 2, all other settings are the same as F15.
+```text
+Define f1-f10 (basic functions)
+Define σ_params (array of σ for each f_i)
+Define λ_params (array of λ for each f_i)
+Define bias_coefficients (array of bias for each f_i, e.g., [0, 100,...])
+Define C_norm (normalization constant, e.g., 2000)
+Define f_global_bias (final bias for the composed function)
 
-Figure 2-16 3‑D map for 2‑D function
+Load o_optima_data (n x D matrix of optima o_i for each f_i)
+Load M_rotation_data (rotation matrices M_i for each f_i, can be identity)
 
-# Properties:
+FUNCTION Calculate_Composed_Fitness(x_input_vector):
+    n_functions = 10 // Number of basic functions
+    D_dimensions = length(x_input_vector)
 
-- Multi‑modal
+    raw_weights = array of size n_functions
+    normalized_fitness_contributions = array of size n_functions
+
+    // Fixed point for f_max estimation
+    y_ref_point = create_vector(D_dimensions, 5.0) 
+
+    // --- Step 1: Calculate normalized fitness and raw weights ---
+    for i from 0 to n_functions-1:
+        // Calculate w_i (gaussian-like weight)
+        current_optimum_oi = o_optima_data[i]
+        sum_sq_dist = 0
+        for k from 0 to D_dimensions-1:
+            sum_sq_dist += (x_input_vector[k] - current_optimum_oi[k])^2
+        end for
+        raw_weights[i] = exp(-sum_sq_dist / (2 * D_dimensions * σ_params[i]^2))
+
+        // Transform input for current basic function f_i
+        // z_i = ((x_input_vector - o_i) / λ_i) * M_i
+        x_shifted = vector_subtract(x_input_vector, current_optimum_oi)
+        x_scaled = vector_divide_scalar(x_shifted, λ_params[i])
+        z_i = matrix_multiply_vector(M_rotation_data[i], x_scaled)
+        
+        // Calculate raw fitness of f_i at z_i
+        fit_i_raw = evaluate_basic_function_by_type(function_type[i], z_i)
+        
+        // Estimate f_max_i for normalization
+        y_ref_scaled = vector_divide_scalar(y_ref_point, λ_params[i])
+        z_ref_transformed = matrix_multiply_vector(M_rotation_data[i], y_ref_scaled)
+        f_max_i = evaluate_basic_function_by_type(function_type[i], z_ref_transformed)
+        
+        // Normalize fitness contribution
+        if abs(f_max_i) < 1.0e-20: // Avoid division by zero
+            normalized_fitness_contributions[i] = C_norm * fit_i_raw
+        else:
+            normalized_fitness_contributions[i] = C_norm * fit_i_raw / abs(f_max_i)
+        end if
+    end for
+
+    // --- Step 2: Adjust and Normalize Weights ---
+    current_max_raw_weight = 0.0
+    for i from 0 to n_functions-1:
+        if raw_weights[i] > current_max_raw_weight:
+            current_max_raw_weight = raw_weights[i]
+        end if
+    end for
+
+    final_weights = array of size n_functions
+    sum_adjusted_weights = 0.0
+
+    for i from 0 to n_functions-1:
+        if abs(raw_weights[i] - current_max_raw_weight) < 1.0e-20: // Check if it's the max weight
+            adjusted_w_i = raw_weights[i]
+        else:
+            adjusted_w_i = raw_weights[i] * (1.0 - power(current_max_raw_weight, 10))
+        end if
+        final_weights[i] = adjusted_w_i 
+        sum_adjusted_weights += adjusted_w_i
+    end for
+
+    // Final normalization of weights
+    if abs(sum_adjusted_weights) < 1.0e-20: // Avoid division by zero
+         for i from 0 to n_functions-1:
+            final_weights[i] = 1.0 / n_functions 
+        end for
+    else:
+        for i from 0 to n_functions-1:
+            final_weights[i] = final_weights[i] / sum_adjusted_weights
+        end for
+    end if
+
+    // --- Step 3: Calculate Composed Function Value ---
+    Composed_F_x = 0.0
+    for i from 0 to n_functions-1:
+        Composed_F_x += final_weights[i] * (normalized_fitness_contributions[i] + bias_coefficients[i])
+    end for
+
+    Composed_F_x += f_global_bias
+
+    return Composed_F_x
+END FUNCTION
+```
+#### 2.4.1. $F_{15}$: Hybrid Composition Function
+
+This function is a composition of 10 basic functions:
+- $f_1, f_2$: Rastrigin's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} (x_{vec,j}^2 - 10 \cos(2\pi x_{vec,j}) + 10)$
+- $f_3, f_4$: Weierstrass Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \left( \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k (x_{vec,j} + 0.5))] \right) - D \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k \cdot 0.5)]$, with $a=0.5, b=3, k_{\text{max}}=20$. [cite: 1]
+- $f_5, f_6$: Griewank's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \frac{x_{vec,j}^2}{4000} - \prod_{j=1}^{D} \cos\left(\frac{x_{vec,j}}{\sqrt{j}}\right) + 1$ [cite: 1]
+- $f_7, f_8$: Ackley's Function
+  $f(x_{vec}) = -20 \exp\left(-0.2 \sqrt{\frac{1}{D}\sum_{j=1}^{D} x_{vec,j}^2}\right) - \exp\left(\frac{1}{D}\sum_{j=1}^{D} \cos(2\pi x_{vec,j})\right) + 20 + e$ [cite: 1]
+- $f_9, f_{10}$: Sphere Function
+  $f(x_{vec}) = \sum_{j=1}^{D} x_{vec,j}^2$ [cite: 1]
+
+*(Note: I've used $x_{vec}$ in the basic function definitions to clearly denote the input vector to these functions, which would be $z_i$ in the context of the composition.)*
+
+**Parameters for $F_{15}$:**
+- $\sigma = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]$ (i.e., $\sigma_i=1$ for all $i=1, ..., 10$). [cite: 1]
+- $\lambda = [1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100]$. [cite: 1]
+- $M_i$ are all Identity matrices for $F_{15}$. [cite: 1]
+- $\text{bias_coefficients} = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]$. [cite: 1]
+- $f_{\text{global_bias}} = f_{\text{bias}_{15}} = 120$. [cite: 1]
+
+*(Important Note from PDF: The formulas above for $f_1$ to $f_{10}$ are for the basic functions themselves. When used in the composition, no shift or rotation is included in *these base expressions*; the shift by $o_i$ and rotation by $M_i$ (if $M_i$ is not identity) are applied as per the general composition formula when calculating $z_i = ((x-o_i)/\lambda_i) \cdot M_i$. For $F_{15}$, $M_i$ is identity.)* [cite: 1]
+
+*Example from PDF for $f_1$ (Rastrigin) in composition:*
+When calculating $f'_1(((x-o_1)/\lambda_1) \cdot M_1)$, we first calculate $z_1 = ((x-o_1)/\lambda_1) \cdot M_1$.
+Then, the Rastrigin function is evaluated as $f_1(z_1) = \sum_{j=1}^{D} (z_{1,j}^2 - 10 \cos(2\pi z_{1,j}) + 10)$. This $f_1(z_1)$ is then normalized to $f'_1$. [cite: 1]
+
+**Properties of $F_{15}$:**
+- Multi-modal [cite: 1]
+- Separable near the global optimum (due to Rastrigin $f_1$ having $\text{bias_coefficients}_1=0$ and $M_1$ being identity) [cite: 1]
+- Scalable [cite: 1]
+- A huge number of local optima [cite: 1]
+- Different function properties are mixed together [cite: 1]
+- Sphere Functions ($f_9, f_{10}$) contribute to flat areas in the landscape. [cite: 1]
+
+Search range: $x \in [-5, 5]^D$. [cite: 1]
+Global optimum is designed to be at $o_1$ (the optimum of the first basic function).
+$F_{15}(x^*) = f_{\text{bias}_{15}} = 120$. [cite: 1]
+
+*Figure 2-15 3-D map for 2-D function* [cite: 1]
+
+**Associated Data file for $F_{15}$ (and other Hybrid Functions unless specified):**
+(Generally, files like `hybrid_func1_data.mat/.txt` provide optima $o_i$, and `hybrid_func1_M_D<dims>.mat/.txt` would provide rotation matrices $M_i$ if they are not identity.)
+
+| File Name                 | Variable | Description                                            | Notes for Usage                                     |
+|---------------------------|----------|--------------------------------------------------------|-----------------------------------------------------|
+| `hybrid_func1_data.mat`   | `o`      | $10 \times 100$ matrix (optima $o_i$ for 10 functions) | Use $o_i = o(i, 1:D)$ for the $i$-th function. [cite: 1] |
+| `hybrid_func1_data.txt`   | `o`      | $10 \times 100$ matrix (optima $o_i$ for 10 functions) | Use $o_i$ similarly. [cite: 1]                 |
+
+*(For $F_{15}$, $M_i$ are identity matrices, so specific $M$ files are not strictly needed for its calculation beyond knowing they are identity.)*
+
+#### 2.4.2. $F_{16}$: Rotated Version of Hybrid Composition Function $F_{15}$
+
+All settings are the same as $F_{15}$ **except** $M_i$ are different linear transformation matrices with a condition number of 2. [cite: 1] The basic functions, $\sigma_i$, $\lambda_i$, $\text{bias_coefficients}$, and $f_{\text{global_bias}} = f_{\text{bias}_{16}} = 120$ remain the same as for $F_{15}$.
+
+**Properties of $F_{16}$:**
+- Multi-modal [cite: 1]
+- Rotated [cite: 1]
+- Non-Separable [cite: 1]
+- Scalable [cite: 1]
+- A huge number of local optima [cite: 1]
+- Different function properties are mixed together [cite: 1]
+- Sphere Functions give two flat areas for the function. [cite: 1]
+
+Search range: $x \in [-5, 5]^D$. [cite: 1]
+Global optimum $x^* \approx o_1$ (transformed by $M_1^{-1}$ if $o_1$ is the target in the unrotated space).
+$F_{16}(x^*) = f_{\text{bias}_{16}} = 120$. [cite: 1]
+
+*Figure 2-16 3-D map for 2-D function* [cite: 1]
+
+**Associated Data file for $F_{16}$:**
+Uses `hybrid_func1_data.mat/.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in separate files:
+
+| File Name                   | Variable      | Description                                                                                                                               |
+|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `hybrid_func1_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, `M.M2`, ..., `M.M10` (ten $10 \times 10$ matrices). [cite: 1]                                                              |
+| `hybrid_func1_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially (e.g., lines 1-10 for M1, 11-20 for M2, ..., 91-100 for M10). [cite: 1]                             |
+| `hybrid_func1_M_D30.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $30 \times 30$ matrices). [cite: 1]                                                                     |
+| `hybrid_func1_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially. [cite: 1]                                                                                       |
+| `hybrid_func1_M_D50.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $50 \times 50$ matrices). [cite: 1]                                                                     |
+| `hybrid_func1_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially. [cite: 1]                                                                                       |
+
+*(When using, cut $o = o(:, 1:D)$ for the optima. The matrices $M_i$ are used in $z_i = ((x-o_i)/\lambda_i) \cdot M_i$.)*
+
+#### 2.4.3. $F_{17}$: $F_{16}$ with Noise in Fitness
+
+Let $G(x) = F_{16}(x) - f_{\text{bias}_{16}}$ (where $f_{\text{bias}_{16}}$ is the bias term for $F_{16}$, which is 120).
+Then, $F_{17}(x) = G(x) \cdot (1 + 0.2 \cdot |N(0,1)|) + f_{\text{bias}_{17}}$.
+
+All other settings (basic functions, $\sigma_i$, $\lambda_i$, $M_i$, $\text{bias_coefficients}$) are the same as for $F_{16}$.
+$f_{\text{bias}_{17}} = 120$.
+$N(0,1)$ is a normally distributed random number with mean 0 and standard deviation 1.
+
+**Properties of $F_{17}$:**
+- Multi-modal
 - Rotated
-- Non‑Separable
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
+- Different function properties are mixed together
 - Sphere Functions give two flat areas for the function.
-- x ∈ [−5,5]ᴰ, Global optimum x* = o₁, F (x*) = f_bias = 120
+- With Gaussian noise in fitness.
 
-# Associated Data file:
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed by $M_1^{-1}$).
+$F_{17}(x^*) = f_{\text{bias}_{17}} = 120$.
 
-|Name:|hybrid_func1_data.mat|
-|---|---|
-| |hybrid_func1_data.txt|
-|Variable:|o 10*100 vector the shifted optima for 10 functions|
-| |When using, cut o=o(:,1:D)|
-|Name:|hybrid_func1_M_D10.mat|
-|Variable:|M structure an variable|
-| |Contains M.M1 M.M2, … , M.M10 ten 10*10 matrixes|
-|Name:|hybrid_func1_M_D10.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 10*10 matrixes, 1‑10 lines are M1, 11‑20 lines are M2,....,91‑100 lines are M10|
-|Name:|hybrid_func1_M_D30.mat|
-|Variable:|M structure an variable contains M.M1,…,M.M10 ten 30*30 matrix|
-|Name:|hybrid_func1_M_D30.txt|
+*Figure 2-17 3-D map for 2-D function*
 
----
-# Variable
+**Associated Data file for $F_{17}$:**
+Same as $F_{16}$ (uses `hybrid_func1_data.mat/.txt` for optima $o_i$ and `hybrid_func1_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
 
-M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 30*30 matrixes, 1‑30 lines are M1, 31‑60 lines are M2,....,271‑300 lines are M10
+#### 2.4.4. $F_{18}$: Rotated Hybrid Composition Function
 
-# Name
+This function uses a different set of 10 basic functions:
+- $f_1, f_2$: Ackley's Function
+  $f(x_{vec}) = -20 \exp\left(-0.2 \sqrt{\frac{1}{D}\sum_{j=1}^{D} x_{vec,j}^2}\right) - \exp\left(\frac{1}{D}\sum_{j=1}^{D} \cos(2\pi x_{vec,j})\right) + 20 + e$
+- $f_3, f_4$: Rastrigin's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} (x_{vec,j}^2 - 10 \cos(2\pi x_{vec,j}) + 10)$
+- $f_5, f_6$: Sphere Function
+  $f(x_{vec}) = \sum_{j=1}^{D} x_{vec,j}^2$
+- $f_7, f_8$: Weierstrass Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \left( \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k (x_{vec,j} + 0.5))] \right) - D \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k \cdot 0.5)]$, with $a=0.5, b=3, k_{\text{max}}=20$.
+- $f_9, f_{10}$: Griewank's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \frac{x_{vec,j}^2}{4000} - \prod_{j=1}^{D} \cos\left(\frac{x_{vec,j}}{\sqrt{j}}\right) + 1$
 
-hybrid_func1_M_D50 .mat
+**Parameters for $F_{18}$:**
+- $\sigma = [1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2]$.
+- $\lambda = [2 \cdot 5/32, 5/32, 2 \cdot 1, 1, 2 \cdot 5/100, 5/100, 2 \cdot 10, 10, 2 \cdot 5/60, 5/60]$.
+  (Note: The PDF shows $2*5/32;$. Assuming `*` means multiplication).
+- $M_i$ are all rotation matrices. Condition numbers for $M_1, ..., M_{10}$ are $[2, 3, 2, 3, 2, 3, 20, 30, 200, 300]$ respectively.
+- $o_{10} = [0,0,...,0]$ (The optimum for the 10th basic function is set to the origin). Optima $o_1, ..., o_9$ are loaded from data files.
+- $\text{bias_coefficients} = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]$.
+- $f_{\text{global_bias}} = f_{\text{bias}_{18}} = 10$.
 
-# Variable
-
-M
-
-structure
-
-an variable contains M.M1,…,M.M10 ten 50*50 matrix
-
-# Name
-
-hybrid_func1_M_D50 .txt
-
-# Variable
-
-M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 50*50 matrixes, 1‑50 lines are M1, 51‑100 lines are M2,....,451‑500 lines are M10
----
-# 2.4.3. F₁₇: F₁₆ with Noise in Fitness
-
-Let (F₁₆ ‑ f_bias₁₆) be G(x), then
-
-F17(x) = G(x) * (1 + 0.2 N(0,1)) + fbias
-
-All settings are the same as F₁₆.
-
-# Properties:
-
-- Multi‑modal
+**Properties of $F_{18}$:**
+- Multi-modal
 - Rotated
-- Non‑Separable
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
+- Different function properties are mixed together
 - Sphere Functions give two flat areas for the function.
-- With Gaussian noise in fitness
-- x ∈ [−5,5]D, Global optimum x* = o₁, F17(x*) = fbias = 120
+- A local optimum (from $f_{10}$) is set on the origin.
 
-# Associated Data file:
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed by $M_1^{-1}$).
+$F_{18}(x^*) = f_{\text{bias}_{18}} = 10$.
 
-Same as F₁₆.
----
-# 2.4.4. F₁₈: Rotated Hybrid Composition Function
+*Figure 2-18 3-D map for 2-D function*
 
-# f1(x)
+**Associated Data file for $F_{18}$:**
+Uses `hybrid_func2_data.mat/.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files like `hybrid_func2_M_D<dims>.mat/.txt`.
 
-Ackley’s Function
+| File Name                   | Variable      | Description                                                                                                                               |
+|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `hybrid_func2_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$). Note: $o_{10}$ is fixed at origin.                                                                     |
+| `hybrid_func2_data.txt`     | `o`           | As above.                                                                                                                                 |
+| `hybrid_func2_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ matrices).                                                              |
+| `hybrid_func2_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
+| `hybrid_func2_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
+| `hybrid_func2_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
+| `hybrid_func2_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
+| `hybrid_func2_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
 
-f1(x) = -20 exp( -0.2 &sum;i=1D xi2) - exp(&sum;i=1D cos(2 &pi; xi)) + 20
+#### 2.4.5. $F_{19}$: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum
 
-# f3-4(x)
+All settings are the same as $F_{18}$ **except** for $\sigma$ and $\lambda$ for the first basic function ($f_1$, Ackley's) to create a narrow basin for the global optimum:
+- $\sigma = [\textbf{0.1}, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2]$ (First element changed from 1 to 0.1).
+- $\lambda = [\textbf{0.1} \cdot 5/32, 5/32, 2 \cdot 1, 1, 2 \cdot 5/100, 5/100, 2 \cdot 10, 10, 2 \cdot 5/60, 5/60]$ (First element's scaling factor for $5/32$ changed from 2 to 0.1).
+- All other parameters ($M_i$, their condition numbers, other $\sigma_i$ and $\lambda_i$, $o_i$, $\text{bias_coefficients}$, $f_{\text{global_bias}} = f_{\text{bias}_{19}} = 10$) remain the same as for $F_{18}$.
 
-Rastrigin’s Function
-
-f3-4(x) = &sum;i=1D (xi2 - 10 cos(2 &pi; xi) + 10)
-
-# f5-6(x)
-
-Sphere Function
-
-f5-6(x) = &sum;i=1D xi2
-
-# f7-8(x)
-
-Weierstrass Function
-
-f7-8(x) = &sum;i=1D &sum;k=0kmax [ak cos(2 bk (xi + 0.5))] - D &sum;k=0kmax [ak cos(2 bk * 0.5)], a=0.5, b=3, kmax=20
-
-# f9-10(x)
-
-Griewank’s Function
-
-f9-10(x) = &sum;i=1D (xi2/4000) - &prod;i=1D cos(xi/&radic;i) + 1
-
-σ = [1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2];
-
-λ = [2*5/32; 5/32; 2*1; 1; 2*5/100; 5/100; 2*10; 10; 2*5/60; 5/60]
-
-Mi are all rotation matrices. Condition numbers are [2, 3, 2, 3, 2, 3, 20, 30, 200, 300]
-
-o10 = [0, 0,..., 0]
-
-# Figure 2-18
-
-3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
+**Properties of $F_{19}$:**
+- Multi-modal
 - Rotated
-- Non‑Separable
-- Scalable
----
-# Current Page Content
-
-- A huge number of local optima
-- Different function’s properties are mixed together
-- Sphere Functions give two flat areas for the function.
-- A local optimum is set on the origin
-- x ∈ − D
-- [5,5], Global optimum x = o₁, F(x) = f_bias = 10
-
-# Associated Data file:
-
-|Name:|hybrid_func2_data.mat|
-|---|---|
-| |hybrid_func2_data.txt|
-|Variable:|o 10*100 vector the shifted optima for 10 functions|
-| |When using, cut o=o(:,1:D)|
-|Name:|hybrid_func2_M_D10.mat|
-|Variable:|M structure an variable|
-| |Contains M.M1 M.M2, … , M.M10 ten 10*10 matrixes|
-|Name:|hybrid_func2_M_D10.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 10*10 matrixes, 1‑10 lines are M1, 11‑20 lines are M2,....,91‑100 lines are M10|
-|Name:|hybrid_func2_M_D30.mat|
-|Variable:|M structure an variable contains M.M1,…,M.M10 ten 30*30 matrix|
-|Name:|hybrid_func2_M_D30.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 30*30 matrixes, 1‑30 lines are M1, 31‑60 lines are M2,....,271‑300 lines are M10|
-|Name:|hybrid_func2_M_D50.mat|
-|Variable:|M structure an variable contains M.M1,…,M.M10 ten 50*50 matrix|
-|Name:|hybrid_func2_M_D50.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 50*50 matrixes, 1‑50 lines are M1, 51‑100 lines are M2,....,451‑500 lines are M10|
-
----
-# 2.4.5. F₁₉: Rotated Hybrid Composition Function with narrow basin global optimum
-
-All settings are the same as F₁₈ except
-
-σ = [0.1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2];
-
-λ = [0.1*5/32; 5/32; 2*1; 1; 2*5/100; 5/100; 2*10; 10; 2*5/60; 5/60]
-
-30002500200015001000500
-Figure 2-19 3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
-- Non‑separable
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
+- Different function properties are mixed together
 - Sphere Functions give two flat areas for the function.
-- A local optimum is set on the origin
-- A narrow basin for the global optimum
-- x ∈ [−5, 5]ᴰ, Global optimum x* = o₁, F₁₉(x*) = f_bias (19) = 10
+- A local optimum is set on the origin.
+- **A narrow basin for the global optimum.**
 
-Associated Data file:
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed by $M_1^{-1}$).
+$F_{19}(x^*) = f_{\text{bias}_{19}} = 10$. (PDF says $f_{\text{bias}_{19}}(19)$, assumed typo).
 
-Same as F₁₈.
+*Figure 2-19 3-D map for 2-D function*
 
-27
----
-# 2.4.6. F₂₀: Rotated Hybrid Composition Function with Global Optimum on the Bounds
+**Associated Data file for $F_{19}$:**
+Same as $F_{18}$ (uses `hybrid_func2_data.mat/.txt` for optima $o_i$ and `hybrid_func2_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
 
-All settings are the same as F₁₈ except after load the data file, set o₁(2j) = 5, for j = 1, 2,..., ⎢D / 2⎥
+#### 2.4.6. $F_{20}$: Rotated Hybrid Composition Function with the Global Optimum on the Bounds
 
-# Properties:
+All settings are the same as $F_{18}$ **except** the location of the global optimum $o_1$ is modified.
+After loading the data file for $o_i$ (from `hybrid_func2_data.mat/.txt`), the coordinates of $o_1$ (the optimum for the first basic function) are adjusted:
+Set $o_{1,j} = 5$ for $j = 1, 2, ..., \lfloor D/2 \rfloor$. (The PDF states "$o_{1(2,j)}=5$", which could be a typo. Interpreted as setting the first $\lfloor D/2 \rfloor$ components of $o_1$ to the upper bound, 5). This forces the global optimum onto the boundary of the search space.
 
-- Multi‑modal
-- Non‑separable
-- Scalable
-- A huge number of local optima
-- Different function’s properties are mixed together
-- Sphere Functions give two flat areas for the function.
-- A local optimum is set on the origin
-- Global optimum is on the bound
-- If the initialization procedure initializes the population at the bounds, this problem will be solved easily.
-- x ∈ − D * *
-- [ 5,5], Global optimum x = o₁, F₂₀(x) = f_bias₂₀ = 10
+- All other parameters (basic functions, $\sigma_i$, $\lambda_i$, $M_i$, their condition numbers, other $o_i$ (for $i=2..10$), $\text{bias_coefficients}$, $f_{\text{global_bias}} = f_{\text{bias}_{20}} = 10$) remain the same as for $F_{18}$.
 
-# Associated Data file:
-
-Same as F18.
----
-# 2.4.7. F₂₁: Rotated Hybrid Composition Function
-
-f1(x): Rotated Expanded Scaffer’s F6 Function
-
-F(x, y) = 0.5 + (sin(x2 + y2) − 0.5)2 (1 + 0.001(x2 + y2))2
-
-f2(x) = F1(x1, x) + F2(x2, x) + ... + FD-1(xD, x)
-
-f3-4(x): Rastrigin’s Function
-
-fi(x) = ∑i=1D (xi2 − 10 cos(2 xi) + 10)
-
-f5-6(x): F8F2 Function
-
-F8(x) = ∑i=1D (xi2 − cos(4000 xi)) + 1
-
-F2(x) = ∑i=1D-1 (100(xi2 − xi+12)2 + (xi − 1)2)
-
-fi(x) = F8(F2(x1, x2)) + F8(F2(x2, x3)) + ... + F8(F2(xD-1, xD)) + F8(F2(xD, x1))
-
-f7-8(x): Weierstrass Function
-
-fi(x) = ∑i=1D ∑k=0kmax (ak cos(2 bk (xi + 0.5))) − D ∑k=0kmax (ak cos(2 bk ⋅ 0.5))
-
-a = 0.5, b = 3, kmax = 20
-
-f9-10(x): Griewank’s Function
-
-fi(x) = ∑i=1D (xi2 − cos(4000 xi)) + 1
-
-σ = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2],
-λ = [5*5/100; 5/100; 5*1; 1; 5*1; 1; 5*10; 10; 5*5/200; 5/200];
-
-Mi are all orthogonal matrix
----
-# Properties:
-
-- Multi‑modal
+**Properties of $F_{20}$:**
+- Multi-modal
 - Rotated
-- Non‑Separable
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
-
-x ∈ [−5,5]ᴰ, Global optimum x* = o₁, F₂₁(x*) = f_bias₂₁ = 360
-
-# Associated Data file:
-
-|Name:|hybrid_func3_data.mat|
-|---|---|
-| |hybrid_func3_data.txt|
-|Variable:|o 10*100 vector the shifted optima for 10 functions|
-| |When using, cut o=o(:,1:D)|
-|Name:|hybrid_func3_M_D10.mat|
-|Variable:|M structure an variable|
-| |Contains M.M1 M.M2, … , M.M10 ten 10*10 matrixes|
-|Name:|hybrid_func3_M_D10.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 10*10 matrixes, 1‑10 lines are M1, 11‑20 lines are M2,....,91‑100 lines are M10|
-|Name:|hybrid_func3_M_D30.mat|
-|Variable:|M structure an variable contains M.M1,…,M.M10 ten 30*30 matrix|
-|Name:|hybrid_func3_M_D30.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 30*30 matrixes, 1‑30 lines are M1, 31‑60 lines are M2,....,271‑300 lines are M10|
-|Name:|hybrid_func3_M_D50.mat|
-|Variable:|M structure an variable contains M.M1,…,M.M10 ten 50*50 matrix|
-|Name:|hybrid_func3_M_D50.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 50*50 matrixes, 1‑50 lines are M1, 51‑100 lines are M2,....,451‑500 lines are M10|
-
----
-# 2.4.8. F₂₂: Rotated Hybrid Composition Function with High Condition Number Matrix
-
-All settings are the same as F₂₁ except  Mi ’s condition numbers are [10 20 50 100 200 1000 2000 3000 4000 5000 10000]
-
-# Properties:
-
-- Multi‑modal
-- Non‑separable
-- Scalable
-- A huge number of local optima
-- Different function’s properties are mixed together
-- Global optimum is on the bound
-- x ∈ [−5,5]ᴰ, Global optimum x* = o₁, F₂₂(x*) = f_bias₂₂ = 360
-
-# Associated Data file:
-
-|Name:|hybrid_func3_data.mat|
-|---|---|
-| |hybrid_func3_data.txt|
-|Variable:|o 10*100 vector the shifted optima for 10 functions|
-| |When using, cut o=o(:,1:D)|
-|Name:|hybrid_func3_HM_D10.mat|
-|Variable:|M structure an variable|
-| |Contains M.M1 M.M2, … , M.M10 ten 10*10 matrixes|
-|Name:|hybrid_func3_HM_D10.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 10*10 matrixes, 1‑10 lines are M1, 11‑20 lines are M2,....,91‑100 lines are M10|
-|Name:|hybrid_func3_HM_D30.mat|
-|Variable:|M an structure variable contains M.M1,…,M.M10 ten 30*30 matrix|
-|Name:|hybrid_func3_MH_D30.txt|
-|Variable:|M1 M2 M3 M4 M5 M6 M7 M8 M9 M10 are ten 30*30 matrixes, 1‑30 lines are M1, 31‑60 lines are M2,....,271‑300 lines are M10|
-
----
-# Name: hybrid_func3_MH_D50 .mat
-
-# Variable: M
-
-structure an variable contains M.M1,…,M.M10 ten 50*50 matrix
-
-# Name: hybrid_func3_HM_D50 .txt
-
-# Variable: M1 M2 M3 M4 M5 M6 M7 M8 M9 M10
-
-are ten 50*50 matrixes, 1‑50 lines are M1, 51‑100 lines are M2,....,451‑500 lines are M10
-
-32
----
-# 2.4.9. F₂₃: Non-Continuous Rotated Hybrid Composition Function
-
-All settings are the same as F₂₁.
-
-⎧ x
-x − o   < 1/2
-
-Except  x
-⎪   j
-j   1j
-
-= ⎨
-for 1, 2,..,
-
-j
-⎪round(2x  ) / 2 x  −o   >= 1/2
-j =      D
-
-⎩
-j
-
-⎧a −1   if         x <= 0 & b >= 0.5
-
-round x
-⎪                            ,
-
-( ) = ⎨ a
-if              b < 0.5
-
-⎪a +1   if          x > 0 &b >= 0.5
-
-⎩
-
-where a is  x ’s integral part and b is  x ’s decimal part
-
-All “round” operators in this document use the same schedule.
-
-eoo0
-4000
-3000
-zuoo
-1000
-
-Figure 2-23 3‑D map for 2‑D function
-
-# Properties:
-
-- ¾ Multi‑modal
-- ¾ Non‑separable
-- ¾ Scalable
-- ¾ A huge number of local optima
-- ¾ Different function’s properties are mixed together
-- ¾ Non‑continuous
-- ¾ Global optimum is on the bound
-
-x ∈ −                       x   o      x     f_bias
-
-¾      [ 5,5]ᴰ , Global optimum  * =  1 , f ( * ) ≈    (23)=360
-
-# Associated Data file:
-
-Same as F₂₁.
-
-33
----
-# 2.4.10. F₂₄: Rotated Hybrid Composition Function
-
-f1(x): Weierstrass Function
-
-fi(x) = (Dkmax ∑i=1 ∑k=0 π [ak cos(2 bk (xi + 0.5))]) − D [ak cos(2 bk 0.5)],
-
-a = 0.5, b = 3, kmax = 20
-
-f2(x): Rotated Expanded Scaffer’s F6 Function
-
-F(x, y) = 0.5 + (sin(x2 + y2) − 0.5)2 + (1 + 0.001(x2 + y2))2
-
-fi(x) = F(x1, x) + F(x2, x) + ... + F(xD, x)
-
-f3(x): F8F2 Function
-
-F8(x) = ∑i=1D xi2 − ∏i=14000 cos(xi) + 1
-
-F2(x) = ∑i=1D−1 (100(xi2 − xi+12)2 + (xi − 1)2)
-
-fi(x) = F8(F2(x1, x2)) + F8(F2(x2, x3)) + ... + F8(F2(xD−1, xD)) + F8(F2(xD, x1))
-
-f4(x): Ackley’s Function
-
-fi(x) = −20 exp(−0.2 ∑i=1D xi2) − exp(∑i=1D cos(2 π xi)) + 20 + e
-
-f5(x): Rastrigin’s Function
-
-fi(x) = ∑i=1D (xi2 − 10 cos(2 xi) + 10)
-
-f6(x): Griewank’s Function
-
-fi(x) = ∑i=1D xi2 − ∏i=14000 cos( xi) + 1
-
-f7(x): Non‑Continuous Expanded Scaffer’s F6 Function
-
-F(x, y) = 0.5 + (sin(x2 + y2) − 0.5)2 + (1 + 0.001(x2 + y2))2
-
-f(x) = F(y1, y) + F(y2, y) + ... + F(yD, y)
-
-yj =
-
-⎧ xj
-j = 1, 2, .., D
-
-⎨ round(2xj) / 2
-xj >= 1/2
-⎩
-
-f8(x): Non‑Continuous Rastrigin’s Function
-
-fi(x) = ∑i=1D (yi2 − 10 cos(2 yi) + 10)
----
-# 9 ( ): High Conditioned Elliptic Function
-
-fx = ∑i=1D 6i (10)D−¹ xi
-
-# 10( ): Sphere Function with Noise in Fitness
-
-fx = ∑i=1D (xi)(1 + 0.1 N(0,1))
-
-σ = 2, for 1, 2...,
-
-i = D
-
-λ = [10; 5/20; 1; 5/32; 1; 5/100; 5/50; 1; 5/100; 5/100]
-
-Mi are all rotation matrices, condition numbers are [100 50 30 10 5 5 4 3 2 2];
-
-# Figure 2-24 3‑D map for 2‑D function
-
-# Properties:
-
-- Multi‑modal
+- Different function properties are mixed together
+- Sphere Functions give two flat areas for the function.
+- A local optimum is set on the origin.
+- **Global optimum is on the bound.**
+- If the initialization procedure initializes the population at the bounds, this problem might be solved more easily.
+
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^*$ is at the modified $o_1$ (transformed by $M_1^{-1}$).
+$F_{20}(x^*) = f_{\text{bias}_{20}} = 10$.
+
+*Figure 2-20 3-D map for 2-D function*
+
+**Associated Data file for $F_{20}$:**
+Same as $F_{18}$ (uses `hybrid_func2_data.mat/.txt` for base optima $o_i$ and `hybrid_func2_M_D<dims>.mat/.txt` for rotation matrices $M_i$), with the specific modification to $o_1$ applied after loading.
+
+#### 2.4.7. $F_{21}$: Rotated Hybrid Composition Function
+
+This function uses a different set of 10 basic functions:
+- $f_1, f_2$: Rotated Expanded Scaffer's F6 Function (as defined for $F_{14}$ but here it's a basic component, so the rotation $M_i$ for $F_{21}$ will be applied to the $z_i$ that goes into this basic Scaffer's F6 structure)
+  The basic Scaffer's F6 form is $F(x,y) = 0.5 + \frac{\sin^2(\sqrt{x^2+y^2}) - 0.5}{(1 + 0.001(x^2+y^2))^2}$.
+  The expanded form used here is $f(x_{vec}) = F(x_{vec,1}, x_{vec,2}) + F(x_{vec,2}, x_{vec,3}) + ... + F(x_{vec,D}, x_{vec,1})$.
+- $f_3, f_4$: Rastrigin's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} (x_{vec,j}^2 - 10 \cos(2\pi x_{vec,j}) + 10)$
+- $f_5, f_6$: F8F2 Function (Expanded Griewank's plus Rosenbrock's, as defined for $F_{13}$, used as a basic component here)
+  Base F8 (Griewank): $F_8(y_{vec}) = \sum_{k=1}^{D'} \frac{y_{vec,k}^2}{4000} - \prod_{k=1}^{D'} \cos\left(\frac{y_{vec,k}}{\sqrt{k}}\right) + 1$.
+  Base F2 (Rosenbrock): $F_2(y_{vec}) = \sum_{k=1}^{D'-1} (100(y_{vec,k}^2 - y_{vec,k+1})^2 + (y_{vec,k} - 1)^2)$.
+  (Here $D'$ would be 2 as F8F2 applies F8 to the output of F2 which takes 2D inputs at a time in the expansion).
+  The expanded F8F2 form is $f(x_{vec}) = F8(F2(x_{vec,1}, x_{vec,2})) + ... + F8(F2(x_{vec,D}, x_{vec,1}))$.
+- $f_7, f_8$: Weierstrass Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \left( \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k (x_{vec,j} + 0.5))] \right) - D \sum_{k=0}^{k_{\text{max}}} [a^k \cos(2\pi b^k \cdot 0.5)]$, with $a=0.5, b=3, k_{\text{max}}=20$.
+- $f_9, f_{10}$: Griewank's Function
+  $f(x_{vec}) = \sum_{j=1}^{D} \frac{x_{vec,j}^2}{4000} - \prod_{j=1}^{D} \cos\left(\frac{x_{vec,j}}{\sqrt{j}}\right) + 1$
+
+**Parameters for $F_{21}$:**
+- $\sigma = [1,1,1,1,1,2,2,2,2,2]$.
+- $\lambda = [5 \cdot 5/100, 5/100, 5 \cdot 1, 1, 5 \cdot 1, 1, 5 \cdot 10, 10, 5 \cdot 5/200, 5/200]$.
+  (The PDF format is "5\*5/100; 5/100; ...". Assuming `*` means multiplication).
+- $M_i$ are all orthogonal matrices. (Condition numbers for these are not specified for $F_{21}$ but are for $F_{22}$).
+- $\text{bias_coefficients} = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]$.
+- $f_{\text{global_bias}} = f_{\text{bias}_{21}} = 360$.
+
+**Properties of $F_{21}$:**
+- Multi-modal
 - Rotated
-- Non‑Separable
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
-- Unimodal Functions give flat areas for the function.
+- Different function properties are mixed together.
 
-x ∈ −D
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed).
+$F_{21}(x^*) = f_{\text{bias}_{21}} = 360$.
 
-x*o = 1, F24(x) = fbias₂₄ = 260
+*Figure 2-21 3-D map for 2-D function*
 
-# Associated Data file:
+**Associated Data file for $F_{21}$:**
+Uses `hybrid_func3_data.mat/.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files like `hybrid_func3_M_D<dims>.mat/.txt`.
 
-Name: hybrid_func4_data.mat
+| File Name                   | Variable      | Description                                                                                                                               |
+|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `hybrid_func3_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$).                                                                                                    |
+| `hybrid_func3_data.txt`     | `o`           | As above.                                                                                                                                 |
+| `hybrid_func3_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ orthogonal matrices).                                                              |
+| `hybrid_func3_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
+| `hybrid_func3_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
+| `hybrid_func3_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
+| `hybrid_func3_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
+| `hybrid_func3_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
 
-hybrid_func4_data.txt
+#### 2.4.8. $F_{22}$: Rotated Hybrid Composition Function with High Condition Number Matrix
 
-Variable: o 10*100 vector the shifted optima for 10 functions
+All settings are the same as $F_{21}$ **except** the rotation matrices $M_i$ have high condition numbers.
+- The condition numbers for $M_1, ..., M_{10}$ are $[10, 20, 50, 100, 200, 1000, 2000, 3000, 4000, 5000]$ respectively.
+- Basic functions, $\sigma_i$, $\lambda_i$, $o_i$, $\text{bias_coefficients}$, and $f_{\text{global_bias}} = f_{\text{bias}_{22}} = 360$ remain the same as for $F_{21}$.
 
-When using, cut o=o(:,1:D)
----
-# Hybrid Function Matrices
-
-# 1. hybrid_func4_M_D10
-
-File Type: .mat
-
-Variable: M
-
-Structure: an variable
-
-Contains M.M1, M.M2, … , M.M10 ten 10*10 matrixes
-
-# 2. hybrid_func4_M_D10.txt
-
-Variable: M1, M2, M3, M4, M5, M6, M7, M8, M9, M10 are ten 10*10 matrixes,
-
-1‑10 lines are M1, 11‑20 lines are M2,....,91‑100 lines are M10
-
-# 3. hybrid_func4_M_D30
-
-File Type: .mat
-
-Variable: M
-
-Structure: an variable
-
-Contains ten 30*30 matrix
-
-# 4. hybrid_func4_M_D30.txt
-
-Variable: M1, M2, M3, M4, M5, M6, M7, M8, M9, M10 are ten 30*30 matrixes,
-
-1‑30 lines are M1, 31‑60 lines are M2,....,271‑300 lines are M10
-
-# 5. hybrid_func4_M_D50
-
-File Type: .mat
-
-Variable: M
-
-Structure: an variable
-
-Contains ten 50*50 matrix
-
-# 6. hybrid_func4_M_D50.txt
-
-Variable: M1, M2, M3, M4, M5, M6, M7, M8, M9, M10 are ten 50*50 matrixes,
-
-1‑50 lines are M1, 51‑100 lines are M2,....,451‑500 lines are M10
----
-# 2.4.11. F₂₅: Rotated Hybrid Composition Function without bounds
-
-All settings are the same as F₂₄ except no exact search range set for this test function.
-
-# Properties:
-
-- Multi‑modal
-- Non‑separable
+**Properties of $F_{22}$:**
+- Multi-modal
+- Rotated (with high condition number matrices)
+- Non-Separable
 - Scalable
 - A huge number of local optima
-- Different function’s properties are mixed together
-- Unimodal Functions give flat areas for the function.
-- Global optimum is on the bound
-- No bounds
+- Different function properties are mixed together.
+- The PDF also states "Global optimum is on the bound", which seems like a copy-paste error from another function description as $F_{21}$ (its base) doesn't state this, and no parameters are changed to force this. This property might be incorrect here.
 
-Initialize population in [2,5], Global optimum = D x* o₁ is outside of the initialization range, F₂₅(x* ) = f_bias₂₅ = 260
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed).
+$F_{22}(x^*) = f_{\text{bias}_{22}} = 360$.
 
-# Associated Data file:
+*Figure 2-22 3-D map for 2-D function*
 
-Same as F₂₄
+**Associated Data file for $F_{22}$:**
+Uses `hybrid_func3_data.mat/.txt` for optima $o_i$ (same as $F_{21}$).
+Rotation matrices $M_i$ with high condition numbers are provided in files like `hybrid_func3_HM_D<dims>.mat/.txt` (HM for High Condition Matrix).
 
-37
----
-# 2.5 Comparisons Pairs
+| File Name                    | Variable      | Description                                                                                                                               |
+|------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `hybrid_func3_HM_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ high condition matrices).                                                         |
+| `hybrid_func3_HM_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
+| `hybrid_func3_HM_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices. (PDF also lists `hybrid_func3_MH_D30.txt`, likely a typo and should be `_HM_`).                   |
+| `hybrid_func3_MH_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially. (Filename from PDF)                                                                  |
+| `hybrid_func3_MH_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices. (PDF also lists `hybrid_func3_HM_D50.txt`, likely `_HM_`).                                      |
+| `hybrid_func3_HM_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially. (Filename from PDF)                                                                  |
 
-# Different Condition Numbers:
+#### 2.4.9. $F_{23}$: Non-Continuous Rotated Hybrid Composition Function
 
-- F₁. Shifted Rotated Sphere Function
-- F₂. Shifted Schwefel’s Problem 1.2
-- F₃. Shifted Rotated High Conditioned Elliptic Function
+All settings are the same as $F_{21}$ (basic functions, $\sigma_i$, $\lambda_i$, $M_i$ which are orthogonal, $o_i$, $\text{bias_coefficients}$, $f_{\text{global_bias}} = f_{\text{bias}_{23}} = 360$) **except** for a non-continuous transformation applied to the input $x$ before it's used in the composition logic (or more precisely, as it's used to calculate distance for $w_i$ and as input to the first basic function $f_1$).
 
-# Function With Noise Vs Without Noise
+The non-continuous transformation on $x_j$ for $j=1, ..., D$:
+$x'_j = x_j$ if $|x_j - o_{1j}| < 0.5$
+$x'_j = \text{round}(2x_j)/2$ if $|x_j - o_{1j}| \ge 0.5$
+where $o_{1j}$ is the $j$-th component of the optimum $o_1$ for the first basic function.
+The `round(y)` function is defined as:
+Let $a = \text{integer_part}(y)$ and $b = \text{decimal_part}(y)$.
+$\text{round}(y) = a-1$ if $y \le 0$ and $b \ge 0.5$
+$\text{round}(y) = a$ if $b < 0.5$
+$\text{round}(y) = a+1$ if $y > 0$ and $b \ge 0.5$
+(This is a specific rounding schedule, often to the nearest integer, with halves rounded based on sign or to even/odd, but here it is explicitly defined. The PDF formula $round(2x_j)/2$ means values are rounded to the nearest $0.5$).
+The PDF says "All 'round' operators in this document use the same schedule." And the condition on $x_j$ depends on $o_{1j}$. This implies the discontinuity is centered around the global optimum's location $o_1$.
 
-# Pair 1:
+**Properties of $F_{23}$:**
+- Multi-modal
+- Rotated
+- Non-Separable
+- Scalable
+- A huge number of local optima
+- Different function properties are mixed together.
+- **Non-continuous.**
+- The PDF also states "Global optimum is on the bound", which, like for $F_{22}$, seems to be a copy-paste error. The discontinuity is around $o_1$, not necessarily pushing the true optimum to the bounds.
 
-- F₂. Shifted Schwefel’s Problem 1.2
-- F₄. Shifted Schwefel’s Problem 1.2 with Noise in Fitness
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed). The function value at optimum is approximate due to discontinuity.
+$F_{23}(x^*) \approx f_{\text{bias}_{23}} = 360$.
 
-# Pair 2:
+*Figure 2-23 3-D map for 2-D function*
 
-- F₁₆. Rotated Hybrid Composition Function
-- F₁₇. F₁₆. with Noise in Fitness
+**Associated Data file for $F_{23}$:**
+Same as $F_{21}$ (uses `hybrid_func3_data.mat/.txt` for optima $o_i$ and `hybrid_func3_M_D<dims>.mat/.txt` for rotation matrices $M_i$). The non-continuous transformation is an additional processing step.
 
-# Function without Rotation Vs With Rotation
+#### 2.4.10. $F_{24}$: Rotated Hybrid Composition Function
 
-# Pair 1:
+This function uses yet another set of 10 basic functions:
+1.  $f_1$: Weierstrass Function (as in $F_{21}$)
+2.  $f_2$: Rotated Expanded Scaffer's F6 Function (as in $F_{21}$)
+3.  $f_3$: F8F2 Function (as in $F_{21}$)
+4.  $f_4$: Ackley's Function (as in $F_{15}$)
+5.  $f_5$: Rastrigin's Function (as in $F_{15}$)
+6.  $f_6$: Griewank's Function (as in $F_{15}$)
+7.  $f_7$: Non-Continuous Expanded Scaffer's F6 Function.
+    Base Scaffer's F6: $F(x,y) = 0.5 + \frac{\sin^2(\sqrt{x^2+y^2}) - 0.5}{(1 + 0.001(x^2+y^2))^2}$.
+    Expanded form: $f(x_{vec})=F(y_1,y_2)+F(y_2,y_3)+...+F(y_D,y_1)$.
+    With $y_j = x_{vec,j}$ if $|x_{vec,j}| < 0.5$, else $y_j = \text{round}(2x_{vec,j})/2$.
+8.  $f_8$: Non-Continuous Rastrigin's Function.
+    $f(x_{vec}) = \sum_{j=1}^{D} (y_j^2 - 10 \cos(2\pi y_j) + 10)$.
+    With $y_j = x_{vec,j}$ if $|x_{vec,j}| < 0.5$, else $y_j = \text{round}(2x_{vec,j})/2$.
+9.  $f_9$: High Conditioned Elliptic Function (this is $F_3$'s form, but as a basic function $f(x_{vec}) = \sum_{j=1}^{D} (10^6)^{\frac{j-1}{D-1}} x_{vec,j}^2$)
+10. $f_{10}$: Sphere Function with Noise in Fitness.
+    $f(x_{vec}) = \left(\sum_{j=1}^{D} x_{vec,j}^2\right) (1 + 0.1 \cdot |N(0,1)|)$
 
-- F₉. Shifted Rastrigin’s Function
-- F₁₀. Shifted Rotated Rastrigin’s Function
+**Parameters for $F_{24}$:**
+- $\sigma_i = 2$ for all $i=1, ..., 10$.
+- $\lambda = [10, 5/20, 1, 5/32, 1, 5/100, 5/50, 1, 5/100, 5/100]$.
+- $M_i$ are all rotation matrices. Condition numbers for $M_1, ..., M_{10}$ are $[100, 50, 30, 10, 5, 5, 4, 3, 2, 2]$ respectively.
+- $\text{bias_coefficients} = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]$.
+- $f_{\text{global_bias}} = f_{\text{bias}_{24}} = 260$.
 
-# Pair 2:
+**Properties of $F_{24}$:**
+- Multi-modal
+- Rotated
+- Non-Separable
+- Scalable
+- A huge number of local optima
+- Different function properties are mixed together, including non-continuity and noise.
+- Unimodal functions (Sphere, Elliptic) contribute to flat/smoother areas.
 
-- F₁₅. Hybrid Composition Function
-- F₁₆. Rotated Hybrid Composition Function
+Search range: $x \in [-5, 5]^D$.
+Global optimum $x^* \approx o_1$ (transformed).
+$F_{24}(x^*) = f_{\text{bias}_{24}} = 260$.
 
-# Continuous Vs Non-continuous
+*Figure 2-24 3-D map for 2-D function*
 
-- F₂₁. Rotated Hybrid Composition Function
-- F₂₃. Non‑Continuous Rotated Hybrid Composition Function
+**Associated Data file for $F_{24}$:**
+Uses `hybrid_func4_data.mat/.txt` for optima $o_i$.
+Rotation matrices $M_i$ are provided in files like `hybrid_func4_M_D<dims>.mat/.txt`.
 
-# Global Optimum on Bounds Vs Global Optimum on Bounds
+| File Name                   | Variable      | Description                                                                                                                               |
+|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `hybrid_func4_data.mat`     | `o`           | $10 \times 100$ matrix (optima $o_i$).                                                                                                    |
+| `hybrid_func4_data.txt`     | `o`           | As above.                                                                                                                                 |
+| `hybrid_func4_M_D10.mat`    | `M` (struct)  | Contains `M.M1`, ..., `M.M10` (ten $10 \times 10$ matrices).                                                              |
+| `hybrid_func4_M_D10.txt`    | `M1`...`M10`  | Ten $10 \times 10$ matrices sequentially.                                                                                       |
+| `hybrid_func4_M_D30.mat`    | `M` (struct)  | Ten $30 \times 30$ matrices.                                                                                                    |
+| `hybrid_func4_M_D30.txt`    | `M1`...`M10`  | Ten $30 \times 30$ matrices sequentially.                                                                                       |
+| `hybrid_func4_M_D50.mat`    | `M` (struct)  | Ten $50 \times 50$ matrices.                                                                                                    |
+| `hybrid_func4_M_D50.txt`    | `M1`...`M10`  | Ten $50 \times 50$ matrices sequentially.                                                                                       |
 
-- F₁₈. Rotated Hybrid Composition Function
-- F₂₀. Rotated Hybrid Composition Function with the Global Optimum on the Bounds
+#### 2.4.11. $F_{25}$: Rotated Hybrid Composition Function without bounds
 
-# Wide Global Optimum Basin Vs Narrow Global Optimum Basin
+All settings are the same as $F_{24}$ (basic functions, $\sigma_i$, $\lambda_i$, $M_i$, their condition numbers, $o_i$, $\text{bias_coefficients}$, $f_{\text{global_bias}} = f_{\text{bias}_{25}} = 260$) **except** no exact search range is set for this test function.
 
-- F₁₈. Rotated Hybrid Composition Function
-- F₁₉. Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum
+**Properties of $F_{25}$:**
+- Multi-modal
+- Rotated
+- Non-Separable
+- Scalable
+- A huge number of local optima
+- Different function properties are mixed together.
+- Unimodal functions give flat areas for the function.
+- The PDF states "Global optimum is on the bound". This seems to conflict with "No bounds". The key is that the *initialization range is different from where the global optimum $o_1$ is located*.
+- **No bounds** (for search, though an initialization range is given).
+- Initialize population in $[2, 5]^D$. The global optimum $x^* \approx o_1$ (which is loaded from `hybrid_func4_data.mat` and is likely centered around 0 before transformation by $M_1$) is outside of this initialization range.
 
-# Orthogonal Matrix Vs High Condition Number Matrix
+$F_{25}(x^*) = f_{\text{bias}_{25}} = 260$.
 
-- F₂₁. Rotated Hybrid Composition Function
-- F₂₂. Rotated Hybrid Composition Function with High Condition Number Matrix
-
-# Global Optimum in the Initialization Range Vs outside of the Initialization Range
-
-- F₂₄. Rotated Hybrid Composition Function
-- F₂₅. Rotated Hybrid Composition Function without Bounds
----
-# 2.6 Similar Groups:
-
-# Unimodal Functions
-
-Function 1‑5
-
-# Multi-modal Functions
-
-Function 6‑25
-
-- Single
-- Function:
-- Function 6‑12
-
-Expanded
-- Function:
-- Function 13‑14
-
-Hybrid Composition Function:
-
-# Functions with Global Optimum outside of the Initialization Range
-
-- F₇. Shifted Rotated Griewank’s Function without Bounds
-- F₂₅. Rotated Hybrid Composition Function 4 without Bounds
-
-# Functions with Global Optimum on Bounds
-
-- F₅. Schwefel’s Problem 2.6 with Global Optimum on Bounds
-- F₈. Shifted Rotated Ackley’s Function with Global Optimum on Bounds
-- F₂₀. Rotated Hybrid Composition Function 2 with the Global Optimum on the Bounds
-
-39
----
-# 3. Evaluation Criteria
-
-# 3.1 Description of the Evaluation Criteria
-
-Problems:
-
-- minimization
-- 25 problems
-- Dimensions: D=10, 30, 50
-
-Runs / problem: 25 (Do not run many 25 runs to pick the best run)
-
-Max_FES: 10000*D (Max_FES_10D= 100000; for 30D=300000; for 50D=500000)
-
-Initialization: Uniform random initialization within the search space, except for problems 7 and 25, for which initialization ranges are specified.
-
-Please use the same initializations for the comparison pairs (problems 1, 2, 3 & 4, problems 9 & 10, problems 15, 16 & 17, problems 18, 19 & 20, problems 21, 22 & 23, problems 24 & 25). One way to achieve this would be to use a fixed seed for the random number generator.
-
-Global Optimum: All problems, except 7 and 25, have the global optimum within the given bounds and there is no need to perform search outside of the given bounds for these problems. 7 & 25 are exceptions without a search range and with the global optimum outside of the specified initialization range.
-
-Termination: Terminate before reaching Max_FES if the error in the function value is 10‑8 or less.
-
-Ter_Err: 10‑8 (termination error value)
-
-1. Record function error value (f(x)-f(x*)) after 1e3, 1e4, 1e5 FES and at termination (due to Ter_Err or Max_FES) for each run. For each function, sort the error values in 25 runs from the smallest (best) to the largest (worst). Present the following: 1ˢᵗ (best), 7ᵗʰ, 13ᵗʰ (median), 19ᵗʰ, 25ᵗʰ (worst) function values Mean and STD for the 25 runs.
-2. Record the FES needed in each run to achieve the following fixed accuracy level. The Max_FES applies.
-
-**Table 3-1 Fixed Accuracy Level for Each Function**
-|Function|Accuracy|
-|---|---|
-|1|‑450 + 1e‑6|
-|14|‑300 + 1e‑2|
-|40| |
+**Associated Data file for $F_{25}$:**
+Same as $F_{24}$ (uses `hybrid_func4_data.mat/.txt` for optima $o_i$ and `hybrid_func4_M_D<dims>.mat/.txt` for rotation matrices $M_i$).
 
 ---
-|2|-450 + 1e-6|15|120 + 1e-2|
-|---|---|---|---|
-|3|-450 + 1e-6|16|120 + 1e-2|
-|4|-450 + 1e-6|17|120 + 1e-1|
-|5|-310 + 1e-6|18|10 + 1e-1|
-|6|390 + 1e-2|19|10 + 1e-1|
-|7|-180 + 1e-2|20|10 + 1e-1|
-|8|-140 + 1e-2|21|360 + 1e-1|
-|9|-330 + 1e-2|22|360 + 1e-1|
-|10|-330 + 1e-2|23|360 + 1e-1|
-|11|90 + 1e-2|24|260 + 1e-1|
-|12|-460 + 1e-2|25|260 + 1e-1|
-|13|-130| | |
+### 2.5 Comparisons Pairs
 
-Successful Run: A run during which the algorithm achieves the fixed accuracy level within the Max_FES for the particular dimension.
+This section outlines pairs of functions for specific comparisons.
 
-For each function/dimension, sort FES in 25 runs from the smallest (best) to the largest (worst)
+**Different Condition Numbers:**
+- $F_1$: Shifted Sphere Function (implicitly, condition number 1)
+- $F_2$: Shifted Schwefel's Problem 1.2 (non-separable, but not explicitly rotated by a controlled condition matrix in its basic form)
+- $F_3$: Shifted Rotated High Conditioned Elliptic Function (explicit high condition number)
 
-Present the following: 1st (best), 7th, 13th (median), 19th, 25th (worst) FES
+**Function With Noise Vs Without Noise:**
+- **Pair 1:**
+    - $F_2$: Shifted Schwefel's Problem 1.2
+    - $F_4$: Shifted Schwefel's Problem 1.2 with Noise in Fitness
+- **Pair 2:**
+    - $F_{16}$: Rotated Hybrid Composition Function
+    - $F_{17}$: $F_{16}$ with Noise in Fitness
 
-Mean and STD for the 25 runs
+**Function without Rotation Vs With Rotation:**
+- **Pair 1:**
+    - $F_9$: Shifted Rastrigin's Function (separable)
+    - $F_{10}$: Shifted Rotated Rastrigin's Function (non-separable due to rotation)
+- **Pair 2:**
+    - $F_{15}$: Hybrid Composition Function (all $M_i$ are identity)
+    - $F_{16}$: Rotated Hybrid Composition Function (all $M_i$ are rotation matrices)
 
-# 3) Success Rate & Success Performance For Each Problem
+**Continuous Vs Non-continuous:**
+- $F_{21}$: Rotated Hybrid Composition Function
+- $F_{23}$: Non-Continuous Rotated Hybrid Composition Function
 
-Success Rate= (# of successful runs according to the table above) / total runs
+**Global Optimum on Bounds Vs Not Necessarily on Bounds:**
+(The PDF titles this "Global Optimum on Bounds Vs Global Optimum on Bounds", which is likely a typo. Should be "Global Optimum on Bounds Vs Global Optimum *Not* on Bounds" or similar contrast).
+- $F_{18}$: Rotated Hybrid Composition Function (global optimum $o_1$ typically not on bound unless data makes it so)
+- $F_{20}$: Rotated Hybrid Composition Function with the Global Optimum on the Bounds
 
-Success Performance=mean (FEs for successful runs)*(# of total runs) / (# of successful runs)
+**Wide Global Optimum Basin Vs Narrow Global Optimum Basin:**
+- $F_{18}$: Rotated Hybrid Composition Function
+- $F_{19}$: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum
 
-The above two quantities are computed for each problem separately.
+**Orthogonal Matrix Vs High Condition Number Matrix:**
+(Applied to component functions in a hybrid composition)
+- $F_{21}$: Rotated Hybrid Composition Function (component $M_i$ are orthogonal)
+- $F_{22}$: Rotated Hybrid Composition Function with High Condition Number Matrix (component $M_i$ have high condition numbers)
 
-# 4) Convergence Graphs (or Run-length distribution graphs)
+**Global Optimum in the Initialization Range Vs outside of the Initialization Range:**
+- $F_{24}$: Rotated Hybrid Composition Function (global optimum expected within typical $[-5,5]$ search range, initialization likely also covers this)
+- $F_{25}$: Rotated Hybrid Composition Function without Bounds (global optimum at $o_1$ (likely near origin), but initialization is $[2,5]^D$)
 
-Convergence Graphs for each problem for D=30. The graph would show the median performance of the total runs with termination by either the Max_FES or the Ter_Err. The semi-log graphs should show log10(f(x) - f(x*)) vs FES for each problem.
-
-# 5) Algorithm Complexity
-
-a) Run the test program below:
 ---
+### 2.6 Similar Groups:
+
+**Unimodal Functions:**
+- Functions $F_1 - F_5$
+
+**Multi-modal Functions:**
+- Functions $F_6 - F_{25}$
+    - **Single Functions (Basic Multimodal):** Functions $F_6 - F_{12}$
+    - **Expanded Functions:** Functions $F_{13} - F_{14}$
+    - **Hybrid Composition Functions:** Functions $F_{15} - F_{25}$
+
+**Functions with Global Optimum outside of the Initialization Range:**
+- $F_7$: Shifted Rotated Griewank's Function without Bounds
+- $F_{25}$: Rotated Hybrid Composition Function without Bounds
+
+**Functions with Global Optimum on Bounds:**
+- $F_5$: Schwefel's Problem 2.6 with Global Optimum on Bounds
+- $F_8$: Shifted Rotated Ackley's Function with Global Optimum on Bounds
+- $F_{20}$: Rotated Hybrid Composition Function with the Global Optimum on the Bounds
+
+---
+## 3. Evaluation Criteria
+
+### 3.1 Description of the Evaluation Criteria
+
+-   **Problems:** 25 minimization problems
+-   **Dimensions:** $D = 10, 30, 50$
+-   **Runs/problem:** 25 (Do not run many 25 runs to pick the best run)
+-   **Max_FES (Maximum Function Evaluations):** $10000 \times D$
+    -   For $D=10$: Max_FES = 100,000
+    -   For $D=30$: Max_FES = 300,000
+    -   For $D=50$: Max_FES = 500,000
+-   **Initialization:** Uniform random initialization within the defined search space for each problem, except for problems $F_7$ and $F_{25}$, for which specific initialization ranges are specified.
+    -   It is recommended to use the same set of initial populations for fair comparison across different algorithms and for the comparison pairs (problems 1, 2, 3 & 4; problems 9 & 10; problems 15, 16 & 17; problems 18, 19 & 20; problems 21, 22 & 23; problems 24 & 25). One way to achieve this is by using a fixed seed for the random number generator for generating these initial populations.
+-   **Global Optimum:** All problems, except $F_7$ and $F_{25}$, have their global optimum $x^*$ located within their specified search bounds. There is no need to search outside these bounds for these problems. $F_7$ and $F_{25}$ are exceptions as they do not have predefined search bounds, and their global optima are outside their specified initialization ranges.
+-   **Termination Error (Ter_Err):** $10^{-8}$.
+-   **Termination Condition:** Terminate an algorithm run before reaching Max_FES if the error in function value, $f(x) - f(x^*)$, is less than or equal to Ter_Err ($10^{-8}$).
+
+**1) Recording Function Error Values:**
+-   For each run, record the function error value $(f(x) - f(x^*))$ at specified checkpoints: $1 \times 10^3$, $1 \times 10^4$, $1 \times 10^5$ FES, and also at the point of termination (either due to meeting Ter_Err or reaching Max_FES).
+-   For each function and dimension, sort the recorded error values from the 25 runs in ascending order (best to worst).
+-   Present the $1^{st}$ (best), $7^{th}$, $13^{th}$ (median), $19^{th}$, and $25^{th}$ (worst) error values.
+-   Also, present the Mean and Standard Deviation (STD) of the error values over the 25 runs.
+
+**2) Recording FES for Fixed Accuracy:**
+-   For each run, record the number of FES required to reach a predefined fixed accuracy level (target error value). These accuracy levels are specified for each function (see Table 3-1 below).
+-   The Max_FES limit applies; if the accuracy is not met within Max_FES, it's considered not achieved for that run in terms of FES count for this metric.
+
+    **Table 3-1: Fixed Accuracy Level (Target Error $f(x) - f(x^*)$) for Each Function**
+
+    | Function | Target Error Value $f(x)-f(x^*)$ | Function | Target Error Value $f(x)-f(x^*)$ |
+    |----------|--------------------------------|----------|--------------------------------|
+    | $F_1$    | $1 \times 10^{-6}$             | $F_{14}$ | $1 \times 10^{-2}$             |
+    | $F_2$    | $1 \times 10^{-6}$             | $F_{15}$ | $1 \times 10^{-2}$             |
+    | $F_3$    | $1 \times 10^{-6}$             | $F_{16}$ | $1 \times 10^{-2}$             |
+    | $F_4$    | $1 \times 10^{-6}$             | $F_{17}$ | $1 \times 10^{-1}$             |
+    | $F_5$    | $1 \times 10^{-6}$             | $F_{18}$ | $1 \times 10^{-1}$             |
+    | $F_6$    | $1 \times 10^{-2}$             | $F_{19}$ | $1 \times 10^{-1}$             |
+    | $F_7$    | $1 \times 10^{-2}$             | $F_{20}$ | $1 \times 10^{-1}$             |
+    | $F_8$    | $1 \times 10^{-2}$             | $F_{21}$ | $1 \times 10^{-1}$             |
+    | $F_9$    | $1 \times 10^{-2}$             | $F_{22}$ | $1 \times 10^{-1}$             |
+    | $F_{10}$ | $1 \times 10^{-2}$             | $F_{23}$ | $1 \times 10^{-1}$             |
+    | $F_{11}$ | $1 \times 10^{-2}$             | $F_{24}$ | $1 \times 10^{-1}$             |
+    | $F_{12}$ | $1 \times 10^{-2}$             | $F_{25}$ | $1 \times 10^{-1}$             |
+    | $F_{13}$ | $1 \times 10^{-2}$             |          |                                |
+    *(Note: The PDF shows $f(x^*)$ values + accuracy, e.g., $-450 + 1e-6$. This table reflects the target error $f(x)-f(x^*)$ directly.)*
+
+    -   **Successful Run:** A run is considered successful if the algorithm achieves the specified fixed accuracy level within the Max_FES for that dimension.
+    -   For each function and dimension, sort the FES values from the 25 runs (only for successful runs if not all are successful, or note Max_FES if not achieved) in ascending order.
+    -   Present the $1^{st}$ (best), $7^{th}$, $13^{th}$ (median), $19^{th}$, and $25^{th}$ (worst) FES values.
+    -   Also, present the Mean and STD of the FES values over the 25 runs (or over successful runs, with clarification).
+
+**3) Success Rate & Success Performance:**
+-   For each problem (function/dimension):
+-   **Success Rate** = (Number of successful runs) / (Total number of runs, i.e., 25)
+-   **Success Performance** = Mean(FES for successful runs) $\times$ (Total runs) / (Number of successful runs). If no runs are successful, this metric is typically reported as N/A or $\infty$. (This simplifies to Mean(FES for successful runs) if there's at least one successful run).
+
+**4) Convergence Graphs (or Run-length distribution graphs):**
+-   For each problem, provide convergence graphs for $D=30$.
+-   The graph should show the median performance (e.g., $13^{th}$ best run's error value) of the total runs versus FES.
+-   The semi-log graphs should plot $\log_{10}(f(x) - f(x^*))$ (y-axis) against FES (x-axis).
+-   Termination occurs either by meeting Ter_Err or reaching Max_FES.
+
+**5) Algorithm Complexity:**
+-   **a) Baseline Time $T_0$:** Execute the following test program and record its computing time as $T_0$.
+```matlab
 for i=1:1000000
-
-x= (double) 5.55;
-
-x=x + x; x=x./2; x=x*x; x=sqrt(x); x=ln(x); x=exp(x); y=x/x;
-
+    x_test = 5.55; % cast to double if necessary
+    x_test = x_test + x_test; 
+    x_test = x_test / 2.0;
+    x_test = x_test * x_test;
+    x_test = sqrt(x_test);
+    x_test = log(x_test);   % natural logarithm
+    x_test = exp(x_test);
+    y_test = x_test / x_test; % results in 1 or NaN
 end
+```
+-   **b) Function Evaluation Time $T_1$:** Evaluate the computing time for $200,000$ evaluations of benchmark function $F_3$ (Shifted Rotated High Conditioned Elliptic Function) for a specific dimension D. Record this time as $T_1$.
+-   **c) Algorithm Runtime $T_2$:** Measure the complete computing time for your algorithm running for $200,000$ evaluations on the same D-dimensional benchmark function $F_3$. Execute this step 5 times and record the five $T_2$ values. Calculate $\overline{T2} = \text{Mean}(T_2 \text{ values})$.
+-   This step is done to accommodate variations in execution time, especially for adaptive algorithms.
+-   **Complexity Metrics:** The complexity of the algorithm is reflected by $\overline{T2}$, $T_1$, $T_0$, and the ratio $(\overline{T2} - T_1) / T_0$.
+-   Calculate these complexity metrics for $D=10, 30,$ and $50$ to show the relationship between algorithm complexity and dimension.
+-   Provide sufficient details on the computing system (CPU, RAM, OS) and the programming language/version used.
 
-Computing time for the above=T0;
+**6) Parameters:**
+-   Discourage searching for a distinct set of parameters for each problem/dimension. Aim for a robust set of parameters.
+-   Provide details on the following whenever applicable:
+-   a) All parameters that need to be adjusted by the user.
+-   b) Corresponding dynamic ranges for these parameters.
+-   c) Guidelines on how to set or adjust these parameters.
+-   d) Estimated cost of parameter tuning (e.g., in terms of FES).
+-   e) Actual parameter values used for the experiments.
 
-b) evaluate the computing time just for Function 3. For 200000 evaluations of a certain dimension D, it gives T1;
+**7) Encoding:**
+-   If the algorithm requires encoding of solutions (e.g., for genetic algorithms operating on binary strings for continuous parameters), the encoding scheme should be independent of the specific problems and governed by generic factors such as the search ranges. Describe the encoding scheme used.
 
-c) the complete computing time for the algorithm with 200000 evaluations of the same D dimensional benchmark function 3 is T2. Execute step c 5 times and get 5 T2 values.
-
-T 2 =Mean(T2)
-
-The complexity of the algorithm is reflected by: T2 , T1, T0, and ( T2 -T1)/T0
-
-The algorithm complexities are calculated on 10, 30 and 50 dimensions, to show the algorithm complexity’s relationship with dimension. Also provide sufficient details on the computing system and the programming language used. In step c, we execute the complete algorithm 5 times to accommodate variations in execution time due adaptive nature of some algorithms.
-
-# 6) Parameters
-
-We discourage participants searching for a distinct set of parameters for each problem/dimension/etc. Please provide details on the following whenever applicable:
-
-a) All parameters to be adjusted
-
-b) Corresponding dynamic ranges
-
-c) Guidelines on how to adjust the parameters
-
-d) Estimated cost of parameter tuning in terms of number of FEs
-
-e) Actual parameter values used.
-
-# 7) Encoding
-
-If the algorithm requires encoding, then the encoding scheme should be independent of the specific problems and governed by generic factors such as the search ranges.
-
-42
----
-# 3.2 Example
+### 3.2 Example (Illustrative - data will vary based on actual algorithm and runs)
 
 System: Windows XP (SP1)
-
 CPU: Pentium(R) 4 3.00GHz
-
-RAM: 1 G
-
+RAM: 1 GB
 Language: Matlab 6.5
-
 Algorithm: Particle Swarm Optimizer (PSO)
 
-# Results
+**Results for $D=10$ (Max_FES = 100,000)**
 
-D=10
+**Table 3-2: Error Values Achieved When $FES=1 \times 10^3, 1 \times 10^4, 1 \times 10^5$ for Problems 1-8**
+*(The PDF contains extensive tables here. I will represent the structure. "T" indicates termination error was met before the FES count.)*
 
-Max_FES=100000
+| FES      | Statistic     | Prob 1      | Prob 2      | Prob 3      | Prob 4      | Prob 5      | Prob 6 | Prob 7 | Prob 8 |
+|----------|---------------|-------------|-------------|-------------|-------------|-------------|--------|--------|--------|
+| $10^3$   | $1^{st}$ (Best) | 4.8672e+2   | 2.2037e+6   | 4.7296e+2   | 4.6617e+2   | 2.3522e+3   | ...    | ...    | ...    |
+|          | $7^{th}$        | 8.0293e+2   | 8.5141e+6   | 9.8091e+2   | 1.2900e+3   | 4.0573e+3   | ...    | ...    | ...    |
+|          | Median        | 9.2384e+2   | 1.4311e+7   | 1.5293e+3   | 1.9769e+3   | 4.6308e+3   | ...    | ...    | ...    |
+|          | $19^{th}$       | 1.3393e+3   | 1.9298e+7   | 1.7615e+3   | 2.9175e+3   | 4.8015e+3   | ...    | ...    | ...    |
+|          | $25^{th}$ (Worst)| 1.9151e+3   | 4.4688e+7   | 3.2337e+3   | 6.5038e+3   | 5.6701e+3   | ...    | ...    | ...    |
+|          | Mean          | 1.0996e+3   | 1.5156e+7   | 1.5107e+3   | 2.3669e+3   | 4.4857e+3   | ...    | ...    | ...    |
+|          | Std           | 4.0575e+2   | 9.3002e+6   | 7.2503e+2   | 1.5082e+3   | 7.0081e+2   | ...    | ...    | ...    |
+| $10^4$   | $1^{st}$ (Best) | 3.1984e-3   | 1.3491e+5   | 1.0413e+0   | 6.7175e+0   | 1.6584e+3   | ...    | ...    | ...    |
+|          | ...           | ...         | ...         | ...         | ...         | ...         | ...    | ...    | ...    |
+| $10^5$   | $1^{st}$ (Best) | 4.7434e-9T  | 4.2175e+4   | 5.1782e-9T  | 1.7070e-5   | 1.1864e+3   | ...    | ...    | ...    |
+|          | ...           | ...         | ...         | ...         | ...         | ...         | ...    | ...    | ...    |
 
-| |Prob|8|1|2|3|4|5|
-|---|---|---|---|---|---|---|---|
-|FES|7|6| | | | | |
-|1st(Best)|4.8672e+2|4.7296e+2|2.2037e+6|4.6617e+2|2.3522e+3| | |
-|7th|8.0293e+2|9.8091e+2|8.5141e+6|1.2900e+3|4.0573e+3| | |
-|13th(Median)|9.2384e+2|1.5293e+3|1.4311e+7|1.9769e+3|4.6308e+3| | |
-|1e3|19th|1.3393e+3|1.7615e+3|1.9298e+7|2.9175e+3|4.8015e+3| |
-|25th (Worst)|1.9151e+3|3.2337e+3|4.4688e+7|6.5038e+3|5.6701e+3| | |
-|Mean|1.0996e+3|1.5107e+3|1.5156e+7|2.3669e+3|4.4857e+3| | |
-|Std|4.0575e+2|7.2503e+2|9.3002e+6|1.5082e+3|7.0081e+2| | |
-|1st(Best)|3.1984e‑3|1.0413e+0|1.3491e+5|6.7175e+0|1.6584e+3| | |
-|7th|2.6509e‑2|1.3202e+1|4.4023e+5|3.8884e+1|2.3522e+3| | |
-|13th(Median)|6.0665e‑2|1.9981e+1|1.1727e+6|5.5027e+1|2.6335e+3| | |
-|1e4|19th|1.0657e‑1|3.5319e+1|2.0824e+6|7.1385e+1|2.8788e+3| |
-|25th (Worst)|4.3846e‑1|1.0517e+2|2.9099e+6|1.7905e+2|3.6094e+3| | |
-|Mean|8.6962e‑2|2.7883e+1|1.3599e+6|5.9894e+1|2.6055e+3| | |
-|Std|9.6616e‑2|2.3526e+1|9.1421e+5|3.5988e+1|4.5167e+2| | |
-|1st(Best)|4.7434e‑9T|5.1782e‑9T|4.2175e+4|1.7070e‑5|1.1864e+3| | |
-|7th|7.9845e‑9T|8.5278e‑9T|1.2805e+5|1.2433e‑3|1.4951e+3| | |
-|13th(Median)|9.0901e‑9T|9.7281e‑9T|2.3534e+5|4.0361e‑3|1.7380e+3| | |
-|1e5|19th|9.6540e‑9T|1.5249e‑8|4.6436e+5|1.8283e‑2|1.9846e+3| |
-|25th (Worst)|9.9506e‑9T|2.3845e‑7|2.2776e+6|3.9795e‑1|2.3239e+3| | |
-|Mean|8.5375e‑9T|3.2227e‑8|4.6185e+5|3.4388e‑2|1.7517e+3| | |
-|Std|1.4177e‑9T|6.2340e‑8|5.4685e+5|8.2733e‑2|2.9707e+2| | |
+*(Similar tables would follow for problems 9-17 (Table 3-3) and 18-25 (Table 3-4) for $D=10$. Then similar sets of tables for $D=30$ and $D=50$.)*
 
-* xxx.e-9T means it get termination error before it gets the predefined record FES.
----
-# Table 3-3 Error Values Achieved When FES=1e+3, FES=1e+4, FES=1e+5 for Problems 9‑17
+**Table 3-5: Number of FES to achieve the fixed accuracy level ($D=10$)**
 
-|FES|Prob|9|10|11|12|13|14|15|16|17| | |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| | |1e+3|1ˢᵗ(Best)| | | | | | | | | |
-| |7ᵗʰ| | | | | | | | | | | |
-| |13ᵗʰ(Median)| | | | | | | | | | | |
-| |19ᵗʰ| | | | | | | | | | | |
-| |25ᵗʰ (Worst)| | | | | | | | | | | |
-| |Mean| | | | | | | | | | | |
-| |Std| | | | | | | | | | | |
+| Prob | $1^{st}$ (Best) FES | $7^{th}$ FES | Median FES | $19^{th}$ FES | $25^{th}$ (Worst) FES | Mean FES    | Std FES     | Success Rate | Success Performance |
+|------|-----------------|------------|------------|-------------|-------------------|-------------|-------------|--------------|---------------------|
+| $F_1$  | 11607           | 12133      | 12372      | 12704       | 13022             | 1.2373e+4   | 3.6607e+2   | 100%         | 1.2373e+4           |
+| $F_2$  | 17042           | 17608      | 18039      | 18753       | 19671             | 1.8163e+4   | 7.5123e+2   | 100%         | 1.8163e+4           |
+| $F_3$  | N/A             | N/A        | N/A        | N/A         | N/A               | N/A         | N/A         | 0%           | N/A                 |
+| ...  | ...             | ...        | ...        | ...         | ...               | ...         | ...         | ...          | ...                 |
 
-# Table 3-4 Error Values Achieved When FES=1e+3, FES=1e+4, FES=1e+5 for Problems 18‑25
+*(This table would be presented for all 25 functions for $D=10$, then repeated for $D=30$ and $D=50$.)*
 
-|FES|Prob|18|19|20|21|22|23|24|25| |
-|---|---|---|---|---|---|---|---|---|---|---|
-| |1e+3|1ˢᵗ(Best)| | | | | | | | |
-|7ᵗʰ| | | | | | | | | | |
-|13ᵗʰ| | | | | | | | | | |
-|(Median)| | | | | | | | | | |
-|19ᵗʰ| | | | | | | | | | |
-|25ᵗʰ| | | | | | | | | | |
-| |(Worst)| | | | | | | | | |
-| |Mean| | | | | | | | | |
-| |Std| | | | | | | | | |
+**Convergence Graphs (30D):**
+*(The PDF shows sample graph structures. Actual graphs would be generated from experimental data.)*
 
----
-# Table 3-5 Number of FES to achieve the fixed accuracy level
+*Figure 3-1: Convergence Graph for Functions 1-5 (Median error vs FES for D=30)*
+*(Plot $\log_{10}(f(x)-f(x^*))$ vs FES)*
 
-|Prob|1st(Best)|7th|13th|19th|25th|Mean|Std|Success rate|Success Performance|
-|---|---|---|---|---|---|---|---|---|---|
-|1|11607|12133|12372|12704|13022|1.2373e+4|3.6607e+2|100%|1.2373e+4|
-|2|17042|17608|18039|18753|19671|1.8163e+4|7.5123e+2|100%|1.8163e+4|
-|3|0%|-|-|-|-|-|-|-|-|
-|4|0%|-|-|-|-|-|-|-|-|
-|5|0%|-|-|-|-|-|-|-|-|
+*(Similarly, Figure 3-2 for F6-10, Figure 3-3 for F11-14, Figure 3-4 for F15-20, Figure 3-5 for F21-25)*
 
-Max_FES=300000
+**Algorithm Complexity:**
 
-# Table 3-6 Error Values Achieved When FES=1e3, FES=1e4, FES=1e5 for Problems 1-8
+**Table 3-8: Computational Complexity**
+*(Example data from PDF)*
 
-|FES|Prob|1st(Best)|7th|13th|(Median)|19th|25th|(Worst)|Mean|Std|
-|---|---|---|---|---|---|---|---|---|---|---|
-|1e3| | | | | | | | | | |
-|1e4| | | | | | | | | | |
-|1e5| | | | | | | | | | |
+| Dimension | $T_0$ (s) | $T_1$ (s) | $\overline{T2}$ (s) | $(\overline{T2}-T_1)/T_0$ |
+|-----------|-----------|-----------|-----------------|-------------------------|
+| $D=10$    | (value)   | 31.1250   | 82.3906         | 1.2963                  |
+| $D=30$    | (value)   | 39.5470   | 90.8437         | 1.3331                  |
+| $D=50$    | (value)   | 46.0780   | 108.9094        | 1.5888                  |
+*(Note: $T_0$ is a single baseline value, not dimension-dependent in the table shown in PDF, but it should be measured on the specific test system.)*
+
+**Parameters:**
+*(This section would detail the parameters of the specific algorithm used, e.g., PSO's inertia weight, acceleration coefficients, population size, etc., as per guidelines in 3.1.6.)*
+- a) All parameters to be adjusted: ...
+- b) Corresponding dynamic ranges: ...
+- c) Guidelines on how to adjust the parameters: ...
+- d) Estimated cost of parameter tuning in terms of number of FES: ...
+- e) Actual parameter values used: ...
 
 ---
-# Table 3-7
+## 4. Notes
 
-# Error Values Achieved When FES=1e3, FES=1e4, FES=1e5 for Problems 1-8
+**Note 1: Linear Transformation Matrix**
+A linear transformation matrix $M$ is constructed as $M = P \cdot N \cdot Q$.
+-   P, Q are two orthogonal matrices, generated using the Classical Gram-Schmidt method.
+-   N is a diagonal matrix where diagonal elements $d_{ii}$ control the condition number. For example, $d_{ii} = c^{\frac{i-1}{D-1}}$, where $u = \text{rand}(1,D)$ and $c = \text{Cond}(M)$ is the desired condition number. (The PDF mentions $d_{ii} = c \frac{u_i - \min(u)}{\max(u) - \min(u)}$ which seems to scale random values, but then states $M$'s condition number Cond(M)=c. The power form $c^{\frac{i-1}{D-1}}$ is more standard for achieving a specific condition $c$ across scales).
 
-|FES|Prob|1st(Best)|7th|13th|(Median)|19th|25th(Worst)|Mean|Std|
-|---|---|---|---|---|---|---|---|---|---|
-|1e3| | | | | | | | | |
-|1e4| | | | | | | | | |
-|1e5| | | | | | | | | |
-|3e5| | | | | | | | | |
+**Note 2: Weight Adjustment in Composition Functions**
+On page 18 (of PDF), the weight values $w_i$ are adjusted (e.g., $w_i^* = w_i \cdot (1 - \max(w_j)^{10})$ if $w_i$ is not the maximum weight). The objective is to ensure that each optimum (local or global) is primarily influenced by only one basic function in its immediate vicinity, while allowing a higher degree of mixing of different functions further away from the optima.
 
----
-# Convergence Graphs (30D)
+**Note 3: Objective Function Values**
+We assign different positive and negative objective function values (biases $f_{\text{bias}_i}$) instead of always having $f(x^*)=0$. This may influence some algorithms that make use of the absolute objective values.
 
-| |1010|105|100|log(f(x)-f(x*))| | | |
-|---|---|---|---|---|---|---|---|
-| |10-5|function1|function2| | | | |
-| |10-10|function3|function4|function5| | | |
-| |0|0.5|1|1.5|2|2.5|3|
+**Note 4: Comparison Pairs Objective Values**
+We assign the same $f_{\text{bias}}$ values to the functions within comparison pairs (e.g., $F_{15}$ and $F_{16}$ both have $f_{\text{bias}} = 120$) to make their comparison easier in terms of target values.
 
-Figure 3-1 Convergence Graph for Functions 1‑5
+**Note 5: High Condition Number Rotation**
+High condition number rotation can sometimes transform a multimodal problem into a unimodal one (or one with a much more pronounced global basin). Hence, moderate condition numbers were generally used for the rotation matrices applied to inherently multimodal basic functions.
 
-Figure 3-2 Convergence Graph for Function 6‑10
+**Note 6: Additional Data Files for Verification**
+Additional data files are provided with some coordinate positions and their corresponding fitness values. These are intended to help in the verification process during the translation and implementation of the benchmark functions.
 
-Figure 3-3 Convergence Graph for Function 11‑14
+**Note 7: Statistical Significance of Pairs**
+It is insufficient to make any statistically meaningful conclusions solely based on the comparison pairs presented, as each case has at most 2 pairs. A more rigorous study would likely require 5, 10, or more pairs for each specific comparative aspect. This extension might be considered for future work or an edited volume.
 
-Figure 3-4 Convergence Graph for Function 15‑20
+**Note 8: Pseudo-Real World Problems**
+Pseudo-real world problems are available from the web link: [http://www.cs.colostate.edu/~genitor/functions.html](http://www.cs.colostate.edu/~genitor/functions.html).
+If you have any queries on these problems, please contact Professor Darrell Whitley directly. Email: whitley@CS.ColoState.EDU
 
-Figure 3-5 Convergence Graph for Function 21‑25
-
-# Algorithm Complexity
-
-**Table 3-8 Computational Complexity**
-|T0|T1| |( )|( )|-T1)/T0|T2|T2|
-|---|---|---|---|---|---|---|---|
-|1.2963|82.3906|D=10|31.1250| | | | |
-|1.3331|90.8437|D=30|38.1250|39.5470| | | |
-| |D=50| |46.0780|108.9094|1.5888| | |
+**Note 9: Data Recording for Statistical Tests**
+We are recording detailed performance data, such as 'the number of FES to reach the given fixed accuracy' and 'the objective function value at different FES counts' for each run, each problem, and each dimension. This is done to facilitate performing statistical significance tests on the results. The details of a suitable statistical significance test would be made available at a later date.
 
 ---
-# Parameters
+## References:
 
-- a) All parameters to be adjusted
-- b) Corresponding dynamic ranges
-- c) Guidelines on how to adjust the parameters
-- d) Estimated cost of parameter tuning in terms of number of FES
-- e) Actual parameter values used.
----
-# 4. Notes
-
-Note 1: Linear Transformation Matrix
-
-M = P * N * Q
-
-P, Q are two orthogonal matrixes, generated using Classical Gram‑Schmidt method
-
-N is diagonal matrix
-
-ui − min(u)
-
-u = rand(1, D), dii = cmax(u) − min(u)
-
-M’s condition number Cond(M) = c
-
-Note 2: On page 17, wi values are sorted and raised to a higher power. The objective is to ensure that each optimum (local or global) is determined by only one function while allowing a higher degree of mixing of different functions just a very short distance away from each optimum.
-
-Note 3: We assign different positive and negative objective function values, instead of zeros. This may influence some algorithms that make use of the objective values.
-
-Note 4: We assign the same objective values to the comparison pairs in order to make the comparison easier.
-
-Note 5: High condition number rotation may convert a multimodal problem into a unimodal problem. Hence, moderate condition numbers were used for multimodal.
-
-Note 6: Additional data files are provided with some coordinate positions and the corresponding fitness values in order to help the verification process during the code translation.
-
-Note 7: It is insufficient to make any statistically meaningful conclusions on the pairs of problems as each case has at most 2 pairs. We would probably require 5 or 10 or more pairs for each case. We would consider this extension for the edited volume.
-
-Note 8: Pseudo‑real world problems are available from the web link given below. If you have any queries on these problems, please contact Professor Darrell Whitley directly. Email: whitley@CS.ColoState.EDU
-
-Web-link: http://www.cs.colostate.edu/~genitor/functions.html
-
-Note 9: We are recording the numbers such as ‘the number of FES to reach the given fixed accuracy’, ‘the objective function value at different number of FES’ for each run of each problem and each dimension in order to perform some statistical significance tests. The details of a statistical significance test would be made available a little later.
----
-# References:
-
-1. N. Hansen, S. D. Muller and P. Koumoutsakos, “Reducing the Time Complexity of the Derandomized evolution Strategy with Covariance Matrix Adaptation (CMA‑ES).” Evolutionary Computation, 11(1), pp. 1‑18, 2003
-2. A. Klimke, “Weierstrass function’s matlab code”, http://matlabdb.mathematik.uni-stuttgart.de/download.jsp?MC_ID=9&MP_ID=56
-3. H‑P. Schwefel, “Evolution and Optimum Seeking”, http://ls11‑www.cs.uni-dortmund.de/lehre/wiley/
-4. D. Whitley, K. Mathias, S. Rana and J. Dzubera, “Evaluating Evolutionary Algorithms” Artificial Intelligence, 85 (1‑2): 245‑276 AUG 1996.
+1.  N. Hansen, S. D. Muller and P. Koumoutsakos, "Reducing the Time Complexity of the Derandomized Evolution Strategy with Covariance Matrix Adaptation (CMA-ES)." *Evolutionary Computation*, 11(1), pp. 1-18, 2003.
+2.  A. Klimke, "Weierstrass function's matlab code", <http://matlabdb.mathematik.uni-stuttgart.de/download.jsp?MC_ID=9&MP_ID=56>
+3.  H-P. Schwefel, "Evolution and Optimum Seeking", <http://ls11-www.cs.uni-dortmund.de/lehre/wiley/> (Link might be outdated or specific to a course).
+4.  D. Whitley, K. Mathias, S. Rana and J. Dzubera, "Evaluating Evolutionary Algorithms." *Artificial Intelligence*, 85 (1-2): 245-276, AUG 1996.
