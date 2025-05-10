@@ -1,0 +1,65 @@
+Readme file for C version of test problems.
+
+Following is a brief description of included files.
+
+1. global.h - Contains global variable and function declarations. Function selection is now done at runtime, so no need to edit this file for choosing a function.
+
+2. sub.h - Contains test problem specific declarations (mostly empty now as function-specific data is handled differently).
+
+3. rand.h - Contains random number generator related function declarations. The original SPRNG RNG has been replaced with the standard C library's `rand()` and `srand()`.
+
+4. aux.c - Contains definitions of some auxiliary routines.
+
+5. def1.c - Contains definitions of basic functions (basis of hybrid composite and other functions).
+
+6. def2.c - Contains memory allocation, data transformation, and weight calculation routines. Also defines common global variables.
+
+7. def3.c - Contains initialization routines for each benchmark function, exported with function-specific names for the dispatcher.
+
+8. def3_dispatcher.c - Contains dispatcher code that selects the appropriate initialization function based on function_id.
+
+9. def4.c - Contains calculation routines for each benchmark function with function-specific names.
+
+10. def4_dispatcher.c - Contains dispatcher code that selects the appropriate calculation and normalization functions based on function_id.
+
+11. rand.c - Contains random number generator related routines, now using standard C library functions.
+
+12. benchmark_data.c - Contains definitions for common global variables and function-specific global data pointers (e.g., for F5, F12).
+
+13. main.c - This is a sample file included that demonstrates how to use the various routines. It now takes the function ID and dimension as command-line arguments.
+
+Follow the following steps in order to use the code.
+
+Step 1: Compile the program using the `Makefile` provided by running `make` in the `CEC2005-C` directory.
+   No need to edit `global.h` to select functions anymore.
+
+Step 2: Run the compiled executable `main` with the desired function ID and dimension.
+   Usage: `./main <function_id> <dimension> [input_file]`
+   - `<function_id>`: An integer from 1 to 25.
+   - `<dimension>`: The number of real variables (problem dimension). Supported values are 2, 10, 30, 50.
+   - `[input_file]`: Optional file containing input vector values (one per line).
+
+   Example: `./main 7 10` (Runs function F7 with 10 dimensions, prompting for input values).
+   Example: `./main 7 10 input.txt` (Runs function F7 with 10 dimensions, reading input values from file).
+
+   The program will automatically determine the number of basic functions (`nfunc`) based on the `<function_id>` (1 for F1-F14, 10 for F15-F25).
+   Input data files from the `input_data/` directory are loaded automatically based on the function ID and dimension.
+
+Step 3: You can also use the Python helper script to run all functions with specific input values.
+   Example: `python ../utility_scripts/run_cec2005.py --func 7 --dim 10 --type zeros`
+   
+   The helper script supports:
+   - Running all functions: `--all`
+   - Running specific functions: `--func <id>`
+   - Running with specific dimensions: `--dim <dimension>`
+   - Using different input types: `--type [zeros|random]`
+
+Step 4: The `main.c` file can be further edited to suit your specific testing needs (e.g., how input vectors `x` are generated or read).
+
+Note: File `global.h` declares global variables. Avoid using same names for your global variables if any.
+
+Feel free to contact me in case of any questions/comments/suggestions/doubts.
+__
+Santosh Tiwari (tiwaris@iitk.ac.in)
+Date: March 10, 2005
+(Updated by AI Assistant on 2024-06-13 to reflect runtime function selection refactoring)

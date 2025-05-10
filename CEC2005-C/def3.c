@@ -1,6 +1,7 @@
 /* Source file for custom initialization */
 /* Hard-coded for every function based on the type and nature of input files */
 /* At present hard-coded for D=2, 10, 30 and 50 */
+/* Refactored to use function-specific names instead of ifdefs */
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -10,15 +11,74 @@
 # include "sub.h"
 # include "rand.h"
 
-# ifdef f1
+/* Function to select the appropriate initialization function based on function_id */
 void initialize(void)
+{
+    switch (function_id) {
+        case 1: initialize_f1(); break;
+        case 2: initialize_f2(); break;
+        case 3: initialize_f3(); break;
+        case 4: initialize_f4(); break;
+        case 5: initialize_f5(); break;
+        case 6: initialize_f6(); break;
+        case 7: initialize_f7(); break;
+        case 8: initialize_f8(); break;
+        case 9: initialize_f9(); break;
+        case 10: initialize_f10(); break;
+        case 11: initialize_f11(); break;
+        case 12: initialize_f12(); break;
+        case 13: initialize_f13(); break;
+        case 14: initialize_f14(); break;
+        case 15: initialize_f15(); break;
+        case 16: initialize_f16(); break;
+        case 17: initialize_f17(); break;
+        case 18: initialize_f18(); break;
+        case 19: initialize_f19(); break;
+        case 20: initialize_f20(); break;
+        case 21: initialize_f21(); break;
+        case 22: initialize_f22(); break;
+        case 23: initialize_f23(); break;
+        case 24: initialize_f24(); break;
+        case 25: initialize_f25(); break;
+        default:
+            fprintf(stderr, "Error: Invalid function ID %d\n", function_id);
+            exit(1);
+    }
+}
+
+/* F1: Shifted Sphere Function */
+void initialize_f1(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/sphere_func_data.txt","r");
+    fpt = fopen("input_data_original/sphere_func_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/sphere_func_data.txt for reading \n");
+        exit(0);
+    }
+    
+    for (i=0; i<nfunc; i++)
+    {
+        for (j=0; j<nreal; j++)
+        {
+            fscanf(fpt,"%Lf",&o[i][j]);
+        }
+    }
+    fclose(fpt);
+    bias[0] = -450.0;
+    return;
+}
+
+/* F2: Shifted Schwefel's Problem 1.2 */
+void initialize_f2(void)
+{
+    int i, j;
+    FILE *fpt;
+    fpt = fopen("input_data_original/schwefel_102_data.txt","r");
+    if (fpt==NULL)
+    {
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/schwefel_102_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -26,52 +86,25 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -450.0;
     return;
 }
-#endif
 
-# ifdef f2
-void initialize(void)
+/* F3: Shifted Rotated High Conditioned Elliptic Function */
+void initialize_f3(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/schwefel_102_data.txt","r");
+    if (nreal==2) fpt = fopen("input_data_original/elliptic_M_D2.txt","r");
+    if (nreal==10) fpt = fopen("input_data_original/elliptic_M_D10.txt","r");
+    if (nreal==30) fpt = fopen("input_data_original/elliptic_M_D30.txt","r");
+    if (nreal==50) fpt = fopen("input_data_original/elliptic_M_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
-        exit(0);
-    }
-    for (i=0; i<nfunc; i++)
-    {
-        for (j=0; j<nreal; j++)
-        {
-            fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
-        }
-    }
-    fclose(fpt);
-    bias[0] = -450.0;
-    return;
-}
-#endif
-
-# ifdef f3
-void initialize(void)
-{
-    int i, j;
-    FILE *fpt;
-    if (nreal==2) fpt = fopen("input_data/elliptic_M_D2.txt","r");
-    if (nreal==10) fpt = fopen("input_data/elliptic_M_D10.txt","r");
-    if (nreal==30) fpt = fopen("input_data/elliptic_M_D30.txt","r");
-    if (nreal==50) fpt = fopen("input_data/elliptic_M_D50.txt","r");
-    if (fpt==NULL)
-    {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open rotation matrix file elliptic_M_D*.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nreal; i++)
@@ -79,14 +112,13 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n G[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/high_cond_elliptic_rot_data.txt","r");
+    fpt = fopen("input_data_original/high_cond_elliptic_rot_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open shift vector file input_data_original/high_cond_elliptic_rot_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -94,24 +126,22 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -450.0;
     return;
 }
-#endif
 
-# ifdef f4
-void initialize(void)
+/* F4: Shifted Schwefel's Problem 1.2 with Noise in Fitness */
+void initialize_f4(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/schwefel_102_data.txt","r");
+    fpt = fopen("input_data_original/schwefel_102_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/schwefel_102_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -119,35 +149,40 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -450.0;
     return;
 }
-#endif
 
-# ifdef f5
-void initialize(void)
+/* F5: Schwefel's Problem 2.6 with Global Optimum on Bounds */
+void initialize_f5(void)
 {
     int i, j;
     int index;
     FILE *fpt;
     char c;
-    A = (long double **)malloc(nreal*sizeof(long double));
+    
+    /* Allocate memory for F5 specific arrays */
+    A_f5 = (long double **)malloc(nreal*sizeof(long double*));
     for (i=0; i<nreal; i++)
     {
-        A[i] = (long double *)malloc(nreal*sizeof(long double));
+        A_f5[i] = (long double *)malloc(nreal*sizeof(long double));
     }
-    B = (long double *)malloc(nreal*sizeof(long double));
-    fpt = fopen("input_data/schwefel_206_data.txt","r");
+    B_f5 = (long double *)malloc(nreal*sizeof(long double));
+
+    fpt = fopen("input_data_original/schwefel_206_data.txt","r");
+    if (fpt==NULL) {
+        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        exit(0);
+    }
+    
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -159,8 +194,7 @@ void initialize(void)
     {
         for (j=0; j<nreal; j++)
         {
-            fscanf(fpt,"%Lf",&A[i][j]);
-            printf("\n A[%d][%d] = %LE",i+1,j+1,A[i][j]);
+            fscanf(fpt,"%Lf",&A_f5[i][j]);
         }
         do
         {
@@ -188,23 +222,22 @@ void initialize(void)
     }
     for (i=0; i<nreal; i++)
     {
-        B[i] = 0.0;
+        B_f5[i] = 0.0;
         for (j=0; j<nreal; j++)
         {
-            B[i] += A[i][j]*o[0][j];
+            B_f5[i] += A_f5[i][j]*o[0][j];
         }
     }
     bias[0] = -310.0;
     return;
 }
-#endif
 
-# ifdef f6
-void initialize(void)
+/* F6: Shifted Rosenbrock's Function */
+void initialize_f6(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/rosenbrock_func_data.txt","r");
+    fpt = fopen("input_data_original/rosenbrock_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -216,24 +249,22 @@ void initialize(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
             o[i][j] -= 1.0;
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = 390.0;
     return;
 }
-#endif
 
-# ifdef f7
-void initialize(void)
+/* F7: Shifted Rotated Griewank's Function */
+void initialize_f7(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data/griewank_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/griewank_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/griewank_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/griewank_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/griewank_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/griewank_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/griewank_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/griewank_M_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -244,11 +275,10 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n G[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/griewank_func_data.txt","r");
+    fpt = fopen("input_data_original/griewank_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -259,25 +289,23 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -180.0;
     return;
 }
-#endif
 
-# ifdef f8
-void initialize(void)
+/* F8: Shifted Rotated Ackley's Function with Global Optimum on Bounds */
+void initialize_f8(void)
 {
     int i, j;
     int index;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data/ackley_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/ackley_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/ackley_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/ackley_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/ackley_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/ackley_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/ackley_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/ackley_M_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -288,11 +316,10 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n M[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/ackley_func_data.txt","r");
+    fpt = fopen("input_data_original/ackley_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -303,7 +330,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
@@ -315,14 +341,13 @@ void initialize(void)
     bias[0] = -140.0;
     return;
 }
-#endif
 
-# ifdef f9
-void initialize(void)
+/* F9: Shifted Rastrigin's Function */
+void initialize_f9(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/rastrigin_func_data.txt","r");
+    fpt = fopen("input_data_original/rastrigin_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -333,24 +358,22 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -330.0;
     return;
 }
-#endif
 
-# ifdef f10
-void initialize(void)
+/* F10: Shifted Rotated Rastrigin's Function */
+void initialize_f10(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data/rastrigin_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/rastrigin_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/rastrigin_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/rastrigin_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/rastrigin_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/rastrigin_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/rastrigin_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/rastrigin_M_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -361,11 +384,10 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n M[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/rastrigin_func_data.txt","r");
+    fpt = fopen("input_data_original/rastrigin_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -376,27 +398,25 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -330.0;
     return;
 }
-#endif
 
-# ifdef f11
-void initialize(void)
+/* F11: Shifted Rotated Weierstrass Function */
+void initialize_f11(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data/weierstrass_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/weierstrass_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/weierstrass_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/weierstrass_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/weierstrass_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/weierstrass_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/weierstrass_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/weierstrass_M_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file weierstrass_M_D*.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nreal; i++)
@@ -404,14 +424,13 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n M[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/weierstrass_data.txt","r");
+    fpt = fopen("input_data_original/weierstrass_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/weierstrass_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -419,42 +438,54 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = 90.0;
     return;
 }
-#endif
 
-# ifdef f12
-void initialize(void)
+/* F12: Schwefel's Problem 2.13 */
+void initialize_f12(void)
 {
     int i, j;
     FILE *fpt;
     char c;
-    A = (long double **)malloc(nreal*sizeof(long double));
-    B = (long double **)malloc(nreal*sizeof(long double));
-    alpha = (long double *)malloc(nreal*sizeof(long double));
+    
+    /* Allocate memory for F12 specific arrays */
+    A_f12 = (long double **)malloc(nreal*sizeof(long double*));
+    B_f12 = (long double **)malloc(nreal*sizeof(long double*));
+    alpha_f12 = (long double *)malloc(nreal*sizeof(long double));
+    
     for (i=0; i<nreal; i++)
     {
-        A[i] = (long double *)malloc(nreal*sizeof(long double));
-        B[i] = (long double *)malloc(nreal*sizeof(long double));
+        A_f12[i] = (long double *)malloc(nreal*sizeof(long double));
+        B_f12[i] = (long double *)malloc(nreal*sizeof(long double));
     }
-    fpt = fopen("input_data/schwefel_213_data.txt","r");
+    fpt = fopen("input_data_original/schwefel_213_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file for function 12 \n");
         exit(0);
     }
-    /* Reading A */
+    
+    /* Read alpha values */
+    for (i=0; i<nreal; i++)
+    {
+        fscanf(fpt,"%Lf",&alpha_f12[i]);
+        do
+        {
+            fscanf(fpt,"%c",&c);
+        }
+        while (c!='\n');
+    }
+    
+    /* Read A values */
     for (i=0; i<nreal; i++)
     {
         for (j=0; j<nreal; j++)
         {
-            fscanf(fpt,"%Lf",&A[i][j]);
-            printf("\n A[%d][%d] = %LE",i+1,j+1,A[i][j]);
+            fscanf(fpt,"%Lf",&A_f12[i][j]);
         }
         do
         {
@@ -462,24 +493,13 @@ void initialize(void)
         }
         while (c!='\n');
     }
-    if (i!=100)
-    {
-        for (i=nreal; i<100; i++)
-        {
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while(c!='\n');
-        }
-    }
-    /* Reading B */
+    
+    /* Read B values */
     for (i=0; i<nreal; i++)
     {
         for (j=0; j<nreal; j++)
         {
-            fscanf(fpt,"%Lf",&B[i][j]);
-            printf("\n B[%d][%d] = %LE",i+1,j+1,B[i][j]);
+            fscanf(fpt,"%Lf",&B_f12[i][j]);
         }
         do
         {
@@ -501,21 +521,18 @@ void initialize(void)
     /* Reading alpha */
     for (i=0; i<nreal; i++)
     {
-        fscanf(fpt,"%Lf",&alpha[i]);
-        printf("\n alpha[%d] = %LE",i+1,alpha[i]);
+        fscanf(fpt,"%Lf",&alpha_f12[i]);
     }
     fclose(fpt);
     bias[0] = -460.0;
     return;
 }
-#endif
 
-# ifdef f13
-void initialize(void)
+void initialize_f13(void) 
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data/EF8F2_func_data.txt","r");
+    fpt = fopen("input_data_original/EF8F2_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -527,24 +544,20 @@ void initialize(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
             o[i][j] -= 1.0;
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -130.0;
     return;
 }
-#endif
-
-# ifdef f14
-void initialize(void)
+void initialize_f14(void) 
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data/E_ScafferF6_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/E_ScafferF6_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/E_ScafferF6_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/E_ScafferF6_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/E_ScafferF6_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/E_ScafferF6_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/E_ScafferF6_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/E_ScafferF6_M_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -555,11 +568,10 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&g[i][j]);
-            printf("\n M[%d][%d] = %LE",i+1,j+1,g[i][j]);
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data/E_ScafferF6_func_data.txt","r");
+    fpt = fopen("input_data_original/E_ScafferF6_func_data.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -570,25 +582,21 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
     }
     fclose(fpt);
     bias[0] = -300.0;
     return;
 }
-#endif
-
-# ifdef f15
-void initialize(void)
+void initialize_f15(void) 
 {
     int i, j;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func1_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -596,14 +604,12 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
             fscanf(fpt,"%c",&c);
         }
         while (c!='\n');
-        printf("\n");
     }
     fclose(fpt);
     lambda[0] = 1.0;
@@ -619,18 +625,15 @@ void initialize(void)
     global_bias = 120.0;
     return;
 }
-#endif
-
-# ifdef f16
-void initialize(void)
+void initialize_f16(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func1_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -638,7 +641,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -648,10 +650,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func1_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func1_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func1_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func1_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func1_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func1_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func1_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func1_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -659,7 +661,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -682,18 +683,15 @@ void initialize(void)
     global_bias = 120.0;
     return;
 }
-#endif
-
-# ifdef f17
-void initialize(void)
+void initialize_f17(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func1_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -701,7 +699,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -711,10 +708,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func1_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func1_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func1_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func1_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func1_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func1_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func1_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func1_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -722,7 +719,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -745,18 +741,15 @@ void initialize(void)
     global_bias = 120.0;
     return;
 }
-#endif
-
-# ifdef f18
-void initialize(void)
+void initialize_f18(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func2_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -764,7 +757,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -774,10 +766,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func2_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -785,7 +777,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -822,18 +813,15 @@ void initialize(void)
     global_bias = 10.0;
     return;
 }
-#endif
-
-# ifdef f19
-void initialize(void)
+void initialize_f19(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func2_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -841,7 +829,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -851,10 +838,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func2_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -862,7 +849,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -899,19 +885,16 @@ void initialize(void)
     global_bias = 10.0;
     return;
 }
-#endif
-
-# ifdef f20
-void initialize(void)
+void initialize_f20(void) 
 {
     int i, j, k;
     int index;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func2_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -919,7 +902,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -934,10 +916,10 @@ void initialize(void)
     {
         o[0][2*i-1] = 5.0;
     }
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func2_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -945,7 +927,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -982,18 +963,15 @@ void initialize(void)
     global_bias = 10.0;
     return;
 }
-#endif
-
-# ifdef f21
-void initialize(void)
+void initialize_f21(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func3_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1001,7 +979,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -1011,10 +988,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func3_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func3_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func3_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func3_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1022,7 +999,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -1055,18 +1031,15 @@ void initialize(void)
     global_bias = 360.0;
     return;
 }
-#endif
-
-# ifdef f22
-void initialize(void)
+void initialize_f22(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func3_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1074,7 +1047,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -1084,10 +1056,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func3_HM_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func3_HM_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func3_HM_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func3_HM_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_HM_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_HM_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_HM_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_HM_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1095,7 +1067,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -1128,18 +1099,15 @@ void initialize(void)
     global_bias = 360.0;
     return;
 }
-#endif
-
-# ifdef f23
-void initialize(void)
+void initialize_f23(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func3_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1147,7 +1115,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -1157,10 +1124,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func3_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func3_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func3_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func3_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1168,12 +1135,10 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
                 fscanf(fpt,"%c",&c);
-                /*printf("\n got here \n");*/
             }
             while (c!='\n');
         }
@@ -1202,18 +1167,15 @@ void initialize(void)
     global_bias = 360.0;
     return;
 }
-#endif
-
-# if defined f24 || defined f25
-void initialize(void)
+void initialize_f24(void) 
 {
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data/hybrid_func4_data.txt","r");
+    fpt = fopen("input_data_original/hybrid_func4_data.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func4_data.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1221,7 +1183,6 @@ void initialize(void)
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
-            printf("\n O[%d][%d] = %LE",i+1,j+1,o[i][j]);
         }
         do
         {
@@ -1231,10 +1192,10 @@ void initialize(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data/hybrid_func4_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data/hybrid_func4_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data/hybrid_func4_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data/hybrid_func4_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func4_M_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func4_M_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func4_M_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func4_M_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1242,7 +1203,6 @@ void initialize(void)
             for (k=0; k<nreal; k++)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
-                printf("\n M[%d][%d][%d] = %LE",i+1,j+1,k+1,l[i][j][k]);
             }
             do
             {
@@ -1269,4 +1229,8 @@ void initialize(void)
     global_bias = 260.0;
     return;
 }
-#endif
+void initialize_f25(void) 
+{ 
+    /* F25 is the same as F24 for initialization purposes */
+    initialize_f24();
+}

@@ -6,30 +6,37 @@
 # Machine architecture: i686
 # Last edited on: 10 March 2005
 # Author: Santosh Tiwari (tiwaris@iitk.ac.in)
+# Updated for runtime function selection in 2024
 
-CC=/usr/bin/gcc
+CC=gcc
 
-LD=/usr/bin/gcc
+LD=gcc
 
-RM=/bin/rm -f
+RM=rm -f
 
-CFLAGS=-Wall -Werror -ansi -pedantic -g
+CFLAGS=-Wall -ansi -pedantic -g
 
 #CFLAGS=-O2 -march=pentium4 -pipe -fomit-frame-pointer
 #LDFLAGS=-s
 
-OBJS := $(patsubst %.c,%.o,$(wildcard *.c))
+SRC=$(wildcard *.c)
+OBJ=$(SRC:.c=.o)
 
 MAIN = main
 
 all: $(MAIN)
 
-$(MAIN): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $(MAIN) -lm
+$(MAIN): $(OBJ)
+	$(LD) $(LDFLAGS) $(OBJ) -o $(MAIN) -lm
 
 %.o: %.c global.h sub.h rand.h
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	$(RM) $(OBJS) core.* *~ *.out
+	$(RM) $(OBJ) $(MAIN) core.* *~ *.out
+
+# Special target for initial compilation and testing all functions
+test: all
+	@echo "Testing compilation and all functions..."
+	@cd .. && python utility_scripts/run_cec2005.py --all --type zeros
 

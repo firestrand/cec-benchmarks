@@ -11,59 +11,42 @@
 # define E  2.7182818284590452353602874713526625
 # define PI 3.1415926535897932384626433832795029
 
-/* Uncomment one of the lines corresponding to a particular function */
-/* Function identifier */
-/* # define f1 */
-/* # define f2 */
-/* # define f3 */
-/* # define f4 */
-/* # define f5 */
-/* # define f6 */
-/* # define f7 */
-/* # define f8 */
-/* # define f9 */
-/* # define f10 */
-# define f11
-/* # define f12 */
-/* # define f13 */
-/* # define f14 */
-/* # define f15 */
-/* # define f16 */
-/* # define f17 */
-/* # define f18 */
-/* # define f19 */
-/* # define f20 */
-/* # define f21 */
-/* # define f22 */
-/* # define f23 */
-/* # define f24 */
-/* # define f25 */
-
 /* Global variables that you are required to initialize */
-int nreal;					/* number of real variables */
-int nfunc;					/* number of basic functions */
-long double bound;			/* required for plotting the function profiles for nreal=2 */
-int density;				/* density of grid points for plotting for nreal=2 */
+extern int nreal;                /* number of real variables */
+extern int nfunc;                /* number of basic functions */
+extern int function_id;          /* function identifier (1-25) */
+extern long double bound;        /* required for plotting the function profiles for nreal=2 */
+extern int density;              /* density of grid points for plotting for nreal=2 */
 
 /* Global variables being used in evaluation of various functions */
 /* These are initalized in file def2.c */
-long double C;
-long double global_bias;
-long double *trans_x;
-long double *basic_f;
-long double *temp_x1;
-long double *temp_x2;
-long double *temp_x3;
-long double *temp_x4;
-long double *weight;
-long double *sigma;
-long double *lambda;
-long double *bias;
-long double *norm_x;
-long double *norm_f;
-long double **o;
-long double **g;
-long double ***l;
+extern long double C;
+extern long double global_bias;
+extern long double *trans_x;
+extern long double *basic_f;
+extern long double *temp_x1;
+extern long double *temp_x2;
+extern long double *temp_x3;
+extern long double *temp_x4;
+extern long double *weight;
+extern long double *sigma;
+extern long double *lambda;
+extern long double *bias;
+extern long double *norm_x;
+extern long double *norm_f;
+extern long double **o;
+extern long double **g;
+extern long double ***l;
+
+/* Function-specific global variables */
+/* F5 */
+extern long double **A_f5;
+extern long double *B_f5;
+
+/* F12 */
+extern long double **A_f12;
+extern long double **B_f12;
+extern long double *alpha_f12;
 
 /* Auxillary function declarations */
 long double maximum (long double, long double);
@@ -91,8 +74,75 @@ void transform_norm (int);
 void calc_weight (long double*);
 void free_memory(void);
 
+/* Function-specific initialization declarations */
+void initialize_f1(void);
+void initialize_f2(void);
+void initialize_f3(void);
+void initialize_f4(void);
+void initialize_f5(void);
+void initialize_f6(void);
+void initialize_f7(void);
+void initialize_f8(void);
+void initialize_f9(void);
+void initialize_f10(void);
+void initialize_f11(void);
+void initialize_f12(void);
+void initialize_f13(void);
+void initialize_f14(void);
+void initialize_f15(void);
+void initialize_f16(void);
+void initialize_f17(void);
+void initialize_f18(void);
+void initialize_f19(void);
+void initialize_f20(void);
+void initialize_f21(void);
+void initialize_f22(void);
+void initialize_f23(void);
+void initialize_f24(void);
+void initialize_f25(void);
+
+/* Function-specific calculation declarations */
+long double calc_benchmark_f1(long double *x);
+long double calc_benchmark_f2(long double *x);
+long double calc_benchmark_f3(long double *x);
+long double calc_benchmark_f4(long double *x);
+long double calc_benchmark_f5(long double *x);
+long double calc_benchmark_f6(long double *x);
+long double calc_benchmark_f7(long double *x);
+long double calc_benchmark_f8(long double *x);
+long double calc_benchmark_f9(long double *x);
+long double calc_benchmark_f10(long double *x);
+long double calc_benchmark_f11(long double *x);
+long double calc_benchmark_f12(long double *x);
+long double calc_benchmark_f13(long double *x);
+long double calc_benchmark_f14(long double *x);
+long double calc_benchmark_f15(long double *x);
+long double calc_benchmark_f16(long double *x);
+long double calc_benchmark_f17(long double *x);
+long double calc_benchmark_f18(long double *x);
+long double calc_benchmark_f19(long double *x);
+long double calc_benchmark_f20(long double *x);
+long double calc_benchmark_f21(long double *x);
+long double calc_benchmark_f22(long double *x);
+long double calc_benchmark_f23(long double *x);
+long double calc_benchmark_f24(long double *x);
+long double calc_benchmark_f25(long double *x);
+
+/* Normalization function declarations */
+void calc_benchmark_norm_f15(void);
+void calc_benchmark_norm_f16(void);
+void calc_benchmark_norm_f17(void);
+void calc_benchmark_norm_f18(void);
+void calc_benchmark_norm_f19(void);
+void calc_benchmark_norm_f20(void);
+void calc_benchmark_norm_f21(void);
+void calc_benchmark_norm_f22(void);
+void calc_benchmark_norm_f23(void);
+void calc_benchmark_norm_f24(void);
+void calc_benchmark_norm_f25(void);
+
 /* Benchmark function declaration */
 long double calc_benchmark_func (long double*);
 void calc_benchmark_norm(void);
 
-# endif
+# endif 
