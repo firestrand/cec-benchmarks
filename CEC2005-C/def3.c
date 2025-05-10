@@ -51,10 +51,10 @@ void initialize_f1(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/sphere_func_data.txt","r");
+    fpt = fopen("input_data/f01/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/sphere_func_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f01/shift_D50.txt for reading \n");
         exit(0);
     }
     
@@ -75,10 +75,10 @@ void initialize_f2(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/schwefel_102_data.txt","r");
+    fpt = fopen("input_data/f02/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/schwefel_102_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f02/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -98,10 +98,10 @@ void initialize_f3(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2) fpt = fopen("input_data_original/elliptic_M_D2.txt","r");
-    if (nreal==10) fpt = fopen("input_data_original/elliptic_M_D10.txt","r");
-    if (nreal==30) fpt = fopen("input_data_original/elliptic_M_D30.txt","r");
-    if (nreal==50) fpt = fopen("input_data_original/elliptic_M_D50.txt","r");
+    if (nreal==2) fpt = fopen("input_data/f03/rot_D2.txt","r");
+    if (nreal==10) fpt = fopen("input_data/f03/rot_D10.txt","r");
+    if (nreal==30) fpt = fopen("input_data/f03/rot_D30.txt","r");
+    if (nreal==50) fpt = fopen("input_data/f03/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open rotation matrix file elliptic_M_D*.txt for reading \n");
@@ -115,10 +115,10 @@ void initialize_f3(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/high_cond_elliptic_rot_data.txt","r");
+    fpt = fopen("input_data/f03/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open shift vector file input_data_original/high_cond_elliptic_rot_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open shift vector file input_data/f03/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -138,10 +138,10 @@ void initialize_f4(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/schwefel_102_data.txt","r");
+    fpt = fopen("input_data/f02/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/schwefel_102_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f02/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -172,7 +172,7 @@ void initialize_f5(void)
     }
     B_f5 = (long double *)malloc(nreal*sizeof(long double));
 
-    fpt = fopen("input_data_original/schwefel_206_data.txt","r");
+    fpt = fopen("input_data/f05/shift_D50.txt","r");
     if (fpt==NULL) {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
         exit(0);
@@ -237,7 +237,7 @@ void initialize_f6(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/rosenbrock_func_data.txt","r");
+    fpt = fopen("input_data/f06/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -261,10 +261,10 @@ void initialize_f7(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data_original/griewank_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/griewank_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/griewank_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/griewank_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f07/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f07/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f07/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f07/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -278,7 +278,7 @@ void initialize_f7(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/griewank_func_data.txt","r");
+    fpt = fopen("input_data/f07/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -302,10 +302,10 @@ void initialize_f8(void)
     int i, j;
     int index;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data_original/ackley_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/ackley_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/ackley_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/ackley_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f08/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f08/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f08/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f08/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -319,7 +319,7 @@ void initialize_f8(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/ackley_func_data.txt","r");
+    fpt = fopen("input_data/f08/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -347,7 +347,7 @@ void initialize_f9(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/rastrigin_func_data.txt","r");
+    fpt = fopen("input_data/f09/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -370,10 +370,10 @@ void initialize_f10(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data_original/rastrigin_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/rastrigin_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/rastrigin_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/rastrigin_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f10/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f10/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f10/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f10/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -387,7 +387,8 @@ void initialize_f10(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/rastrigin_func_data.txt","r");
+    /* The shift is the same as f9 */
+    fpt = fopen("input_data/f09/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -410,10 +411,10 @@ void initialize_f11(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data_original/weierstrass_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/weierstrass_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/weierstrass_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/weierstrass_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f11/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f11/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f11/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f11/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file weierstrass_M_D*.txt for reading \n");
@@ -427,10 +428,10 @@ void initialize_f11(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/weierstrass_data.txt","r");
+    fpt = fopen("input_data/f11/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/weierstrass_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f11/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -462,7 +463,7 @@ void initialize_f12(void)
         A_f12[i] = (long double *)malloc(nreal*sizeof(long double));
         B_f12[i] = (long double *)malloc(nreal*sizeof(long double));
     }
-    fpt = fopen("input_data_original/schwefel_213_data.txt","r");
+    fpt = fopen("input_data/f12/bias_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for function 12 \n");
@@ -532,7 +533,7 @@ void initialize_f13(void)
 {
     int i, j;
     FILE *fpt;
-    fpt = fopen("input_data_original/EF8F2_func_data.txt","r");
+    fpt = fopen("input_data/f13/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -554,10 +555,10 @@ void initialize_f14(void)
 {
     int i, j;
     FILE *fpt;
-    if (nreal==2)    fpt = fopen("input_data_original/E_ScafferF6_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/E_ScafferF6_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/E_ScafferF6_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/E_ScafferF6_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f14/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f14/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f14/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f14/rot_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -571,7 +572,7 @@ void initialize_f14(void)
         }
     }
     fclose(fpt);
-    fpt = fopen("input_data_original/E_ScafferF6_func_data.txt","r");
+    fpt = fopen("input_data/f14/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file for reading \n");
@@ -593,10 +594,10 @@ void initialize_f15(void)
     int i, j;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
+    fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f15/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -630,10 +631,11 @@ void initialize_f16(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
+    /* Uses the same shift data as f15 */
+    fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f15/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -650,10 +652,10 @@ void initialize_f16(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func1_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func1_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func1_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func1_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f16/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f16/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f16/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f16/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -688,10 +690,11 @@ void initialize_f17(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func1_data.txt","r");
+    /* Uses the same shift data as f15 */
+    fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func1_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f15/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -708,10 +711,11 @@ void initialize_f17(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func1_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func1_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func1_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func1_M_D50.txt","r");
+    /* Same rotation data as f16 */
+    if (nreal==2)    fpt = fopen("input_data/f16/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f16/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f16/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f16/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -746,10 +750,10 @@ void initialize_f18(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
+    fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f18/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -766,10 +770,10 @@ void initialize_f18(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f18/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f18/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f18/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f18/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -818,10 +822,11 @@ void initialize_f19(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
+    /* Same shift data as f18 */
+    fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f18/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -838,10 +843,11 @@ void initialize_f19(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
+    /* Same rotation data as f18 */
+    if (nreal==2)    fpt = fopen("input_data/f18/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f18/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f18/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f18/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -891,10 +897,11 @@ void initialize_f20(void)
     int index;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func2_data.txt","r");
+    /* Same shift data as f18 */
+    fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func2_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f18/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -916,10 +923,11 @@ void initialize_f20(void)
     {
         o[0][2*i-1] = 5.0;
     }
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func2_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func2_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func2_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func2_M_D50.txt","r");
+    /* Same rotation data as f18 */
+    if (nreal==2)    fpt = fopen("input_data/f18/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f18/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f18/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f18/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -968,10 +976,10 @@ void initialize_f21(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
+    fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f21/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -988,10 +996,10 @@ void initialize_f21(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f21/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f21/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f21/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f21/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1036,10 +1044,11 @@ void initialize_f22(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
+    /* Same shift data as f21 */
+    fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f21/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1056,10 +1065,10 @@ void initialize_f22(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_HM_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_HM_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_HM_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_HM_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f22/rot_sub_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f22/rot_sub_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f22/rot_sub_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f22/rot_sub_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1104,10 +1113,11 @@ void initialize_f23(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func3_data.txt","r");
+    /* Same shift data as f21 */
+    fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func3_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f21/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1124,10 +1134,11 @@ void initialize_f23(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func3_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func3_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func3_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func3_M_D50.txt","r");
+    /* Same rotation data as f21 */
+    if (nreal==2)    fpt = fopen("input_data/f21/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f21/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f21/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f21/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
@@ -1172,10 +1183,10 @@ void initialize_f24(void)
     int i, j, k;
     FILE *fpt;
     char c;
-    fpt = fopen("input_data_original/hybrid_func4_data.txt","r");
+    fpt = fopen("input_data/f24/shift_D50.txt","r");
     if (fpt==NULL)
     {
-        fprintf(stderr,"\n Error: Cannot open input file input_data_original/hybrid_func4_data.txt for reading \n");
+        fprintf(stderr,"\n Error: Cannot open input file input_data/f24/shift_D50.txt for reading \n");
         exit(0);
     }
     for (i=0; i<nfunc; i++)
@@ -1192,10 +1203,10 @@ void initialize_f24(void)
         printf("\n");
     }
     fclose(fpt);
-    if (nreal==2)    fpt = fopen("input_data_original/hybrid_func4_M_D2.txt","r");
-    if (nreal==10)    fpt = fopen("input_data_original/hybrid_func4_M_D10.txt","r");
-    if (nreal==30)    fpt = fopen("input_data_original/hybrid_func4_M_D30.txt","r");
-    if (nreal==50)    fpt = fopen("input_data_original/hybrid_func4_M_D50.txt","r");
+    if (nreal==2)    fpt = fopen("input_data/f24/rot_D2.txt","r");
+    if (nreal==10)    fpt = fopen("input_data/f24/rot_D10.txt","r");
+    if (nreal==30)    fpt = fopen("input_data/f24/rot_D30.txt","r");
+    if (nreal==50)    fpt = fopen("input_data/f24/rot_D50.txt","r");
     for (i=0; i<nfunc; i++)
     {
         for (j=0; j<nreal; j++)
