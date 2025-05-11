@@ -35,3 +35,61 @@ To achieve these goals, the following steps will be undertaken:
 6.  **Code Consistency Pass**: Review and apply minimal, targeted changes to the C source code to improve consistency (e.g., variable naming, function signatures where appropriate) without altering the core algorithmic logic.
 
 This structured approach aims to create a reliable and easy-to-use resource for researchers and practitioners working with CEC benchmark functions.
+
+## Example Usage (CEC2005)
+
+This section provides a brief example of how to compile and run one of the CEC2005 benchmark functions.
+
+1.  **Navigate to the CEC2005 directory**:
+    ```bash
+    cd CEC2005-C
+    ```
+
+2.  **Compile the source code**:
+    Use the provided `Makefile` to build the executable.
+    ```bash
+    make
+    ```
+
+3.  **Run a benchmark function**:
+    Execute the `main` program, specifying the function ID, the number of dimensions, and an input file.
+    ```bash
+    ./main 1 10 input_file.txt
+    ```
+    - `1` is the function ID (1-25)
+    - `10` is the dimension (2, 10, 30, or 50)
+    - `input_file.txt` is a file containing the input vector (one value per line)
+
+4.  **Using the Python helper script**:
+    The repository includes a Python helper script (`utility_scripts/run_cec2005.py`) that can generate various types of input vectors and run the benchmark functions.
+    ```bash
+    # Run F1 in 10 dimensions with the optimal input vector
+    python utility_scripts/run_cec2005.py --func 1 --dim 10 --type optimal
+    
+    # Run F1 in 10 dimensions with a random input vector
+    python utility_scripts/run_cec2005.py --func 1 --dim 10 --type random
+    
+    # Run F1 in 10 dimensions with a custom input file
+    python utility_scripts/run_cec2005.py --func 1 --dim 10 --input my_input_file.txt
+    ```
+
+## Data File Structure
+
+The data files for the CEC2005 benchmark functions have been refactored to follow a consistent naming convention:
+
+```
+CEC2005-C/
+└── input_data/
+    └── f{FUNC:02d}/    # one folder per benchmark function (f01, f02, etc.)
+        ├── shift_D10.txt  # shift vector for dimension 10
+        ├── rot_D10.txt    # rotation matrix for dimension 10
+        ├── ...
+        └── f{FUNC:02d}.meta.yaml  # metadata file describing the function
+```
+
+This refactored structure makes it easier to:
+1. Locate the appropriate files for each function and dimension
+2. Understand the purpose of each file
+3. Programmatically access the data files
+
+**Note:** The data files no longer contain metadata comments at the beginning of each file. Instead, all metadata information is stored in the meta_2005.json file in the input_data directory.

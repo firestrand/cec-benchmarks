@@ -249,17 +249,20 @@ long double calc_benchmark_f13(long double *x)
 long double calc_benchmark_f14(long double *x)
 {
     int i;
+    long double temp1, temp2;
     long double res;
-    transform(x, 0);
-    basic_f[0] = 0.0;
+    transform(x,0);
+    res = 0.0;
     for (i=0; i<nreal-1; i++)
     {
-        basic_f[0] += pow((trans_x[i]-1.0),2.0)*(1.0+pow(sin(3.0*PI*trans_x[i+1]),2.0));
+        temp1 = pow((sin(sqrt(pow(trans_x[i],2.0)+pow(trans_x[i+1],2.0)))),2.0);
+        temp2 = 1.0 + 0.001*(pow(trans_x[i],2.0)+pow(trans_x[i+1],2.0));
+        res += 0.5 + (temp1-0.5)/(pow(temp2,2.0));
     }
-    basic_f[0] += pow(sin(3.0*PI*trans_x[0]),2.0);
-    basic_f[0] += pow((trans_x[nreal-1]-1.0),2.0)*(1.0+pow(sin(2.0*PI*trans_x[nreal-1]),2.0));
-    res = basic_f[0] + bias[0];
-    return res;
+    temp1 = pow((sin(sqrt(pow(trans_x[nreal-1],2.0)+pow(trans_x[0],2.0)))),2.0);
+    temp2 = 1.0 + 0.001*(pow(trans_x[nreal-1],2.0)+pow(trans_x[0],2.0));
+    res += 0.5 + (temp1-0.5)/(pow(temp2,2.0)) + bias[0];
+    return (res);
 }
 
 void calc_benchmark_norm_f15(void)
@@ -285,7 +288,7 @@ void calc_benchmark_norm_f15(void)
 long double calc_benchmark_f15(long double *x) 
 {
     int i;
-    long double res;
+    long double res; 
     transform (x, 0);    basic_f[0] = calc_rastrigin(trans_x);
     transform (x, 1);    basic_f[1] = calc_rastrigin(trans_x);
     for (i=0; i<nreal; i++)
@@ -313,7 +316,7 @@ long double calc_benchmark_f15(long double *x)
     return (res);
 }
 
-void calc_benchmark_norm_f16(void)
+void calc_benchmark_norm_f16()
 {
     int i;
     transform_norm (0);    norm_f[0] = calc_rastrigin(trans_x);

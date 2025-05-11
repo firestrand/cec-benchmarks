@@ -162,7 +162,6 @@ void initialize_f5(void)
     int i, j;
     int index;
     FILE *fpt;
-    char c;
     
     /* Allocate memory for F5 specific arrays */
     A_f5 = (long double **)malloc(nreal*sizeof(long double*));
@@ -184,11 +183,6 @@ void initialize_f5(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
     }
     for (i=0; i<nreal; i++)
     {
@@ -196,11 +190,6 @@ void initialize_f5(void)
         {
             fscanf(fpt,"%Lf",&A_f5[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
     }
     fclose(fpt);
     if (nreal%4==0)
@@ -451,7 +440,6 @@ void initialize_f12(void)
 {
     int i, j;
     FILE *fpt;
-    char c;
     
     /* Allocate memory for F12 specific arrays */
     A_f12 = (long double **)malloc(nreal*sizeof(long double*));
@@ -474,11 +462,6 @@ void initialize_f12(void)
     for (i=0; i<nreal; i++)
     {
         fscanf(fpt,"%Lf",&alpha_f12[i]);
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
     }
     
     /* Read A values */
@@ -488,11 +471,6 @@ void initialize_f12(void)
         {
             fscanf(fpt,"%Lf",&A_f12[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
     }
     
     /* Read B values */
@@ -502,21 +480,12 @@ void initialize_f12(void)
         {
             fscanf(fpt,"%Lf",&B_f12[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
     }
     if (i!=100)
     {
         for (i=nreal; i<100; i++)
         {
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while(c!='\n');
+            /* Skip remaining lines */
         }
     }
     /* Reading alpha */
@@ -593,26 +562,37 @@ void initialize_f15(void)
 {
     int i, j;
     FILE *fpt;
-    char c;
+    
+    printf("\nDEBUG: Starting initialize_f15\n");
+    
     fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
     {
         fprintf(stderr,"\n Error: Cannot open input file input_data/f15/shift_D50.txt for reading \n");
         exit(0);
     }
+    
+    printf("DEBUG: File opened successfully, starting to read shift data\n");
+    
     for (i=0; i<nfunc; i++)
     {
+        printf("DEBUG: Reading shift data for function %d\n", i+1);
+        
         for (j=0; j<nreal; j++)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
+            
+            if (j == 0 || j == nreal-1)
+                printf("DEBUG: Read o[%d][%d] = %Lf\n", i, j, o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
+        
+        printf("DEBUG: Completed reading function %d\n", i+1);
     }
+    
     fclose(fpt);
+    
+    printf("DEBUG: Setting lambda values\n");
+    
     lambda[0] = 1.0;
     lambda[1] = 1.0;
     lambda[2] = 10.0;
@@ -624,13 +604,16 @@ void initialize_f15(void)
     lambda[8] = 1.0/20.0;
     lambda[9] = 1.0/20.0;
     global_bias = 120.0;
+    
+    printf("DEBUG: initialize_f15 completed successfully\n");
+    
     return;
 }
 void initialize_f16(void) 
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     /* Uses the same shift data as f15 */
     fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
@@ -644,11 +627,6 @@ void initialize_f16(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -664,11 +642,7 @@ void initialize_f16(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -689,7 +663,7 @@ void initialize_f17(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     /* Uses the same shift data as f15 */
     fpt = fopen("input_data/f15/shift_D50.txt","r");
     if (fpt==NULL)
@@ -703,11 +677,6 @@ void initialize_f17(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -724,11 +693,7 @@ void initialize_f17(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -749,7 +714,7 @@ void initialize_f18(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
     {
@@ -762,11 +727,6 @@ void initialize_f18(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -782,11 +742,7 @@ void initialize_f18(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -821,7 +777,7 @@ void initialize_f19(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     /* Same shift data as f18 */
     fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
@@ -835,11 +791,6 @@ void initialize_f19(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -856,11 +807,7 @@ void initialize_f19(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -896,7 +843,7 @@ void initialize_f20(void)
     int i, j, k;
     int index;
     FILE *fpt;
-    char c;
+    
     /* Same shift data as f18 */
     fpt = fopen("input_data/f18/shift_D50.txt","r");
     if (fpt==NULL)
@@ -910,11 +857,6 @@ void initialize_f20(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -936,11 +878,7 @@ void initialize_f20(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -975,7 +913,7 @@ void initialize_f21(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
     {
@@ -988,11 +926,6 @@ void initialize_f21(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -1008,11 +941,7 @@ void initialize_f21(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -1043,7 +972,7 @@ void initialize_f22(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     /* Same shift data as f21 */
     fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
@@ -1057,11 +986,6 @@ void initialize_f22(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -1077,11 +1001,7 @@ void initialize_f22(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -1112,7 +1032,7 @@ void initialize_f23(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     /* Same shift data as f21 */
     fpt = fopen("input_data/f21/shift_D50.txt","r");
     if (fpt==NULL)
@@ -1126,11 +1046,6 @@ void initialize_f23(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -1147,11 +1062,7 @@ void initialize_f23(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
@@ -1182,7 +1093,7 @@ void initialize_f24(void)
 {
     int i, j, k;
     FILE *fpt;
-    char c;
+    
     fpt = fopen("input_data/f24/shift_D50.txt","r");
     if (fpt==NULL)
     {
@@ -1195,11 +1106,6 @@ void initialize_f24(void)
         {
             fscanf(fpt,"%Lf",&o[i][j]);
         }
-        do
-        {
-            fscanf(fpt,"%c",&c);
-        }
-        while (c!='\n');
         printf("\n");
     }
     fclose(fpt);
@@ -1215,11 +1121,7 @@ void initialize_f24(void)
             {
                 fscanf(fpt,"%Lf",&l[i][j][k]);
             }
-            do
-            {
-                fscanf(fpt,"%c",&c);
-            }
-            while (c!='\n');
+            printf("\n");
         }
         printf("\n");
     }
