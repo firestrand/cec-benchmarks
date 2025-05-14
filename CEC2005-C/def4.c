@@ -97,7 +97,67 @@ long double calc_benchmark_f3(long double *x)
 {
     int i;
     long double res;
+    
+    /* Write the x vector BEFORE transform for verification */
+    {
+        char filename[256];
+        FILE *fp;
+        int j;
+        
+        /* Create output directory */
+        system("mkdir -p f3_data_dump");
+        
+        sprintf(filename, "f3_data_dump/x_before_transform_D%d.txt", nreal);
+        fp = fopen(filename, "w");
+        if (fp != NULL) {
+            fprintf(fp, "# F3 Vector x before transform for D=%d\n", nreal);
+            for (j=0; j<nreal; j++) {
+                fprintf(fp, "%.15Lf\n", x[j]);
+            }
+            fclose(fp);
+            printf("\nWrote x vector before transform to %s\n", filename);
+        } else {
+            printf("\nWarning: Could not write x vector to file\n");
+        }
+    }
+    
+    /* Now call transform */
     transform(x, 0);
+    
+    /* Write the x vector after transform for verification */
+    {
+        char filename[256];
+        FILE *fp;
+        int j;
+        
+        /* Create output directory */
+        system("mkdir -p f3_data_dump");
+        
+        sprintf(filename, "f3_data_dump/x_after_transform_D%d.txt", nreal);
+        fp = fopen(filename, "w");
+        if (fp != NULL) {
+            fprintf(fp, "# F3 Vector x after transform for D=%d\n", nreal);
+            for (j=0; j<nreal; j++) {
+                fprintf(fp, "%.15Lf\n", x[j]);
+            }
+            fclose(fp);
+            printf("\nWrote x vector after transform to %s\n", filename);
+        } else {
+            printf("\nWarning: Could not write x vector to file\n");
+        }
+
+        /* Also write trans_x vector for completeness */
+        sprintf(filename, "f3_data_dump/trans_x_D%d.txt", nreal);
+        fp = fopen(filename, "w");
+        if (fp != NULL) {
+            fprintf(fp, "# F3 trans_x vector for D=%d\n", nreal);
+            for (j=0; j<nreal; j++) {
+                fprintf(fp, "%.15Lf\n", trans_x[j]);
+            }
+            fclose(fp);
+        }
+    }
+
     basic_f[0] = 0.0;
     for (i=0; i<nreal; i++)
     {

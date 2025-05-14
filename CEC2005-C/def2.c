@@ -92,10 +92,16 @@ void allocate_memory (void)
     return;
 }
 
-/* Code to transform a variable vector based on function index 'count' */
+/* 
+    Code to transform a variable vector based on function index 'count' 
+    This is the original transform function from the CEC2005-C code.
+    It is used to transform the variable vector x based on the function index count.
+    The result is stored in the trans_x vector.
+*/
 void transform (long double *x, int count)
 {
     int i, j;
+    /* Shift the vector x by the shift vector o */
     for (i=0; i<nreal; i++)
     {
         temp_x1[i] = x[i] - o[count][i];
@@ -104,6 +110,8 @@ void transform (long double *x, int count)
     {
         temp_x2[i] = temp_x1[i]/lambda[count];
     }
+
+    /* Rotate the vector temp_x2 by the rotation matrix g */
     for (j=0; j<nreal; j++)
     {
         temp_x3[j] = 0.0;
