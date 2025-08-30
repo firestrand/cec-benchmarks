@@ -35,6 +35,10 @@
 *.i*86
 *.x86_64
 *.hex
+main
+benchmark
+cec09
+debug_*
 
 # Debug files
 *.dSYM/
@@ -65,4 +69,64 @@ Icon
 # Files that might appear in the root of a volume
 .Spotlight-V100
 .Trashes
+
+# IDE files
 .idea
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python cache (for utility scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Test and temporary files
+*.tmp
+*.temp
+test_*.txt
+temp_*.txt
+input_*.txt
+output_*.txt
+results/
+*_dump/
+*_output.txt
+*_output_*.txt
+*_debug*.txt
+
+# Backup files
+*.backup
+*.bak
+*.orig
+
+# Core dumps
+core
+core.*
+
+# MATLAB/Octave files
+*.m~
+*.mat
+*.mex*
+
+# Java compiled files
+*.class
+*.jar
+
+# Log files
+*.log
+
+# Archive files
+*.zip
+*.tar.gz
+*.tgz
+
+# Build directories
+build/
+Debug/
+Release/
+cmake-build-*/
+
+# Keep CLAUDE.md
+!CLAUDE.md
