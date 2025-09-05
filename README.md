@@ -60,17 +60,20 @@ This section provides a brief example of how to compile and run one of the CEC20
     - `10` is the dimension (2, 10, 30, or 50)
     - `input_file.txt` is a file containing the input vector (one value per line)
 
-4.  **Using the Python helper script**:
-    The repository includes a Python helper script (`utility_scripts/run_cec2005.py`) that can generate various types of input vectors and run the benchmark functions.
+4.  **Using the Validation Framework**:
+    The repository includes a unified validation framework that works across all CEC years:
     ```bash
-    # Run F1 in 10 dimensions with the optimal input vector
-    python utility_scripts/run_cec2005.py --func 1 --dim 10 --type optimal
+    # Validate all CEC2005 functions
+    python utility_scripts/validate_cec.py --year 2005
     
-    # Run F1 in 10 dimensions with a random input vector
-    python utility_scripts/run_cec2005.py --func 1 --dim 10 --type random
+    # Validate specific functions
+    python utility_scripts/validate_cec.py --year 2005 --func 1 4 17
     
-    # Run F1 in 10 dimensions with a custom input file
-    python utility_scripts/run_cec2005.py --func 1 --dim 10 --input my_input_file.txt
+    # Validate specific dimensions and test types
+    python utility_scripts/validate_cec.py --year 2005 --dim 10 30 --type optimal
+    
+    # Use the convenience script
+    ./utility_scripts/run_cec_validation.sh --year 2005 --func 1
     ```
 
 ## Data File Structure

@@ -1,0 +1,41 @@
+{
+  "function_id": 13,
+  "function_name": "g13 - Exponential optimization problem",
+  "date_generated": "2025-09-04T13:29:54.600865",
+  "dimensions": {
+    "5": {
+      "results": {
+        "min": {
+          "input_vector": [
+            -2.3,
+            -2.3,
+            -2.3,
+            -2.3,
+            -2.3
+          ],
+          "objective_value": 0.0
+        },
+        "max": {
+          "input_vector": [
+            2.3,
+            2.3,
+            2.3,
+            2.3,
+            2.3
+          ],
+          "objective_value": 8.967729200898107e+27
+        },
+        "random": {
+          "input_vector": [
+            0.70829106146937,
+            -2.2640137071000734,
+            1.4586790215311236,
+            -0.9228577398801017,
+            0.7515880888439557
+          ],
+          "objective_value": 5.06537
+        }
+      }
+    }
+  }
+}

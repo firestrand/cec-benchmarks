@@ -87,32 +87,21 @@ Example:
 ./main 1 10 test_input.txt
 ```
 
-### Using the Python helper
-```bash
-cd ..
-python utility_scripts/run_cec2005.py --func 1 --dim 10 --type zeros
-```
-
-## Testing
-
-To verify all functions with zero inputs:
-```bash
-cd ..
-python utility_scripts/run_all_functions_with_zeros.py
-```
-
-This validates that each function works properly at all supported dimensions (2, 10, 30, 50).
-
-## Validation
-
-The implementation includes validation tools:
+### Using the Validation Framework
 
 ```bash
 cd ..
-python utility_scripts/validate_cec2005_metadata.py
+# Validate all CEC2005 functions
+python utility_scripts/validate_cec.py --year 2005
+
+# Validate specific functions
+python utility_scripts/validate_cec.py --year 2005 --func 1 4 17
+
+# Validate specific dimensions and test types
+python utility_scripts/validate_cec.py --year 2005 --dim 10 30 --type optimal
 ```
 
-This script ensures the metadata matches the actual implementation and technical report specifications.
+This validates that each function works properly at all supported dimensions (2, 10, 30, 50) and compares against pre-generated validation data.
 
 ## Original Data Files
 

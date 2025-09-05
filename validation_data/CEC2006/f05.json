@@ -1,0 +1,38 @@
+{
+  "function_id": 5,
+  "function_name": "g05 - Cubic optimization problem",
+  "date_generated": "2025-09-04T14:25:49.481057",
+  "dimensions": {
+    "4": {
+      "results": {
+        "min": {
+          "input_vector": [
+            0,
+            0,
+            -0.55,
+            -0.55
+          ],
+          "objective_value": 0.0
+        },
+        "max": {
+          "input_vector": [
+            1200,
+            1200,
+            0.55,
+            0.55
+          ],
+          "objective_value": 8880.0
+        },
+        "random": {
+          "input_vector": [
+            506.3061836223245,
+            35.756663325684414,
+            -0.3094982277160363,
+            0.005890816913698638
+          ],
+          "objective_value": 1720.251895
+        }
+      }
+    }
+  }
+}

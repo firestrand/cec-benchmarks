@@ -1,0 +1,41 @@
+{
+  "function_id": 16,
+  "function_name": "g16 - Nonlinear optimization with many constraints",
+  "date_generated": "2025-09-04T13:29:54.602566",
+  "dimensions": {
+    "5": {
+      "results": {
+        "min": {
+          "input_vector": [
+            704.4148,
+            68.6,
+            0,
+            193,
+            25
+          ],
+          "objective_value": 29.084234
+        },
+        "max": {
+          "input_vector": [
+            906.3855,
+            288.88,
+            134.75,
+            287.0966,
+            84.1988
+          ],
+          "objective_value": 2.604088
+        },
+        "random": {
+          "input_vector": [
+            868.1669318165659,
+            262.7583615632371,
+            3.3399622657809305,
+            262.30821247294926,
+            44.66498107986705
+          ],
+          "objective_value": 1.173038
+        }
+      }
+    }
+  }
+}

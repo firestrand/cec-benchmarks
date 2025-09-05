@@ -1,0 +1,149 @@
+{
+  "year": 2006,
+  "functions": {
+    "f01": {
+      "name": "g01 - Quadratic optimization with linear constraints",
+      "dimensions": [13],
+      "inequality_constraints": 9,
+      "equality_constraints": 0
+    },
+    "f02": {
+      "name": "g02 - Nonlinear optimization with polynomial constraints", 
+      "dimensions": [20],
+      "inequality_constraints": 2,
+      "equality_constraints": 0
+    },
+    "f03": {
+      "name": "g03 - Nonlinear optimization with equality constraint",
+      "dimensions": [10],
+      "inequality_constraints": 0,
+      "equality_constraints": 1
+    },
+    "f04": {
+      "name": "g04 - Quadratic optimization with mixed constraints",
+      "dimensions": [5],
+      "inequality_constraints": 6,
+      "equality_constraints": 0
+    },
+    "f05": {
+      "name": "g05 - Cubic optimization problem",
+      "dimensions": [4],
+      "inequality_constraints": 2,
+      "equality_constraints": 3
+    },
+    "f06": {
+      "name": "g06 - Cubic optimization with constraints",
+      "dimensions": [2],
+      "inequality_constraints": 2,
+      "equality_constraints": 0
+    },
+    "f07": {
+      "name": "g07 - Quadratic optimization problem",
+      "dimensions": [10],
+      "inequality_constraints": 8,
+      "equality_constraints": 0
+    },
+    "f08": {
+      "name": "g08 - Nonlinear optimization problem",
+      "dimensions": [2],
+      "inequality_constraints": 2,
+      "equality_constraints": 0
+    },
+    "f09": {
+      "name": "g09 - Polynomial optimization problem",
+      "dimensions": [7],
+      "inequality_constraints": 4,
+      "equality_constraints": 0
+    },
+    "f10": {
+      "name": "g10 - Linear optimization problem",
+      "dimensions": [8],
+      "inequality_constraints": 6,
+      "equality_constraints": 0
+    },
+    "f11": {
+      "name": "g11 - Quadratic optimization problem",
+      "dimensions": [2],
+      "inequality_constraints": 0,
+      "equality_constraints": 1
+    },
+    "f12": {
+      "name": "g12 - Quadratic optimization problem",
+      "dimensions": [3],
+      "inequality_constraints": 1,
+      "equality_constraints": 0
+    },
+    "f13": {
+      "name": "g13 - Exponential optimization problem",
+      "dimensions": [5],
+      "inequality_constraints": 0,
+      "equality_constraints": 3
+    },
+    "f14": {
+      "name": "g14 - Nonlinear optimization problem",
+      "dimensions": [10],
+      "inequality_constraints": 0,
+      "equality_constraints": 3
+    },
+    "f15": {
+      "name": "g15 - Quadratic optimization problem",
+      "dimensions": [3],
+      "inequality_constraints": 0,
+      "equality_constraints": 2
+    },
+    "f16": {
+      "name": "g16 - Nonlinear optimization with many constraints",
+      "dimensions": [5],
+      "inequality_constraints": 38,
+      "equality_constraints": 0
+    },
+    "f17": {
+      "name": "g17 - Nonlinear optimization problem",
+      "dimensions": [6],
+      "inequality_constraints": 0,
+      "equality_constraints": 4
+    },
+    "f18": {
+      "name": "g18 - Quadratic optimization problem",
+      "dimensions": [9],
+      "inequality_constraints": 13,
+      "equality_constraints": 0
+    },
+    "f19": {
+      "name": "g19 - Nonlinear optimization problem",
+      "dimensions": [15],
+      "inequality_constraints": 5,
+      "equality_constraints": 0
+    },
+    "f20": {
+      "name": "g20 - Nonlinear optimization problem",
+      "dimensions": [24],
+      "inequality_constraints": 6,
+      "equality_constraints": 14
+    },
+    "f21": {
+      "name": "g21 - Linear optimization problem",
+      "dimensions": [7],
+      "inequality_constraints": 1,
+      "equality_constraints": 5
+    },
+    "f22": {
+      "name": "g22 - Nonlinear optimization problem",
+      "dimensions": [22],
+      "inequality_constraints": 1,
+      "equality_constraints": 19
+    },
+    "f23": {
+      "name": "g23 - Linear optimization problem",
+      "dimensions": [9],
+      "inequality_constraints": 2,
+      "equality_constraints": 4
+    },
+    "f24": {
+      "name": "g24 - Linear optimization problem",
+      "dimensions": [2],
+      "inequality_constraints": 2,
+      "equality_constraints": 0
+    }
+  }
+}

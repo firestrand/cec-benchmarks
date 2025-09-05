@@ -1,0 +1,41 @@
+{
+  "function_id": 4,
+  "function_name": "g04 - Quadratic optimization with mixed constraints",
+  "date_generated": "2025-09-04T13:29:54.595545",
+  "dimensions": {
+    "5": {
+      "results": {
+        "min": {
+          "input_vector": [
+            78,
+            33,
+            27,
+            27,
+            27
+          ],
+          "objective_value": -32217.431037
+        },
+        "max": {
+          "input_vector": [
+            102,
+            45,
+            45,
+            45,
+            45
+          ],
+          "objective_value": -22302.761886
+        },
+        "random": {
+          "input_vector": [
+            81.0813951479943,
+            38.70338853718478,
+            36.89646468290899,
+            31.771019320921063,
+            42.70379473953463
+          ],
+          "objective_value": -27580.88293
+        }
+      }
+    }
+  }
+}

@@ -40,6 +40,7 @@
     },
     "f04": {
       "name": "Shifted Schwefel's Problem 1.2 with Noise in Fitness",
+      "noisy": true,
       "dimensions": [
         2,
         10,
@@ -202,6 +203,7 @@
     },
     "f17": {
       "name": "Rotated Hybrid Composition Function 1 with Noise in Fitness",
+      "noisy": true,
       "dimensions": [
         2,
         10,
@@ -293,6 +295,7 @@
     },
     "f24": {
       "name": "Rotated Hybrid Composition Function 4",
+      "noisy": true,
       "dimensions": [
         2,
         10,
@@ -306,6 +309,7 @@
     },
     "f25": {
       "name": "Rotated Hybrid Composition Function 4 without Bounds",
+      "noisy": true,
       "dimensions": [
         2,
         10,

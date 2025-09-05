@@ -1,0 +1,35 @@
+{
+  "function_id": 12,
+  "function_name": "g12 - Quadratic optimization problem",
+  "date_generated": "2025-09-04T13:29:54.600290",
+  "dimensions": {
+    "3": {
+      "results": {
+        "min": {
+          "input_vector": [
+            0,
+            0,
+            0
+          ],
+          "objective_value": -0.25
+        },
+        "max": {
+          "input_vector": [
+            10,
+            10,
+            10
+          ],
+          "objective_value": -0.25
+        },
+        "random": {
+          "input_vector": [
+            9.960964478550945,
+            0.73260721099633,
+            2.1315431226704042
+          ],
+          "objective_value": -0.489501
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "function_id": 6,
+  "function_name": "g06 - Cubic optimization with constraints",
+  "date_generated": "2025-09-04T14:25:49.482440",
+  "dimensions": {
+    "2": {
+      "results": {
+        "min": {
+          "input_vector": [
+            13,
+            0
+          ],
+          "objective_value": -7973.0
+        },
+        "max": {
+          "input_vector": [
+            100,
+            100
+          ],
+          "objective_value": 1241000.0
+        },
+        "random": {
+          "input_vector": [
+            32.178334117540615,
+            58.92656838759087
+          ],
+          "objective_value": 69893.607856
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "function_id": 17,
+  "function_name": "g17 - Nonlinear optimization problem",
+  "date_generated": "2025-09-04T13:29:54.603220",
+  "dimensions": {
+    "6": {
+      "results": {
+        "min": {
+          "input_vector": [
+            0,
+            0,
+            340,
+            340,
+            -1000,
+            0
+          ],
+          "objective_value": 9006.778628
+        },
+        "max": {
+          "input_vector": [
+            400,
+            1000,
+            420,
+            420,
+            1000,
+            0.5236
+          ],
+          "objective_value": 9585.455298
+        },
+        "random": {
+          "input_vector": [
+            122.07634693544023,
+            795.3454991528617,
+            358.20763899262164,
+            341.89315477611615,
+            -613.7404233445827,
+            0.1718779576471191
+          ],
+          "objective_value": 9083.642484
+        }
+      }
+    }
+  }
+}

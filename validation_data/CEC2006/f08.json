@@ -1,0 +1,32 @@
+{
+  "function_id": 8,
+  "function_name": "g08 - Nonlinear optimization problem",
+  "date_generated": "2025-09-04T15:15:15.760695",
+  "dimensions": {
+    "2": {
+      "results": {
+        "min": {
+          "input_vector": [
+            0,
+            0
+          ],
+          "objective_value": NaN
+        },
+        "max": {
+          "input_vector": [
+            10,
+            10
+          ],
+          "objective_value": -0.0
+        },
+        "random": {
+          "input_vector": [
+            7.364712141640124,
+            6.766994874229113
+          ],
+          "objective_value": 7.5e-05
+        }
+      }
+    }
+  }
+}
